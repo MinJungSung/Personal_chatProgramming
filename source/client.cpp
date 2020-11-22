@@ -26,7 +26,7 @@ void send_recv(int i, int sockfd)
 	}else {
 		nbyte_recvd = recv(sockfd, recv_buf, BUFSIZE, 0);
 		recv_buf[nbyte_recvd] = '\0';
-		printf("%s\n" , recv_buf);
+		printf("%s" , recv_buf);
 		fflush(stdout);
 	}
 }
@@ -92,9 +92,9 @@ int main()
 	
 	connect_request(&sockfd, &server_addr);
 	FD_ZERO(&master);
-        FD_ZERO(&read_fds);
-        FD_SET(0, &master);
-        FD_SET(sockfd, &master);
+    FD_ZERO(&read_fds);
+    FD_SET(0, &master);
+    FD_SET(sockfd, &master);
 	fdmax = sockfd;
 	
 	while(1){
