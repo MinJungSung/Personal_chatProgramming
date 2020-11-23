@@ -10,78 +10,48 @@
 #include <cstdint>	
 
 #define BUFSIZE 1024
-		
-void send_recv(int i, int sockfd)
+
+class Client
 {
-	char send_buf[BUFSIZE];
-	char recv_buf[BUFSIZE];
-	int nbyte_recvd;
-	printf("Reached send_recv function from client side\n");
-	if (i == 0){
-		fgets(send_buf, BUFSIZE, stdin);
-		if (strcmp(send_buf , "quit\n") == 0) {
-			exit(0);
-		}else
-			send(sockfd, send_buf, strlen(send_buf), 0);
-	}else {
-		nbyte_recvd = recv(sockfd, recv_buf, BUFSIZE, 0);
-		recv_buf[nbyte_recvd] = '\0';
-		printf("%s" , recv_buf);
-		fflush(stdout);
+		
+	void send_recv(int i, int sockfd)
+	{
+		char send_buf[BUFSIZE];
+		char recv_buf[BUFSIZE];
+		int nbyte_recvd;
+		printf("Reached send_recv function from client side\n");
+		if (i == 0){
+			fgets(send_buf, BUFSIZE, stdin);
+			if (strcmp(send_buf , "quit\n") == 0) {
+				exit(0);
+			}else
+				send(sockfd, send_buf, strlen(send_buf), 0);
+		}else {
+			nbyte_recvd = recv(sockfd, recv_buf, BUFSIZE, 0);
+			recv_buf[nbyte_recvd] = '\0';
+			printf("%s" , recv_buf);
+			fflush(stdout);
+		}
+	}
+			
+			
+	void connect_request(int *sockfd, struct sockaddr_in *server_addr)
+	{
+		if ((*sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
+			perror("Socket");
+			exit(1);
+		}
+		server_addr->sin_family = AF_INET;
+		server_addr->sin_port = htons(4950);
+		server_addr->sin_addr.s_addr = inet_addr("127.0.0.1");
+		memset(server_addr->sin_zero, '\0', sizeof server_addr->sin_zero);
+		
+		if(connect(*sockfd, (struct sockaddr *)server_addr, sizeof(struct sockaddr)) == -1) {
+			perror("connect");
+			exit(1);
+		}
 	}
 }
-		
-		
-void connect_request(int *sockfd, struct sockaddr_in *server_addr)
-{
-	if ((*sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
-		perror("Socket");
-		exit(1);
-	}
-	server_addr->sin_family = AF_INET;
-	server_addr->sin_port = htons(4950);
-	server_addr->sin_addr.s_addr = inet_addr("127.0.0.1");
-	memset(server_addr->sin_zero, '\0', sizeof server_addr->sin_zero);
-	
-	if(connect(*sockfd, (struct sockaddr *)server_addr, sizeof(struct sockaddr)) == -1) {
-		perror("connect");
-		exit(1);
-	}
-}
-
-//void receiveMessage(int socket)
-//{
-//	char buff[BUFSIZE];
-//	
-//	memset(buff, 0, BUFSIZE);
-//	printf("Reached receiveMessage function from client side\n");
-//	// Read the message from client and copy it in buffer
-//	read(socket, buff, sizeof(buff));
-//	printf("Server: %s\n", (int)sizeof(buff), buff);
-//}
-
-//void writeMessage(int socket)
-//{
-//	char buff[BUFSIZE];
-//	int n;
-//
-//	printf("Reached writeMessage function from client side\n");
-//	// Print buffer which contains the client contents
-//	printf("me : ");
-//	memset(buff, 0, BUFSIZE);	
-//	n = 0;
-//	// Copy server message in the buffer
-//	while ((buff[n++] = getchar()) != '\n');
-//	
-//	// Send that buffer to server
-//	write(socket, buff, sizeof(buff));
-//	
-//	// If msg contains "Exit", chat ends
-//	if (strncmp("exit", buff, 4) == 0) {
-//		printf("Server Exit...\n");
-//		exit(0);
-//	}
-//}
 
 int main()
 {
@@ -108,8 +78,6 @@ int main()
 			if(FD_ISSET(i, &read_fds))
 				send_recv(i, sockfd);
 	
-		//writeMessage(sockfd);
-		//receiveMessage(sockfd);
 	}
 	printf("client-quited\n");
 	close(sockfd);

@@ -9,14 +9,42 @@
 #include <netdb.h>
 #include <pthread.h>
 #include <cstdint>	
+#include <iostream>
+#include <list>
 
 #define PORT 4950
 #define BUFSIZE 1024
+#define MAX_SOCK 1024
+
+std::list<int> client_list;			// Listed of all clients
+
 
 void send_to_all(int j, int i, int sockfd, int nbytes_recvd, char *recv_buf, fd_set *master)
 {
 	if (FD_ISSET(j, master)){
 		if (j != sockfd && j != i) {
+				
+			// // int sockfd -> char* sockfd_char
+
+			// std::string temp = std::to_string(sockfd);
+			// char const* sockfd_char = temp.c_str();
+
+			// // concat
+			// // TODO: memory allocation failed. Please figure out how to deal with situation
+			// int newSize = sizeof("Socket NO ") + sizeof(sockfd_char) + sizeof(" : ") + sizeof(recv_buf) + 1;
+			// char* recv_buf_new = (char*)malloc(newSize);
+
+			// strcpy(recv_buf_new, "Socket NO ");
+			// strcat(recv_buf_new, sockfd_char);
+			// strcat(recv_buf_new, " : ");
+			// strcat(recv_buf_new, recv_buf);
+
+			// // Release old buffer
+			// free((char*)sockfd_char);
+			
+			// // Store a new pointer
+			// sockfd_char = recv_buf_new;
+	
 			if (send(j, recv_buf, nbytes_recvd, 0) == -1) {
 				perror("send");
 			}
@@ -39,7 +67,6 @@ void send_recv(int i, fd_set *master, int sockfd, int fdmax)
 		close(i);
 		FD_CLR(i, master);
 	}else { 
-	//	printf("%s\n", recv_buf);
 		for(j = 0; j <= fdmax; j++){
 			send_to_all(j, i, sockfd, nbytes_recvd, recv_buf, master );
 		}
@@ -60,6 +87,7 @@ void connection_accept(fd_set *master, int *fdmax, int sockfd, struct sockaddr_i
 		if(newsockfd > *fdmax){
 			*fdmax = newsockfd;
 		}
+		client_list.push_back(client_addr);
 		printf("new connection from %s on port %d \n",inet_ntoa(client_addr->sin_addr), ntohs(client_addr->sin_port));
 	}
 }
@@ -95,16 +123,7 @@ void connect_request(int *sockfd, struct sockaddr_in *my_addr)
 	fflush(stdout);
 }
 
-//char* receiveMessage(int socket)
-//{
-//	char buff[BUFSIZE];
-//	memset(buff, 0, BUFSIZE);
-//	
-//	// Read the message from client and copy it in buffer
-//	read(socket, buff, sizeof(buff));
-//	printf("Reached to receiveMessage function from server size\n");
-//	return buff;
-//} 
+
 
 int main()
 {
@@ -135,9 +154,6 @@ int main()
 					send_recv(i, &master, sockfd, fdmax);
 			}
 		}
-		//receiveMessage(sockfd);
-		
 	}
-
 	return 0;
 }
