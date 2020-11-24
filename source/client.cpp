@@ -8,18 +8,20 @@
 #include <unistd.h>
 #include <errno.h>
 #include <cstdint>	
+#include <client.h>
 
 #define BUFSIZE 1024
 
 class Client
 {
 		
+public:
+
 	void send_recv(int i, int sockfd)
 	{
 		char send_buf[BUFSIZE];
 		char recv_buf[BUFSIZE];
 		int nbyte_recvd;
-		printf("Reached send_recv function from client side\n");
 		if (i == 0){
 			fgets(send_buf, BUFSIZE, stdin);
 			if (strcmp(send_buf , "quit\n") == 0) {
@@ -44,17 +46,37 @@ class Client
 		server_addr->sin_family = AF_INET;
 		server_addr->sin_port = htons(4950);
 		server_addr->sin_addr.s_addr = inet_addr("127.0.0.1");
-		memset(server_addr->sin_zero, '\0', sizeof server_addr->sin_zero);
+		masteremset(server_addr->sin_zero, '\0', sizeof server_addr->sin_zero);
 		
 		if(connect(*sockfd, (struct sockaddr *)server_addr, sizeof(struct sockaddr)) == -1) {
 			perror("connect");
 			exit(1);
 		}
 	}
-}
+	
+	void tcpListener() 
+	{
+		while(1){
+			read_fds = master;
+			if(select(fdmax+1, &read_fds, NULL, NULL, NULL) == -1){
+				perror("select");
+				exit(4);
+			}
+			
+			for(i=0; i <= fdmax; i++ )
+				if(FD_ISSET(i, &read_fds))
+					send_recv(i, sockfd);
+		
+		}
+		printf("client-quited\n");
+		close(sockfd);
+	}
+};
 
 int main()
 {
+	using client;
+
 	int sockfd, fdmax, i;
 	struct sockaddr_in server_addr;
 	fd_set master;
@@ -66,20 +88,8 @@ int main()
     FD_SET(0, &master);
     FD_SET(sockfd, &master);
 	fdmax = sockfd;
-	
-	while(1){
-		read_fds = master;
-		if(select(fdmax+1, &read_fds, NULL, NULL, NULL) == -1){
-			perror("select");
-			exit(4);
-		}
-		
-		for(i=0; i <= fdmax; i++ )
-			if(FD_ISSET(i, &read_fds))
-				send_recv(i, sockfd);
-	
-	}
-	printf("client-quited\n");
-	close(sockfd);
+
+	tcpListerner();	
+
 	return 0;
 }

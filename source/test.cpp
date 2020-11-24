@@ -22,15 +22,7 @@ int main() {
 char* prt1 = "memory";
 char* prt2 = "issue";
 
-int new_size = sizeof(prt1) + sizeof(prt2) + 1;
-
-char* newBuffer = (char *)malloc(new_size);
-strcpy(newBuffer,prt1);
-strcat(newBuffer,prt2);
-
-//printf("%s", newBuffer);
-
-PrintPointers(newBuffer);
+std::cout << prt1;
 
 return 0;
 }

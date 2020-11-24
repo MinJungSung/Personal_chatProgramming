@@ -23,28 +23,6 @@ void send_to_all(int j, int i, int sockfd, int nbytes_recvd, char *recv_buf, fd_
 {
 	if (FD_ISSET(j, master)){
 		if (j != sockfd && j != i) {
-				
-			// // int sockfd -> char* sockfd_char
-
-			// std::string temp = std::to_string(sockfd);
-			// char const* sockfd_char = temp.c_str();
-
-			// // concat
-			// // TODO: memory allocation failed. Please figure out how to deal with situation
-			// int newSize = sizeof("Socket NO ") + sizeof(sockfd_char) + sizeof(" : ") + sizeof(recv_buf) + 1;
-			// char* recv_buf_new = (char*)malloc(newSize);
-
-			// strcpy(recv_buf_new, "Socket NO ");
-			// strcat(recv_buf_new, sockfd_char);
-			// strcat(recv_buf_new, " : ");
-			// strcat(recv_buf_new, recv_buf);
-
-			// // Release old buffer
-			// free((char*)sockfd_char);
-			
-			// // Store a new pointer
-			// sockfd_char = recv_buf_new;
-	
 			if (send(j, recv_buf, nbytes_recvd, 0) == -1) {
 				perror("send");
 			}
@@ -56,8 +34,7 @@ void send_recv(int i, fd_set *master, int sockfd, int fdmax)
 {
 	int nbytes_recvd, j;
 	char recv_buf[BUFSIZE];
-	
-	printf("Reached to send_recv function from server side\n");
+
 	if ((nbytes_recvd = recv(i, recv_buf, BUFSIZE, 0)) <= 0) {
 		if (nbytes_recvd == 0) {
 			printf("socket %d hung up\n", i);
@@ -66,13 +43,28 @@ void send_recv(int i, fd_set *master, int sockfd, int fdmax)
 		}
 		close(i);
 		FD_CLR(i, master);
-	}else { 
+	} else { 
+		
+		// int sockfd -> char* sockfd_char
+
+		std::string sockfd_string = "";
+
+		sockfd_string = std::to_string(sockfd);
+		sockfd_string = "Socket No " + sockfd_string;
+
+		sockfd_string = sockfd_string + " : ";
+		sockfd_string = sockfd_string + std::string(recv_buf, nbytes_recvd);
+
+
+		char* sockfd_char = new char[sockfd_string.length() + 1];
+		strcpy(sockfd_char, sockfd_string.c_str());
+
 		for(j = 0; j <= fdmax; j++){
-			send_to_all(j, i, sockfd, nbytes_recvd, recv_buf, master );
+			send_to_all(j, i, sockfd, strlen(sockfd_char), sockfd_char, master);
 		}
 	}	
 }
-		
+	
 void connection_accept(fd_set *master, int *fdmax, int sockfd, struct sockaddr_in *client_addr)
 {
 	socklen_t addrlen;
@@ -87,7 +79,7 @@ void connection_accept(fd_set *master, int *fdmax, int sockfd, struct sockaddr_i
 		if(newsockfd > *fdmax){
 			*fdmax = newsockfd;
 		}
-		client_list.push_back(client_addr);
+		client_list.push_back(sockfd);
 		printf("new connection from %s on port %d \n",inet_ntoa(client_addr->sin_addr), ntohs(client_addr->sin_port));
 	}
 }

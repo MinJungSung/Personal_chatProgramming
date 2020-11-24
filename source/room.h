@@ -28,19 +28,27 @@ Room (
 
 
 class Room {
-Room();
 
 public: 
+	
+	Room();		// Constructor
+	~Room();	// Deconstructor
+
+
 	virtual void enter(Client client);
 	virtual void exit (Client client);
 	virtual void enterExitMessage(Client client);
 };
 
 class ChatRoom : public Room {
-ChatRoom();
-ChatRoom(int const RoomNo);
 
 public:
+
+	ChatRoom();													// Constructor
+	ChatRoom(int const RoomNo);
+
+	~ChatRoom();												// Deconstructor
+
 	virtual void enter(Client client);							// This adds a client to the room
 	virtual void exit (Client client);							// This removes a client from the room
 	virtual void enterExitMessage(Client client);				// This says welcome and goodbye message when the client enters and exits
@@ -54,9 +62,12 @@ private:
 };
 
 class Lounge : public Room {
-Lounge();
 
 public:
+
+	Lounge();
+	~Lounge();
+
     virtual void enter(Client client);                          // This adds a client to the room
     virtual void exit (Client client);                          // This removes a client from the room
     virtual void enterExitMessage(Client client);               // This says welcome and goodbye message when the client enters and exits
