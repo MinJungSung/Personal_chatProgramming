@@ -7,8 +7,9 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <errno.h>
-#include <cstdint>	
-#include <client.h>
+#include <cstdint>
+// TODO: figure out how to add this file directory	
+// #include <source/client.h>
 
 #define BUFSIZE 1024
 
@@ -46,7 +47,7 @@ public:
 		server_addr->sin_family = AF_INET;
 		server_addr->sin_port = htons(4950);
 		server_addr->sin_addr.s_addr = inet_addr("127.0.0.1");
-		masteremset(server_addr->sin_zero, '\0', sizeof server_addr->sin_zero);
+		memset(server_addr->sin_zero, '\0', sizeof server_addr->sin_zero);
 		
 		if(connect(*sockfd, (struct sockaddr *)server_addr, sizeof(struct sockaddr)) == -1) {
 			perror("connect");
@@ -54,8 +55,16 @@ public:
 		}
 	}
 	
-	void tcpListener() 
+	void tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in server_addr, fd_set master, fd_set read_fds) 
 	{
+
+		connect_request(&sockfd, &server_addr);
+		FD_ZERO(&master);
+		FD_ZERO(&read_fds);
+		FD_SET(0, &master);
+		FD_SET(sockfd, &master);
+		fdmax = sockfd;
+
 		while(1){
 			read_fds = master;
 			if(select(fdmax+1, &read_fds, NULL, NULL, NULL) == -1){
@@ -75,21 +84,13 @@ public:
 
 int main()
 {
-	using client;
-
 	int sockfd, fdmax, i;
 	struct sockaddr_in server_addr;
 	fd_set master;
 	fd_set read_fds;
 	
-	connect_request(&sockfd, &server_addr);
-	FD_ZERO(&master);
-    FD_ZERO(&read_fds);
-    FD_SET(0, &master);
-    FD_SET(sockfd, &master);
-	fdmax = sockfd;
-
-	tcpListerner();	
+	Client client;	
+	client.tcpListener(sockfd, fdmax, i, server_addr, master, read_fds);	
 
 	return 0;
 }
