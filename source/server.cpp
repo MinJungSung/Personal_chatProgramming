@@ -83,7 +83,7 @@ public:
 			if(newsockfd > *fdmax){
 				*fdmax = newsockfd;
 			}
-			client_list.push_back(sockfd)td::list<int> client_list;         // Listed of all clients
+			client_list.push_back(sockfd);         // Listed of all clients
 
 			printf("new connection from %s on port %d \n",inet_ntoa(client_addr->sin_addr), ntohs(client_addr->sin_port));
 		}
@@ -148,17 +148,17 @@ public:
 	}
 };
 
-int main()
-{
-	fd_set master;
-	fd_set read_fds;
-	int fdmax, i;
-	int sockfd = 0;
-	struct sockaddr_in my_addr, client_addr;
-
-	Server server;
-	server.tcpListener(sockfd, fdmax, i, my_addr, client_addr, master, read_fds);
-
-	return 0;
-
-}
+// int main()
+// {
+// 	fd_set master;
+// 	fd_set read_fds;
+// 	int fdmax, i;
+// 	int sockfd = 0;
+// 	struct sockaddr_in my_addr, client_addr;
+// 
+// 	Server server;
+// 	server.tcpListener(sockfd, fdmax, i, my_addr, client_addr, master, read_fds);
+// 
+// 	return 0;
+// 
+// }

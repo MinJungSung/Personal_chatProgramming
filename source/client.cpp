@@ -54,7 +54,7 @@ void Client::connect_request(int *sockfd, struct sockaddr_in *server_addr)
 // TODO: This may not be able to get sockfd
 std::string Client::toString() 
 {
-	return to_string(sockfd);
+	return std::to_string(sockfd);
 }
 
 void Client::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in server_addr, fd_set master, fd_set read_fds) 
@@ -83,15 +83,15 @@ void Client::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in server
 	close(sockfd);
 }
 
-int main()
-{
-	int sockfd, fdmax, i;
-	struct sockaddr_in server_addr;
-	fd_set master;
-	fd_set read_fds;
-	
-	// Client client;	
-	// client.tcpListener(sockfd, fdmax, i, server_addr, master, read_fds);	
-
-	return 0;
-}
+// int main()
+// {
+// 	int sockfd, fdmax, i;
+// 	struct sockaddr_in server_addr;
+// 	fd_set master;
+// 	fd_set read_fds;
+// 	
+// 	// Client client;	
+// 	// client.tcpListener(sockfd, fdmax, i, server_addr, master, read_fds);	
+// 
+// 	return 0;
+// }

@@ -1,3 +1,6 @@
+#ifndef ROOM
+#define ROOM
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -38,6 +41,7 @@ public:
 
 protected:
 
+	int RoomNo;
 	Client* client;
 	std::list<Client> client_list;
 
@@ -86,3 +90,5 @@ private:
 	std::list<Client> client_list;
 	int numOfClient = client_list.size();						
 };
+
+#endif

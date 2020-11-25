@@ -18,6 +18,11 @@
 // TODO: Should I include "room.h" as well?
 // TODO: Make sure that these functions inherit from Room
 
+ChatRoom::ChatRoom(int const RoomNo)
+{
+	this->RoomNo = RoomNo;
+}
+
 virtual void ChatRoom::enter(Client client){};
 virtual void ChatRoom::exit (Client client){};
 virtual void ChatRoom::enterExitMessage(Client client){};
