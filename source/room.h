@@ -11,13 +11,9 @@
 #include <cstdint>
 #include <iostream>
 #include <list>
-#include <server.cpp>
-#include <client.cpp>
+#include "server.cpp"
+#include "client.cpp"
 
-/**
-GLOBAL VARIABLES
-**/
-Client client;
 
 /**
 CLASS STRUCTURE
@@ -38,6 +34,11 @@ public:
 	virtual void enter(Client client);
 	virtual void exit (Client client);
 	virtual void enterExitMessage(Client client);
+
+protected:
+
+	Client* client;
+
 };
 
 class ChatRoom : public Room {
@@ -57,7 +58,8 @@ public:
 	virtual int numberOfClient();								
 
 private:
-	int const _roomNo;
+	int const RoomNo;
+	char* message;
 	std::list<Client> client_list_inRoom;						// Add clients here whenever new client comes in through Enter(client);
 };
 

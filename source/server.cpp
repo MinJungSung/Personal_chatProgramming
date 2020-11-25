@@ -16,10 +16,10 @@
 #define BUFSIZE 1024
 #define MAX_SOCK 1024
 
-std::list<int> client_list;			// Listed of all clients
-
 class Server
 {
+
+std::list<int> client_list;
 
 public:
 
@@ -83,7 +83,8 @@ public:
 			if(newsockfd > *fdmax){
 				*fdmax = newsockfd;
 			}
-			client_list.push_back(sockfd);
+			client_list.push_back(sockfd)td::list<int> client_list;         // Listed of all clients
+
 			printf("new connection from %s on port %d \n",inet_ntoa(client_addr->sin_addr), ntohs(client_addr->sin_port));
 		}
 	}
