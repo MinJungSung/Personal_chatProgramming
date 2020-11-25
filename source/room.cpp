@@ -15,14 +15,24 @@
 #include "server.cpp"
 #include "client.cpp"
 #include "errorHandler.cpp"
+#include "chatRoom.cpp"
+#include "lounge.cpp"
 
 // TODO: if errorHandler contains some libraries, does that inherit to the current cpp file as well?
 
+// If Room is created without RoomNo, create Lounge
+Room::Room() 
+{
+	Lounge* lounge;
+}
 
-std::list<Client> client_list;
+// If Room is created with RoomNo, create ChatRoom with RoomNo
+Room::Room(int RoomNo);
+{
+	ChatRoom* chatRoom(RoomNo);
+}
 
-
-void Room::enter(Client client)
+virtual void Room::enter(Client client)
 {
 	bool foundClient = (std::find(client_list.begin(), client_list.end(), client) != client_list.end());
 	if (foundClient) {
@@ -39,7 +49,7 @@ void Room::enter(Client client)
 	}
 };
 
-void Room::exit(Client client) 
+virtual void Room::exit(Client client) 
 {	
 	std::list<Client>::iterator clientListItr = std::find(client_list.begin(), client_list.end(), client);
 	if (clientListItr != client_list.end()) {
@@ -55,7 +65,7 @@ void Room::exit(Client client)
 	}
 };
 
-void Room::enterExitMessage(Client client, bool entrance)
+virtual void Room::enterExitMessage(Client client, bool entrance)
 {
 	switch(entrance) {
 		case true:

@@ -27,17 +27,19 @@ class Room {
 
 public: 
 	
-	Room();		// Constructor
-	~Room();	// Deconstructor
+	Room();				// Constructor
+	Room(int RoomNo);	// Constructor with RoomNo
+	~Room();			// Deconstructor
 
 
 	virtual void enter(Client client);
 	virtual void exit (Client client);
-	virtual void enterExitMessage(Client client);
+	virtual void enterExitMessage(Client client, bool entrance);
 
 protected:
 
 	Client* client;
+	std::list<Client> client_list;
 
 };
 
@@ -53,14 +55,18 @@ public:
 	virtual void enter(Client client);							// This adds a client to the room
 	virtual void exit (Client client);							// This removes a client from the room
 	virtual void enterExitMessage(Client client);				// This says welcome and goodbye message when the client enters and exits
-	virtual void sendMessage(Client client, char* message);		// Send messages
-	virtual void printClientList();								// Shows clients in this chatroom
-	virtual int numberOfClient();								
+	int numberOfClient();								
 
 private:
+
 	int const RoomNo;
 	char* message;
-	std::list<Client> client_list_inRoom;						// Add clients here whenever new client comes in through Enter(client);
+	std::list<Client> client_list;						// Add clients here whenever new client comes in through Enter(client);
+
+	void sendMessage(Client client, char* message);			// Send messages
+	void printClientList();									// Shows clients in this chatroom
+	int numOfClient = client_list.size();
+
 };
 
 class Lounge : public Room {
@@ -73,9 +79,10 @@ public:
     virtual void enter(Client client);                          // This adds a client to the room
     virtual void exit (Client client);                          // This removes a client from the room
     virtual void enterExitMessage(Client client);               // This says welcome and goodbye message when the client enters and exits
-    virtual void printClientList();                             // Shows clients in this chatroom
-    virtual int numberOfClient();
+    void printClientList();                             										// Shows clients in this chatroom
+    int numberOfClient();
 
 private:	
-	std::list<Client> client_list_inLounge;						
+	std::list<Client> client_list;
+	int numOfClient = client_list.size();						
 };
