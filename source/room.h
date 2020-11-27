@@ -1,22 +1,20 @@
 #ifndef ROOM
 #define ROOM
 
+#include <string>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <netdb.h>
+#include <cstring>
 #include <pthread.h>
+#include <algorithm>
+#include <ifstream>
 #include <cstdint>
 #include <iostream>
+#include <stdexcept>
 #include <list>
-#include "server.cpp"
-#include "client.cpp"
-
+#include "server.h"
+#include "client.h"
 
 /**
 CLASS STRUCTURE
@@ -30,10 +28,9 @@ class Room {
 
 public: 
 	
-	Room();				// Constructor
-	Room(int RoomNo);	// Constructor with RoomNo
-	~Room();			// Deconstructor
-
+	Room();
+	Room(int RoomNo);
+	~Room();
 
 	virtual void enter(Client client);
 	virtual void exit (Client client);
@@ -56,9 +53,9 @@ public:
 
 	~ChatRoom();												// Deconstructor
 
-	virtual void enter(Client client);							// This adds a client to the room
-	virtual void exit (Client client);							// This removes a client from the room
-	virtual void enterExitMessage(Client client);				// This says welcome and goodbye message when the client enters and exits
+	//virtual void enter(Client client);							// This adds a client to the room
+	//virtual void exit (Client client);							// This removes a client from the room
+	//virtual void enterExitMessage(Client client);				// This says welcome and goodbye message when the client enters and exits
 	int numberOfClient();								
 
 private:
@@ -80,9 +77,9 @@ public:
 	Lounge();
 	~Lounge();
 
-    virtual void enter(Client client);                          // This adds a client to the room
-    virtual void exit (Client client);                          // This removes a client from the room
-    virtual void enterExitMessage(Client client);               // This says welcome and goodbye message when the client enters and exits
+    //virtual void enter(Client client);                          // This adds a client to the room
+    //virtual void exit (Client client);                          // This removes a client from the room
+    //virtual void enterExitMessage(Client client);               // This says welcome and goodbye message when the client enters and exits
     void printClientList();                             										// Shows clients in this chatroom
     int numberOfClient();
 

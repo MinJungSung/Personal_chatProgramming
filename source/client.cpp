@@ -1,5 +1,5 @@
+#include <string>
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -8,8 +8,8 @@
 #include <unistd.h>
 #include <errno.h>
 #include <cstdint>
-// TODO: figure out how to add this file directory	
 #include "client.h"
+#include <cstring>
 
 #define BUFSIZE 1024
 
@@ -83,15 +83,18 @@ void Client::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in server
 	close(sockfd);
 }
 
-// int main()
-// {
-// 	int sockfd, fdmax, i;
-// 	struct sockaddr_in server_addr;
-// 	fd_set master;
-// 	fd_set read_fds;
-// 	
-// 	// Client client;	
-// 	// client.tcpListener(sockfd, fdmax, i, server_addr, master, read_fds);	
-// 
-// 	return 0;
-// }
+void insertIdPassword(string id, string password) 
+{
+	this -> id = id;
+	this -> password = password;
+}
+
+string getId()
+{
+	return id;
+}
+
+string getPassword()
+{
+	return password;
+}
