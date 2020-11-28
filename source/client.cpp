@@ -1,15 +1,4 @@
-#include <string>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <unistd.h>
-#include <errno.h>
-#include <cstdint>
 #include "client.h"
-#include <cstring>
 
 #define BUFSIZE 1024
 
@@ -51,7 +40,6 @@ void Client::connect_request(int *sockfd, struct sockaddr_in *server_addr)
 	}
 }
 
-// TODO: This may not be able to get sockfd
 std::string Client::toString() 
 {
 	return std::to_string(sockfd);
@@ -81,20 +69,4 @@ void Client::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in server
 	}
 	printf("client-quited\n");
 	close(sockfd);
-}
-
-void insertIdPassword(string id, string password) 
-{
-	this -> id = id;
-	this -> password = password;
-}
-
-string getId()
-{
-	return id;
-}
-
-string getPassword()
-{
-	return password;
 }

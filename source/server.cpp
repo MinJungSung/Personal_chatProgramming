@@ -1,5 +1,6 @@
 #include "server.h"
 
+using namespace std;
 
 void Server::send_to_all(int j, int i, int sockfd, int nbytes_recvd, char *recv_buf, fd_set *master)
 {
@@ -61,14 +62,11 @@ void Server::connection_accept(fd_set *master, int *fdmax, int sockfd, struct so
 		if(newsockfd > *fdmax){
 			*fdmax = newsockfd;
 		}
-		// TODO: Is this even possible?
-		// 1. Ask whether create new account or login
 		
-		// 2. create: connection_list(sockfd, Client) with id and password
-		// 3. login: check whether id and password matches 
-		//		     connection_list(sockfd, Client)
-		client_list.insert(sockfd,createLogin::askClient(client_list));
-
+		// Ask to create an account/login		
+		// TODO: Make this function to work
+		// connection_list(sockfd, createLogin::askClient(clientInfo_list));
+		
 		printf("new connection from %s on port %d \n",inet_ntoa(client_addr->sin_addr), ntohs(client_addr->sin_port));
 	}
 };

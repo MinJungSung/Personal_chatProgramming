@@ -4,7 +4,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <netdb.h>
-#include <pthread.h>
 #include <cstdint>
 #include <iostream>
 #include <sstream>
@@ -19,8 +18,6 @@
 
 class Server {
 public:
-	std::map<int, Client> connection_list;
-	std::list<Client> client_list;
 
 	void send_to_all(int j, int i, int sockfd, int nbyte_recvd, char* recv_buf, fd_set* master);
 	void send_recv(int i, fd_set* master, int sockfd, int fmax);
@@ -29,6 +26,12 @@ public:
 	void tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in my_addr, struct sockaddr_in client_addr, fd_set master, fd_set read_fds);
 
 private:
+
+	// Store ClientInfo for specific sockfd
+	std::map<int, ClientInfo> connection_list;
+	// Create ClientInfo list
+	std::list<ClientInfo> clientInfo_list;
+
 	fd_set master;
 	fd_set read_fds;
 	int fdmax, i;

@@ -6,15 +6,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <cstring>
-#include <pthread.h>
-#include <algorithm>
-#include <ifstream>
 #include <cstdint>
 #include <iostream>
-#include <stdexcept>
 #include <list>
-#include "server.h"
-#include "client.h"
+#include "clientInfo.h"
 
 /**
 CLASS STRUCTURE
@@ -32,15 +27,15 @@ public:
 	Room(int RoomNo);
 	~Room();
 
-	virtual void enter(Client client);
-	virtual void exit (Client client);
-	virtual void enterExitMessage(Client client, bool entrance);
+	virtual void enter(ClientInfo clientInfo);
+	virtual void exit (ClientInfo clientInfo);
+	virtual void enterExitMessage(ClientInfo clientInfo, bool entrance);
 
 protected:
 
 	int RoomNo;
-	Client* client;
-	std::list<Client> client_list;
+	ClientInfo clientInfo;
+	std::list<ClientInfo> clientInfo_list;
 
 };
 
@@ -53,20 +48,17 @@ public:
 
 	~ChatRoom();												// Deconstructor
 
-	//virtual void enter(Client client);							// This adds a client to the room
-	//virtual void exit (Client client);							// This removes a client from the room
-	//virtual void enterExitMessage(Client client);				// This says welcome and goodbye message when the client enters and exits
 	int numberOfClient();								
 
 private:
 
 	int const RoomNo;
 	char* message;
-	std::list<Client> client_list;						// Add clients here whenever new client comes in through Enter(client);
+	std::list<ClientInfo> clientInfo_list;					// clientList for chatroom
 
-	void sendMessage(Client client, char* message);			// Send messages
+	void sendMessage(ClientInfo clientInfo, char* message);			// Send messages
 	void printClientList();									// Shows clients in this chatroom
-	int numOfClient = client_list.size();
+	int numOfClient = clientInfo_list.size();
 
 };
 
@@ -77,15 +69,12 @@ public:
 	Lounge();
 	~Lounge();
 
-    //virtual void enter(Client client);                          // This adds a client to the room
-    //virtual void exit (Client client);                          // This removes a client from the room
-    //virtual void enterExitMessage(Client client);               // This says welcome and goodbye message when the client enters and exits
     void printClientList();                             										// Shows clients in this chatroom
     int numberOfClient();
 
 private:	
-	std::list<Client> client_list;
-	int numOfClient = client_list.size();						
+	std::list<ClientInfo> clientInfo_list;
+	int numOfClient = clientInfo_list.size();						
 };
 
 #endif

@@ -1,25 +1,25 @@
 #include "createLogin.h"
 
-Client createLogin::askClient(std::list<Client> client_list)
+using namespace std;
+
+ClientInfo createLogin::askClient(list<ClientInfo> clientInfo_list)
 {
 	int option;
-	cout << "Do you want to (1)create an account,(2)login, or (3)cancel?";
+	this->clientInfo_list = clientInfo_list;
+	cout << "Do you want to (1)create an account,(2)login, or (3)exit?";
 	cin >> option;
 	cout << endl;
 	switch(option) {
 		case 1:
-			string id, password;
 			cout << "ID: ";
 			cin >> id;
 			cout << endl;
 			cout << "Password: ";
 			cin >> password;
 			cout << endl;
-			createLogin::createAccount(string id, string password);
-			cout << "Your account is successfully created" << endl;
+			createLogin::createAccount(id, password);
 			break;
 		case 2:
-			string id, password;
 			cout << "ID: ";
 			cin >> id;
 			cout << endl;
@@ -31,23 +31,44 @@ Client createLogin::askClient(std::list<Client> client_list)
 			break;
 		case 3:
 			cout << "Exit" << endl;
-			break;
+			exit(0);
 		default:
-			Client createLogin::askClient(client_list);
+			createLogin::askClient(clientInfo_list);
 	}
-	return client;
+	return clientInfo;
 };
 
-Client createLogin::createAccount(string id, string password)
+void createLogin::createAccount(string id, string password)
 {
-	// client = new Client?
-	// set id and password
+	for(ClientInfo ci : clientInfo_list) {
+		if(ci.getId() == id) {
+			cout << "Same ID already exists" << endl;
+			createLogin::askClient(clientInfo_list);
+			break;
+		}
+	}
+	clientInfo.setId(id);
+	clientInfo.setPassword(password);
+	clientInfo_list.push_back(clientInfo);
+	cout << "Your account is successfully created" << endl;
 
 };
 
-Client createLogin::login(string id, string password)
+void createLogin::login(string id, string password)
 {
 	// Loop through clientList and find the same id and password
 	// client = found_client
-
+	for(ClientInfo ci :  clientInfo_list) {
+		if(clientInfo.getId() == id && clientInfo.getPassword() == password) {	
+			cout << "You are successfully loggine in" << endl;
+			clientInfo = ci;
+			break;	
+		} else if (clientInfo.getId() == id && clientInfo.getPassword() != password) {
+			cout << "Your password is incorrect" << endl;
+			createLogin::askClient(clientInfo_list);
+			break;
+		} 
+	}
+	cout << "Your account doesn't exist" << endl;
+	createLogin::askClient(clientInfo_list);
 };

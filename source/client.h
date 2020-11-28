@@ -19,18 +19,17 @@ public:
 	Client();
 	~Client();
 
+	// Create a connection and send messages
 	void send_recv(int i, int sockfd);
 	void connect_request(int* sockfd, struct sockaddr_in *server_addr);
 	void tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in server_addr, fd_set master, fd_set read_fds);
+
+	// Print sockfd to string
 	std::string toString();
-	void insertIdPassword(string id, string password);
-	string getId();
-	string getPassword();
 
 private:
 
 	int sockfd, fdmax, i;
-	string id, password;
 	struct sockaddr_in server_addr;
 	fd_set master;
 	fd_set read_fds;

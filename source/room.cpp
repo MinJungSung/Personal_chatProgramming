@@ -1,36 +1,23 @@
 #include "room.h"
 
-void Room::enter(Client client)
+void Room::enter(ClientInfo clientInfo)
 {
-	bool foundClient = (std::find(client_list.begin(), client_list.end(), client) != client_list.end());
-	//if (foundClient) {
-	if (true) {
-		throw std::invalid_argument("Client number already exists \n");
-	} else {
-		//client_list.push_back(client);
-		enterExitMessage(client, true);
-	}
+	enterExitMessage(clientInfo, true);
 };
 
-void Room::exit(Client client)
+void Room::exit(ClientInfo clientInfo)
 {
-	//std::list<Client>::iterator clientListItr = std::find(client_list.begin(), client_list.end(), client);
-	//if (clientListItr != client_list.end()) {
-	//	client_list.erase(clientListItr);
-	//	enterExitMessage(client, false);
-	//} else {
-	//	throw invalid_argument("Client doesn't exist in the room \n");
-	//}
+	enterExitMessage(clientInfo, false);
 };
 
-void Room::enterExitMessage(Client client, bool entrance)
+void Room::enterExitMessage(ClientInfo clientInfo, bool entrance)
 {
 	switch(entrance) {
 		case true:
-			std::cout << "Client " << client.toString() << " joined the chat";
+			std::cout << "Client " << clientInfo.getId() << " joined the chat";
 			break;
 		case false:
-			std::cout << "Client " << client.toString() << " left the chat";
+			std::cout << "Client " << clientInfo.getId() << " left the chat";
 			break;
 	}
 };

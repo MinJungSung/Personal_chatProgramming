@@ -1,14 +1,20 @@
 #include <iostream>
 #include <string>
+#include <list>
+#include "clientInfo.h"
 
 class createLogin 
 {
 public:
-	Client askClient(std::list<Client> client_list);
-	void createAccount(string id, string password);
-	void login(string id, string password);
+	ClientInfo askClient(std::list<ClientInfo> clientInfo_list);
+	void createAccount(std::string id, std::string password);
+	void login(std::string id, std::string password);
 private:
-	string id, password;
-	// This is suppoed to create Client
-	Client client;
-}
+
+	createLogin();
+	~createLogin();
+
+	std::string id, password;
+	ClientInfo clientInfo;
+	std::list<ClientInfo>clientInfo_list;
+};
