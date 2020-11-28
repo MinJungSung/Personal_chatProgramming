@@ -1,0 +1,72 @@
+\hypertarget{test_8cpp}{}\section{/home/i531482/\+Development/\+Chat-\/program/source/test.cpp File Reference}
+\label{test_8cpp}\index{/home/i531482/\+Development/\+Chat-\/program/source/test.\+cpp@{/home/i531482/\+Development/\+Chat-\/program/source/test.\+cpp}}
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$sys/types.\+h$>$}\\*
+{\ttfamily \#include $<$sys/socket.\+h$>$}\\*
+{\ttfamily \#include $<$netinet/in.\+h$>$}\\*
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\\*
+{\ttfamily \#include $<$netdb.\+h$>$}\\*
+{\ttfamily \#include $<$pthread.\+h$>$}\\*
+{\ttfamily \#include $<$cstdint$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+Include dependency graph for test.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{test_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{test_8cpp_ac83e1b8a5bdae51931388eead6fba5b9}{Print\+Pointers} (char $\ast$value)
+\item 
+int \hyperlink{test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{test.\+cpp@{test.\+cpp}!main@{main}}
+\index{main@{main}!test.\+cpp@{test.\+cpp}}
+\subsubsection[{\texorpdfstring{main()}{main()}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{}\label{test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}
+
+
+Definition at line 20 of file test.\+cpp.
+
+
+\begin{DoxyCode}
+20            \{
+21 
+22 \textcolor{keywordtype}{char}* prt1 = \textcolor{stringliteral}{"memory"};
+23 \textcolor{keywordtype}{char}* prt2 = \textcolor{stringliteral}{"issue"};
+24 
+25 std::cout << prt1;
+26 
+27 \textcolor{keywordflow}{return} 0;
+28 \}
+\end{DoxyCode}
+\index{test.\+cpp@{test.\+cpp}!Print\+Pointers@{Print\+Pointers}}
+\index{Print\+Pointers@{Print\+Pointers}!test.\+cpp@{test.\+cpp}}
+\subsubsection[{\texorpdfstring{Print\+Pointers(char $\ast$value)}{PrintPointers(char *value)}}]{\setlength{\rightskip}{0pt plus 5cm}void Print\+Pointers (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{test_8cpp_ac83e1b8a5bdae51931388eead6fba5b9}{}\label{test_8cpp_ac83e1b8a5bdae51931388eead6fba5b9}
+
+
+Definition at line 15 of file test.\+cpp.
+
+
+\begin{DoxyCode}
+16 \{
+17     printf(\textcolor{stringliteral}{"%s"}, value);
+18 \}
+\end{DoxyCode}

@@ -1,0 +1,6 @@
+<map id="ChatRoom::ChatRoom" name="ChatRoom::ChatRoom">
+<area shape="rect" id="node3" href="$class_room.html#af6369792216d4f6d8dc14c27fbe8218b" title="Room::enter" alt="" coords="213,5,309,32"/>
+<area shape="rect" id="node5" href="$class_room.html#a463a61c145c7609cfc3433cb201ad71f" title="Room::enterExitMessage" alt="" coords="358,56,533,83"/>
+<area shape="rect" id="node9" href="$class_room.html#a85bb6bc37f4caff36854e38cf659df62" title="Room::exit" alt="" coords="218,107,305,133"/>
+<area shape="rect" id="node7" href="$class_client_info.html#a55ac97ddc9f3e2d2719614c07f71e3af" title="ClientInfo::getId" alt="" coords="581,56,696,83"/>
+</map>

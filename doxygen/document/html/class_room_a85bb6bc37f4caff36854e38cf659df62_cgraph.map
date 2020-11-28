@@ -1,0 +1,4 @@
+<map id="Room::exit" name="Room::exit">
+<area shape="rect" id="node3" href="$class_room.html#a463a61c145c7609cfc3433cb201ad71f" title="Room::enterExitMessage" alt="" coords="142,5,317,32"/>
+<area shape="rect" id="node5" href="$class_client_info.html#a55ac97ddc9f3e2d2719614c07f71e3af" title="ClientInfo::getId" alt="" coords="365,5,480,32"/>
+</map>

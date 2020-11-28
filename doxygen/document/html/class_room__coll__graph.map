@@ -1,0 +1,3 @@
+<map id="Room" name="Room">
+<area shape="rect" id="node2" href="$class_client_info.html" title="{ClientInfo\n|&#45; id\l&#45; password\l|+ setId()\l+ setPassword()\l+ getId()\l+ getPassword()\l}" alt="" coords="19,5,141,141"/>
+</map>

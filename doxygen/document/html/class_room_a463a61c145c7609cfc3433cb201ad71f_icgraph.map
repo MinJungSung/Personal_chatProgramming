@@ -1,0 +1,5 @@
+<map id="Room::enterExitMessage" name="Room::enterExitMessage">
+<area shape="rect" id="node3" href="$class_chat_room.html#aff242030ddeed2bda2de4aeeaaa406f7" title="ChatRoom::ChatRoom" alt="" coords="374,20,533,47"/>
+<area shape="rect" id="node5" href="$class_room.html#af6369792216d4f6d8dc14c27fbe8218b" title="Room::enter" alt="" coords="229,20,325,47"/>
+<area shape="rect" id="node8" href="$class_room.html#a85bb6bc37f4caff36854e38cf659df62" title="Room::exit" alt="" coords="234,71,321,98"/>
+</map>
