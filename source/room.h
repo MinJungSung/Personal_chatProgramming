@@ -27,11 +27,15 @@ public:
 	Room(int RoomNo);
 	~Room();
 
-	virtual void enter(ClientInfo clientInfo);
-	virtual void exit (ClientInfo clientInfo);
-	virtual void enterExitMessage(ClientInfo clientInfo, bool entrance);
+	// virtual void enter(ClientInfo clientInfo);
+	// virtual void exit (ClientInfo clientInfo);
+	// virtual void enterExitMessage(ClientInfo clientInfo, bool entrance);
 
-protected:
+	void enter(ClientInfo clientInfo);
+	void exit (ClientInfo clientInfo);
+	void enterExitMessage(ClientInfo clientInfo, bool entrance);
+
+private:
 
 	int RoomNo;
 	ClientInfo clientInfo;
@@ -47,18 +51,21 @@ public:
 	ChatRoom(int const RoomNo);
 
 	~ChatRoom();												// Deconstructor
-
+	
+	void enter(ClientInfo clientInfo);
+	void exit(ClientInfo clientInfo);
+	void enterExitMessage(ClientInfo clientInfo, bool entrance);	
 	int numberOfClient();								
 
 private:
 
 	int const RoomNo;
-	char* message;
+	int numOfClient = clientInfo_list.size();
+	std::string message;	
 	std::list<ClientInfo> clientInfo_list;					// clientList for chatroom
 
-	void sendMessage(ClientInfo clientInfo, char* message);			// Send messages
+	void sendMessage(ClientInfo clientInfo, std::string message);			// Send messages
 	void printClientList();									// Shows clients in this chatroom
-	int numOfClient = clientInfo_list.size();
 
 };
 
@@ -69,10 +76,15 @@ public:
 	Lounge();
 	~Lounge();
 
+	void enter(ClientInfo clientInfo);
+	void exit(ClientInfo clientInfo);
+	void enterExitMessage(ClientInfo clientInfo, bool entrance);	
     void printClientList();                             										// Shows clients in this chatroom
     int numberOfClient();
 
 private:	
+
+	ClientInfo clientInfo;	
 	std::list<ClientInfo> clientInfo_list;
 	int numOfClient = clientInfo_list.size();						
 };
