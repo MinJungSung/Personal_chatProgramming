@@ -18,6 +18,7 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 	int nbytes_recvd, j;
 	char recv_buf[BUFSIZE];
 
+	// If message received, send except i
 	if ((nbytes_recvd = recv(i, recv_buf, BUFSIZE, 0)) <= 0) {
 		if (nbytes_recvd == 0) {
 			printf("socket %d hung up\n", i);
@@ -38,13 +39,26 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 		sockfd_string = sockfd_string + " : ";
 		sockfd_string = sockfd_string + std::string(recv_buf, nbytes_recvd);
 
-
 		char* sockfd_char = new char[sockfd_string.length() + 1];
 		strcpy(sockfd_char, sockfd_string.c_str());
 
-		for(j = 0; j <= fdmax; j++){
-			send_to_all(j, i, sockfd, strlen(sockfd_char), sockfd_char, master);
+		for(map<int, list<int>>::iterator itr = roomClient.begin(); itr != roomClient.end(); itr++){
+			for(list<int>::iterator it = (itr->second).begin(); it != (itr->second).end(); it++){
+				if(i == *it) {
+					room = *it;	
+				}
+			}
 		}
+	
+		std::map<int, list<int>>::iterator iterator;
+		iterator = roomClient.find(room);
+		for(int so : iterator->second){
+			send_to_room(so, i, sockfd, strlen(sockfd_car), sockfd_char, master);
+		}
+
+		// for(j = 0; j <= fdmax; j++){
+		// 	send_to_all(j, i, sockfd, strlen(sockfd_char), sockfd_char, master);
+		// }
 	}	
 };
 	
@@ -59,16 +73,16 @@ void Server::connection_accept(fd_set *master, int *fdmax, int sockfd, struct so
 		exit(1);
 	}else {
 		FD_SET(newsockfd, master);
+		// fdmax == total number of sockets
 		if(newsockfd > *fdmax){
 			*fdmax = newsockfd;
 		}
-		
-		// Ask to create an account/login		
-		// TODO: Make this function to work
-		// connection_list(sockfd, createLogin::askClient(clientInfo_list));
-		
 		printf("new connection from %s on port %d \n",inet_ntoa(client_addr->sin_addr), ntohs(client_addr->sin_port));
+		// If the connection is made, create an account
+		onlineClient.insert(sockfd, createLogin::askClient());
+		makeEnterRroom(sockfd);
 	}
+	
 };
 	
 void Server::connect_request(int *sockfd, struct sockaddr_in *my_addr)
@@ -129,3 +143,23 @@ void Server::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in my_add
 
 };
 
+void Server::makeEnterRoom(int sockfd)
+{
+	auto itr = roomClient.find(0);
+	if(itr != roomClient.end()){
+		itr.push_back(sockfd);
+	} else {
+		roomClient.insert(0, {sockfd});
+	}
+};
+
+void Server::sent_to_room(int j, int i, int sockfd, int nbytes_recvd, char *recv_buf, fd_set *master)
+{
+	if (FD_ISSET(j, master)){
+		if (j != sockfd && j != i) {
+			if (send(j, recv_buf, nbytes_recvd, 0) == -1) {
+				perror("send");
+			}
+		}
+	}
+};

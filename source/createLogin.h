@@ -6,7 +6,7 @@
 class createLogin 
 {
 public:
-	ClientInfo askClient(std::list<ClientInfo> clientInfo_list);
+	ClientInfo askClient();
 	void createAccount(std::string id, std::string password);
 	void login(std::string id, std::string password);
 private:
@@ -16,5 +16,4 @@ private:
 
 	std::string id, password;
 	ClientInfo clientInfo;
-	std::list<ClientInfo>clientInfo_list;
 };

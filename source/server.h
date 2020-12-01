@@ -8,9 +8,9 @@
 #include <iostream>
 #include <sstream>
 #include <map>
-#include <list>
 #include "client.h"
 #include "createLogin.h"
+#include "room.h"
 
 #define PORT 4950
 #define BUFSIZE 1024
@@ -24,17 +24,24 @@ public:
 	void connection_accept(fd_set* master, int* fdmax, int sockfd, struct sockaddr_in* client_addr);
 	void connect_request(int* sockfd, struct sockaddr_in* my_addr);
 	void tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in my_addr, struct sockaddr_in client_addr, fd_set master, fd_set read_fds);
+	void makeEnterRoom(int sockfd);
+	void sent_to_room(int j, int i, int sockfd, int nbyte_recvd, char* recv_buf, fd_set* master);
 
 private:
 
-	// Store ClientInfo for specific sockfd
-	std::map<int, ClientInfo> connection_list;
 	// Create ClientInfo list
-	std::list<ClientInfo> clientInfo_list;
+	// socketfd == portNo
+	std::map<int, std::list<int>> roomClient;	//map<roomNo, portNo>
+	std::map<int, ClientInfo> onlineClient;	//list<portNo, id an password>
 
 	fd_set master;
 	fd_set read_fds;
-	int fdmax, i;
+	
+	// i == sender
+	// j == iterator
+	// sockfd == openned socket
+	// fdmax == highest socket number
+	int fdmax, i, room;
 	int sockfd = 0;
 	struct sockaddr_in my_addr, client_addr;	
 
