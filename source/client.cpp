@@ -2,7 +2,7 @@
 
 #define BUFSIZE 1024
 
-
+using namespace std;
 void Client::send_recv(int i, int sockfd)
 {
 	char send_buf[BUFSIZE];
@@ -38,7 +38,32 @@ void Client::connect_request(int *sockfd, struct sockaddr_in *server_addr)
 		perror("connect");
 		exit(1);
 	}
+
+	cout << "Do you wnat to (1)create an account, (2)login, or (3)exit?";
+	cin >> option;
+
+	cout << "ID: "; 
+	cin >> id;
+	cout << "Password: ";
+	cin >> password;
+
+	// For each Client, we need one clientInfo
+	clientInfo.setId(id);
+	clientInfo.setPassword(password);
+	clientInfo.setRoomNo(0);
+
+
+	//Server server;
+	insertClientInfo(clientInfo);
 }
+
+// int Client::getOption() {
+// 	return option;
+// }
+
+// ClientInfo Client::getClientInfo() {
+// 	return clientInfo;
+// }
 
 std::string Client::toString() 
 {
@@ -47,7 +72,6 @@ std::string Client::toString()
 
 void Client::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in server_addr, fd_set master, fd_set read_fds) 
 {
-
 	connect_request(&sockfd, &server_addr);
 	FD_ZERO(&master);
 	FD_ZERO(&read_fds);
@@ -69,4 +93,16 @@ void Client::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in server
 	}
 	printf("client-quited\n");
 	close(sockfd);
+}
+
+int main()
+{
+	int sockfd, fdmax, i;
+	struct sockaddr_in server_addr;
+	fd_set master;
+	fd_set read_fds;;
+
+	Client client;
+	client.tcpListener(sockfd, fdmax, i, server_addr, master, read_fds);
+	return 0;
 }

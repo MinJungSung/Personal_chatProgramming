@@ -10,9 +10,9 @@ void ClientInfo::setPassword(std::string password)
 	this->password = password;
 }
 
-void ClientInfo::setRoomNo(int roomNo)
+void ClientInfo::setRoomNo(int RoomNo)
 {
-	this->roomNo = roomNo;
+	this->RoomNo = RoomNo;
 }
 
 std::string ClientInfo::getId()
@@ -27,5 +27,5 @@ std::string ClientInfo::getPassword()
 
 int ClientInfo::getRoomNo()
 {
-	return roomNo;
+	return RoomNo;
 }
