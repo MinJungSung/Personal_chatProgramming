@@ -2,30 +2,29 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <netdb.h>
-#include <pthread.h>
 #include <cstdint>
 #include <iostream>
-#include <list>
-#include "server.cpp"
-#include "client.cpp"
-#include "room.cpp"
+#include "room.h"
 
-// TODO: Should I include "room.h" as well?
-// TODO: Make sure that these functions inherit from Room
+// 
+// ChatRoom::ChatRoom(int const RoomNo)
+// {
+// 	this->RoomNo = RoomNo;
+// }
 
-ChatRoom::ChatRoom(int const RoomNo)
-{
-	this->RoomNo = RoomNo;
-}
+using namespace std;
 
-virtual void Lounge::enter(Client client){};
-virtual void Lounge::exit (Client client){};
-virtual void Lounge::enterExitMessage(Client client){};
+void Lounge::enter(ClientInfo clientInfo){
+	Room::enter(clientInfo);
+};
+
+void Lounge::exit (ClientInfo clientInfo){
+	Room::exit(clientInfo);
+};
+
+void Lounge::enterExitMessage(ClientInfo clientInfo, bool entrance){
+	Room::enterExitMessage(clientInfo, entrance);
+};
 
 void Lounge::printClientList() 
 {
@@ -33,8 +32,8 @@ void Lounge::printClientList()
 		cout << "There is no one in this room";
 	} else {
 		cout << "Client List in Lounge\n";
-		for (Client client : client_list) {
-			cout << "Client " << client.toString() << " \n";
+		for (ClientInfo clientInfo : clientInfo_list) {
+			cout << clientInfo.getId() << " \n";
 		}
 	}
 };

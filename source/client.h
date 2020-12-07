@@ -1,3 +1,5 @@
+#ifndef CLIENT_H
+#define CLIENT_H
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,16 +10,17 @@
 #include <unistd.h>
 #include <errno.h>
 #include <cstdint>
+#include <iostream>
 #include <cstring>
+//#include "server.h"
 
 #define BUFSIZE 1024
+
+using namespace std;
 
 class Client {
 
 public:
-
-	Client();
-	~Client();
 
 	// Create a connection and send messages
 	void send_recv(int i, int sockfd);
@@ -25,7 +28,9 @@ public:
 	void tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in server_addr, fd_set master, fd_set read_fds);
 
 	// Print sockfd to string
-	std::string toString();
+	string toString();
+	string setClientInformation();
+	void send_clientInformation(int sockfd);
 
 private:
 
@@ -35,3 +40,4 @@ private:
 	fd_set read_fds;
 
 };
+#endif

@@ -1,20 +1,42 @@
-#ifndef SERVER
-#define SERVER
+#ifndef SERVER_H
+#define SERVER_H
 
 #include <string.h>
 #include <unistd.h>
 #include <netdb.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h>
 #include <cstdint>
 #include <iostream>
 #include <sstream>
 #include <map>
 #include <list>
-#include "client.h"
-#include "createLogin.h"
+///////////////////////////////
+#include <fstream>
+#include <string>
+
+#include <boost/serialization/serialization.hpp>
+#include <boost/serialization/string.hpp>
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
+//////////////////////////////
 
 #define PORT 4950
 #define BUFSIZE 1024
 #define MAX_SOCK 1024
+
+using namespace std;
+/////////////////////////////
+using std::cout;
+using std::endl;
+using std::cin;
+using std::string;
+
+namespace bst = boost;
+////////////////////////////
 
 class Server {
 public:
@@ -25,19 +47,21 @@ public:
 	void connect_request(int* sockfd, struct sockaddr_in* my_addr);
 	void tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in my_addr, struct sockaddr_in client_addr, fd_set master, fd_set read_fds);
 
-private:
-
-	// Store ClientInfo for specific sockfd
-	std::map<int, ClientInfo> connection_list;
 	// Create ClientInfo list
-	std::list<ClientInfo> clientInfo_list;
+	// socketfd == portNo
+	// std::map<int, std::list<int>> roomClient;	//map<roomNo, portNo>
+	// std::map<int, ClientInfo> onlineClient;		//map<portNo, id an password>
+	std::vector<vector<string>> clientInfo_list;		//clientInfo_list<username, password, roomNumber, sockfd>
 
 	fd_set master;
 	fd_set read_fds;
-	int fdmax, i;
+	
+	// i == sender
+	// j == iterator
+	// sockfd == openned socket
+	// fdmax == highest socket number
+	int fdmax, i, room;
 	int sockfd = 0;
 	struct sockaddr_in my_addr, client_addr;	
-
 };
-
 #endif

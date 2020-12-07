@@ -1,6 +1,14 @@
 #include "server.h"
 
 using namespace std;
+////////////////////////////
+using std::cout;
+using std::endl;
+using std::cin;
+using std::string;
+
+namespace bst = boost;
+///////////////////////////
 
 void Server::send_to_all(int j, int i, int sockfd, int nbytes_recvd, char *recv_buf, fd_set *master)
 {
@@ -11,43 +19,52 @@ void Server::send_to_all(int j, int i, int sockfd, int nbytes_recvd, char *recv_
 			}
 		}
 	}
-};
+}
 		
 void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 {
 	int nbytes_recvd, j;
 	char recv_buf[BUFSIZE];
 
+	// If message received, send except i
 	if ((nbytes_recvd = recv(i, recv_buf, BUFSIZE, 0)) <= 0) {
 		if (nbytes_recvd == 0) {
 			printf("socket %d hung up\n", i);
 		}else {
 			perror("recv");
+			/////////////////////////////////////
+			string recv_buf_toString(recv_buf, recv_buf+BUFSIZE);
+			if((recv_buf_toString.substr(0,18)).compare("clientInformation:")){
+				recv_buf_toString = recv_buf_toString.substr(18);
+				vector<string> clientInformation;
+				while(recv_buf_toString != ""){
+					size_t foundComma = recv_buf_toString.find_first_of(",");
+					clientInformation.push_back(recv_buf_toString.substr(0,foundComma));
+					recv_buf_toString = recv_buf_toString.substr(foundComma);
+				}
+				clientInfo_list.push_back(clientInformation);
+			}
+			////////////////////////////////////
 		}
 		close(i);
 		FD_CLR(i, master);
 	} else { 
-		
-		// int sockfd -> char* sockfd_char
-
+		// Provide sender information in front of messages
+		/* working code
 		std::string sockfd_string = "";
-
-		sockfd_string = std::to_string(sockfd);
+		sockfd_string = std::to_string(i);
 		sockfd_string = "Socket No " + sockfd_string;
-
-		sockfd_string = sockfd_string + " : ";
-		sockfd_string = sockfd_string + std::string(recv_buf, nbytes_recvd);
-
-
+		sockfd_string = sockfd_string + " : " + std::string(recv_buf, nbytes_recvd);
 		char* sockfd_char = new char[sockfd_string.length() + 1];
 		strcpy(sockfd_char, sockfd_string.c_str());
+		*/
 
 		for(j = 0; j <= fdmax; j++){
 			send_to_all(j, i, sockfd, strlen(sockfd_char), sockfd_char, master);
 		}
 	}	
-};
-	
+}
+
 void Server::connection_accept(fd_set *master, int *fdmax, int sockfd, struct sockaddr_in *client_addr)
 {
 	socklen_t addrlen;
@@ -62,14 +79,10 @@ void Server::connection_accept(fd_set *master, int *fdmax, int sockfd, struct so
 		if(newsockfd > *fdmax){
 			*fdmax = newsockfd;
 		}
-		
-		// Ask to create an account/login		
-		// TODO: Make this function to work
-		// connection_list(sockfd, createLogin::askClient(clientInfo_list));
-		
 		printf("new connection from %s on port %d \n",inet_ntoa(client_addr->sin_addr), ntohs(client_addr->sin_port));
+		
 	}
-};
+}
 	
 void Server::connect_request(int *sockfd, struct sockaddr_in *my_addr)
 {
@@ -100,7 +113,7 @@ void Server::connect_request(int *sockfd, struct sockaddr_in *my_addr)
 	}
 	printf("\nTCPServer Waiting for client on port 4950\n");
 	fflush(stdout);
-};
+}
 
 void Server::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in my_addr, struct sockaddr_in client_addr, fd_set master, fd_set read_fds)
 {
@@ -111,6 +124,7 @@ void Server::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in my_add
 	
 	fdmax = sockfd;
 	while(1){
+
 		read_fds = master;
 		if(select(fdmax+1, &read_fds, NULL, NULL, NULL) == -1){
 			perror("select");
@@ -126,6 +140,19 @@ void Server::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in my_add
 			}
 		}
 	}
+}
 
-};
+int main(int argc, char* argv[])
+{
+
+	fd_set master;
+	fd_set read_fds;
+	int fdmax, i;
+	int sockfd = 0;
+	struct sockaddr_in my_addr, client_addr;
+
+	Server server;
+	server.tcpListener(sockfd, fdmax, i, my_addr, client_addr, master, read_fds);
+	return 0;
+}
 
