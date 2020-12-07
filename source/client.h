@@ -12,8 +12,7 @@
 #include <cstdint>
 #include <iostream>
 #include <cstring>
-#include "clientInfo.h"
-#include "server.h"
+//#include "server.h"
 
 #define BUFSIZE 1024
 
@@ -26,16 +25,12 @@ public:
 	// Create a connection and send messages
 	void send_recv(int i, int sockfd);
 	void connect_request(int* sockfd, struct sockaddr_in *server_addr);
-	// TODO: why is option returning wrong result?
-	int getOption(){
-	cout << option << endl;
-	return option;};
-	ClientInfo getClientInfo(){return clientInfo;};
-	
 	void tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in server_addr, fd_set master, fd_set read_fds);
 
 	// Print sockfd to string
-	std::string toString();
+	string toString();
+	string setClientInformation();
+	void send_clientInformation(int sockfd);
 
 private:
 
@@ -44,10 +39,5 @@ private:
 	fd_set master;
 	fd_set read_fds;
 
-	std::string id, password; 
-	int option;
-	ClientInfo clientInfo;
-		
-	//CreateLogin createLogin;
 };
 #endif

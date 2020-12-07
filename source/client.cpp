@@ -22,7 +22,6 @@ void Client::send_recv(int i, int sockfd)
 	}
 }
 			
-	
 void Client::connect_request(int *sockfd, struct sockaddr_in *server_addr)
 {
 	if ((*sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
@@ -38,36 +37,11 @@ void Client::connect_request(int *sockfd, struct sockaddr_in *server_addr)
 		perror("connect");
 		exit(1);
 	}
-
-	cout << "Do you wnat to (1)create an account, (2)login, or (3)exit?";
-	cin >> option;
-
-	cout << "ID: "; 
-	cin >> id;
-	cout << "Password: ";
-	cin >> password;
-
-	// For each Client, we need one clientInfo
-	clientInfo.setId(id);
-	clientInfo.setPassword(password);
-	clientInfo.setRoomNo(0);
-
-
-	//Server server;
-	insertClientInfo(clientInfo);
 }
 
-// int Client::getOption() {
-// 	return option;
-// }
-
-// ClientInfo Client::getClientInfo() {
-// 	return clientInfo;
-// }
-
-std::string Client::toString() 
+string Client::toString() 
 {
-	return std::to_string(sockfd);
+	return to_string(sockfd);
 }
 
 void Client::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in server_addr, fd_set master, fd_set read_fds) 
@@ -78,6 +52,7 @@ void Client::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in server
 	FD_SET(0, &master);
 	FD_SET(sockfd, &master);
 	fdmax = sockfd;
+	send_clientInformation(sockfd);
 
 	while(1){
 		read_fds = master;
@@ -106,3 +81,32 @@ int main()
 	client.tcpListener(sockfd, fdmax, i, server_addr, master, read_fds);
 	return 0;
 }
+
+///////////////////////////////////////////////////////////
+string Client::setClientInformation()
+{
+	string clientInfo = "";
+	string temp = "";
+	cout << "Username: ";
+	cin >> temp;
+	clientInfo = clientInfo + temp;
+	cout << "Password: ";
+	cin >> temp;
+	clientInfo = clientInfo + "," + temp + "0," + to_string(sockfd);
+	return clientInfo;
+}
+
+void Client::send_clientInformation(int sockfd)
+{
+	string s = setClientInformation();
+	char send_buf[BUFSIZE];
+	strcpy(send_buf, s.c_str());
+
+	if (i == 0){
+		if (strcmp(send_buf , "quit\n") == 0) {
+			exit(0);
+		} else
+			send(sockfd, send_buf, strlen(send_buf), 0);
+	}
+}
+///////////////////////////////////////////////////////////
