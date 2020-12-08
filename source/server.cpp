@@ -21,6 +21,40 @@ void Server::send_to_all(int j, int i, int sockfd, int nbytes_recvd, char *recv_
 	}
 }
 		
+void Server::temprecv(int i, fd_set *master, int sockfd, int fdmax)
+{
+	int nbytes_recvd, j;
+	char recv_buf[BUFSIZE];
+
+	// If message received, send except i
+	nbytes_recvd = recv(i, recv_buf, BUFSIZE, 0);
+			cout << "received?" << endl; 
+			/////////////////////////////////////
+			string recv_buf_toString(recv_buf);
+			cout << recv_buf_toString << endl;
+			if((recv_buf_toString.substr(0,18)).compare("clientInformation:") == 0){
+
+				recv_buf_toString = recv_buf_toString.substr(18);
+				vector<string> clientInformation;
+				while(recv_buf_toString != ""){
+					size_t foundComma = recv_buf_toString.find_first_of(",");
+					if(foundComma < 1000){
+					clientInformation.push_back(recv_buf_toString.substr(0,foundComma));
+					recv_buf_toString = recv_buf_toString.substr(foundComma);
+					}
+				}
+				string s;
+				for_each(clientInformation.begin(),clientInformation.end(),[&](const string &piece){s+=piece;});
+				cout << s << endl;
+				clientInfo_list.push_back(clientInformation);
+			cout << recv_buf_toString << endl;
+			////////////////////////////////////
+		}
+		close(i);
+		FD_CLR(i, master);
+	
+}
+
 void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 {
 	int nbytes_recvd, j;
@@ -34,7 +68,7 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 			perror("recv");
 			/////////////////////////////////////
 			string recv_buf_toString(recv_buf, recv_buf+BUFSIZE);
-			if((recv_buf_toString.substr(0,18)).compare("clientInformation:")){
+			if((recv_buf_toString.substr(0,18)).compare("clientInformation:") == 0){
 				recv_buf_toString = recv_buf_toString.substr(18);
 				vector<string> clientInformation;
 				while(recv_buf_toString != ""){
@@ -42,23 +76,26 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 					clientInformation.push_back(recv_buf_toString.substr(0,foundComma));
 					recv_buf_toString = recv_buf_toString.substr(foundComma);
 				}
+				string s;
+				for_each(clientInformation.begin(),clientInformation.end(),[&](const string &piece){s+=piece;});
+				cout << s << endl;
 				clientInfo_list.push_back(clientInformation);
 			}
+			cout << recv_buf_toString << endl;
 			////////////////////////////////////
 		}
 		close(i);
 		FD_CLR(i, master);
 	} else { 
 		// Provide sender information in front of messages
-		/* working code
+		// working code
 		std::string sockfd_string = "";
 		sockfd_string = std::to_string(i);
 		sockfd_string = "Socket No " + sockfd_string;
 		sockfd_string = sockfd_string + " : " + std::string(recv_buf, nbytes_recvd);
 		char* sockfd_char = new char[sockfd_string.length() + 1];
 		strcpy(sockfd_char, sockfd_string.c_str());
-		*/
-
+		
 		for(j = 0; j <= fdmax; j++){
 			send_to_all(j, i, sockfd, strlen(sockfd_char), sockfd_char, master);
 		}
@@ -80,7 +117,6 @@ void Server::connection_accept(fd_set *master, int *fdmax, int sockfd, struct so
 			*fdmax = newsockfd;
 		}
 		printf("new connection from %s on port %d \n",inet_ntoa(client_addr->sin_addr), ntohs(client_addr->sin_port));
-		
 	}
 }
 	
@@ -121,8 +157,9 @@ void Server::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in my_add
 	FD_ZERO(&read_fds);
 	connect_request(&sockfd, &my_addr);
 	FD_SET(sockfd, &master);
-	
 	fdmax = sockfd;
+	
+	//temprecv(i, &master, sockfd, fdmax);
 	while(1){
 
 		read_fds = master;
@@ -133,9 +170,11 @@ void Server::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in my_add
 		
 		for (i = 0; i <= fdmax; i++){
 			if (FD_ISSET(i, &read_fds)){
-				if (i == sockfd)
+				if (i == sockfd){
 					connection_accept(&master, &fdmax, sockfd, &client_addr);
+				}
 				else
+					send_recv(i, &master, sockfd, fdmax);
 					send_recv(i, &master, sockfd, fdmax);
 			}
 		}
