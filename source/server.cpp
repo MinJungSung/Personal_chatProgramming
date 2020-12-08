@@ -61,43 +61,70 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 	char recv_buf[BUFSIZE];
 
 	// If message received, send except i
+	// When connection is not made
 	if ((nbytes_recvd = recv(i, recv_buf, BUFSIZE, 0)) <= 0) {
 		if (nbytes_recvd == 0) {
 			printf("socket %d hung up\n", i);
 		}else {
 			perror("recv");
-			/////////////////////////////////////
-			string recv_buf_toString(recv_buf, recv_buf+BUFSIZE);
-			if((recv_buf_toString.substr(0,18)).compare("clientInformation:") == 0){
-				recv_buf_toString = recv_buf_toString.substr(18);
-				vector<string> clientInformation;
-				while(recv_buf_toString != ""){
-					size_t foundComma = recv_buf_toString.find_first_of(",");
+		}
+		/////////////////////////////////////
+		string recv_buf_toString(recv_buf, recv_buf+BUFSIZE);
+		if((recv_buf_toString.substr(0,18)).compare("clientInformation:") == 0){
+			recv_buf_toString = recv_buf_toString.substr(18);
+			vector<string> clientInformation;
+			while(!recv_buf_toString.empty()){
+				size_t foundComma = recv_buf_toString.find_first_of(",");
+				if (foundComma != string::npos) {
 					clientInformation.push_back(recv_buf_toString.substr(0,foundComma));
 					recv_buf_toString = recv_buf_toString.substr(foundComma);
 				}
-				string s;
-				for_each(clientInformation.begin(),clientInformation.end(),[&](const string &piece){s+=piece;});
-				cout << s << endl;
-				clientInfo_list.push_back(clientInformation);
 			}
-			cout << recv_buf_toString << endl;
-			////////////////////////////////////
+			string s;
+			for_each(clientInformation.begin(),clientInformation.end(),[&](const string &piece){s+=piece;});
+			cout << s << endl;
+			clientInfo_list.push_back(clientInformation);
 		}
+		cout << recv_buf_toString << endl;
+		////////////////////////////////////
+
 		close(i);
 		FD_CLR(i, master);
 	} else { 
+		// When connection is made
 		// Provide sender information in front of messages
 		// working code
-		std::string sockfd_string = "";
-		sockfd_string = std::to_string(i);
-		sockfd_string = "Socket No " + sockfd_string;
-		sockfd_string = sockfd_string + " : " + std::string(recv_buf, nbytes_recvd);
-		char* sockfd_char = new char[sockfd_string.length() + 1];
-		strcpy(sockfd_char, sockfd_string.c_str());
-		
-		for(j = 0; j <= fdmax; j++){
-			send_to_all(j, i, sockfd, strlen(sockfd_char), sockfd_char, master);
+		/////////////////////////////////////
+		string recv_buf_toString(recv_buf, recv_buf+BUFSIZE);
+		// When the recv_buf for client Information
+		if((recv_buf_toString.substr(0,18)).compare("clientInformation:") == 0){
+			recv_buf_toString = recv_buf_toString.substr(18);
+			vector<string> clientInformation;
+			while(!recv_buf_toString.empty()){
+				size_t foundComma = recv_buf_toString.find_first_of(",");
+				if (foundComma != string::npos) {
+					clientInformation.push_back(recv_buf_toString.substr(0,foundComma));
+					recv_buf_toString = recv_buf_toString.substr(foundComma);
+				}
+			}
+			string s;
+			for_each(clientInformation.begin(),clientInformation.end(),[&](const string &piece){s+=piece;});
+			cout << s << endl;
+			clientInfo_list.push_back(clientInformation);
+			cout << recv_buf_toString << endl;
+			///////////////////////////////////////////
+		} else {
+			// When the recv_buf is for messages
+			std::string sockfd_string = "";
+			sockfd_string = std::to_string(i);
+			sockfd_string = "Socket No " + sockfd_string;
+			sockfd_string = sockfd_string + " : " + std::string(recv_buf, nbytes_recvd);
+			char* sockfd_char = new char[sockfd_string.length() + 1];
+			strcpy(sockfd_char, sockfd_string.c_str());
+			
+			for(j = 0; j <= fdmax; j++){
+				send_to_all(j, i, sockfd, strlen(sockfd_char), sockfd_char, master);
+			}
 		}
 	}	
 }
@@ -159,7 +186,6 @@ void Server::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in my_add
 	FD_SET(sockfd, &master);
 	fdmax = sockfd;
 	
-	//temprecv(i, &master, sockfd, fdmax);
 	while(1){
 
 		read_fds = master;
@@ -174,7 +200,6 @@ void Server::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in my_add
 					connection_accept(&master, &fdmax, sockfd, &client_addr);
 				}
 				else
-					send_recv(i, &master, sockfd, fdmax);
 					send_recv(i, &master, sockfd, fdmax);
 			}
 		}
