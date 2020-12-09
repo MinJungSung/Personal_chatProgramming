@@ -20,40 +20,6 @@ void Server::send_to_all(int j, int i, int sockfd, int nbytes_recvd, char *recv_
 		}
 	}
 }
-		
-void Server::temprecv(int i, fd_set *master, int sockfd, int fdmax)
-{
-	int nbytes_recvd, j;
-	char recv_buf[BUFSIZE];
-
-	// If message received, send except i
-	nbytes_recvd = recv(i, recv_buf, BUFSIZE, 0);
-			cout << "received?" << endl; 
-			/////////////////////////////////////
-			string recv_buf_toString(recv_buf);
-			cout << recv_buf_toString << endl;
-			if((recv_buf_toString.substr(0,18)).compare("clientInformation:") == 0){
-
-				recv_buf_toString = recv_buf_toString.substr(18);
-				vector<string> clientInformation;
-				while(recv_buf_toString != ""){
-					size_t foundComma = recv_buf_toString.find_first_of(",");
-					if(foundComma < 1000){
-					clientInformation.push_back(recv_buf_toString.substr(0,foundComma));
-					recv_buf_toString = recv_buf_toString.substr(foundComma);
-					}
-				}
-				string s;
-				for_each(clientInformation.begin(),clientInformation.end(),[&](const string &piece){s+=piece;});
-				cout << s << endl;
-				clientInfo_list.push_back(clientInformation);
-			cout << recv_buf_toString << endl;
-			////////////////////////////////////
-		}
-		close(i);
-		FD_CLR(i, master);
-	
-}
 
 void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 {
@@ -68,32 +34,11 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 		}else {
 			perror("recv");
 		}
-		/////////////////////////////////////
-		string recv_buf_toString(recv_buf, recv_buf+BUFSIZE);
-		if((recv_buf_toString.substr(0,18)).compare("clientInformation:") == 0){
-			recv_buf_toString = recv_buf_toString.substr(18);
-			vector<string> clientInformation;
-			while(!recv_buf_toString.empty()){
-				size_t foundComma = recv_buf_toString.find_first_of(",");
-				if (foundComma != string::npos) {
-					clientInformation.push_back(recv_buf_toString.substr(0,foundComma));
-					recv_buf_toString = recv_buf_toString.substr(foundComma);
-				}
-			}
-			string s;
-			for_each(clientInformation.begin(),clientInformation.end(),[&](const string &piece){s+=piece;});
-			cout << s << endl;
-			clientInfo_list.push_back(clientInformation);
-		}
-		cout << recv_buf_toString << endl;
-		////////////////////////////////////
-
 		close(i);
 		FD_CLR(i, master);
 	} else { 
 		// When connection is made
 		// Provide sender information in front of messages
-		// working code
 		/////////////////////////////////////
 		string recv_buf_toString(recv_buf, recv_buf+BUFSIZE);
 		// When the recv_buf for client Information
