@@ -40,36 +40,70 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 		// When connection is made
 		// Provide sender information in front of messages
 		/////////////////////////////////////
-		string recv_buf_toString(recv_buf, recv_buf+BUFSIZE);
+		string recv_buf_toString(recv_buf);
+		cout << recv_buf_toString << endl;
 		// When the recv_buf for client Information
 		if((recv_buf_toString.substr(0,18)).compare("clientInformation:") == 0){
 			recv_buf_toString = recv_buf_toString.substr(18);
 			vector<string> clientInformation;
 			while(!recv_buf_toString.empty()){
-				size_t foundComma = recv_buf_toString.find_first_of(",");
-				if (foundComma != string::npos) {
-					clientInformation.push_back(recv_buf_toString.substr(0,foundComma));
-					recv_buf_toString = recv_buf_toString.substr(foundComma);
+				if (recv_buf_toString.find_first_of(",") != string::npos) {
+					clientInformation.push_back(recv_buf_toString.substr(0,recv_buf_toString.find_first_of(",")));
+					recv_buf_toString = recv_buf_toString.substr(recv_buf_toString.find_first_of(",") + 1);
+				} else {
+					clientInformation.push_back(recv_buf_toString);
+					clientInformation.push_back(to_string(i));
+					recv_buf_toString = "";	
 				}
 			}
-			string s;
+			string s = "";
 			for_each(clientInformation.begin(),clientInformation.end(),[&](const string &piece){s+=piece;});
 			cout << s << endl;
 			clientInfo_list.push_back(clientInformation);
-			cout << recv_buf_toString << endl;
 			///////////////////////////////////////////
 		} else {
+			int room = 0;
+			string senderUsername = "";
+			for(vector<string> ci : clientInfo_list){
+				// Find which socket sends the message
+				if(stoi(ci[3]) == i){
+					// find room to send
+					room = stoi(ci[2]);
+					senderUsername = ci[0];
+					break;
+				}
+			}
+			senderUsername = senderUsername + " : " + string(recv_buf, nbytes_recvd);	
+
+
 			// When the recv_buf is for messages
+			/*
 			std::string sockfd_string = "";
 			sockfd_string = std::to_string(i);
 			sockfd_string = "Socket No " + sockfd_string;
 			sockfd_string = sockfd_string + " : " + std::string(recv_buf, nbytes_recvd);
 			char* sockfd_char = new char[sockfd_string.length() + 1];
 			strcpy(sockfd_char, sockfd_string.c_str());
-			
+			*/
+			char* sockfd_char = new char[senderUsername.length() + 1];
+			strcpy(sockfd_char, senderUsername.c_str());
+
+			cout << "room:" << room << endl;
+
+
+			for(vector<string> ci : clientInfo_list){
+				if(stoi(ci[2]) == room){
+					cout << "room check: " << ci[2] << endl;
+					cout << "port check: " << ci[3] << endl;
+				
+					send_to_all(stoi(ci[3]), i, sockfd, strlen(sockfd_char), sockfd_char, master);
+				}
+			}
+			/*
 			for(j = 0; j <= fdmax; j++){
 				send_to_all(j, i, sockfd, strlen(sockfd_char), sockfd_char, master);
 			}
+			*/
 		}
 	}	
 }

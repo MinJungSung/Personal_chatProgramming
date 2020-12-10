@@ -9,14 +9,12 @@ void Client::send_recv(int i, int sockfd)
 	char recv_buf[BUFSIZE];
 	int nbyte_recvd;
 	if (i == 0){
-		cout << "i == 0" << endl;
 		fgets(send_buf, BUFSIZE, stdin);
 		if (strcmp(send_buf , "quit\n") == 0) {
 			exit(0);
 		} else
 			send(sockfd, send_buf, strlen(send_buf), 0);
 	} else {
-		cout << "else" << endl;
 		nbyte_recvd = recv(sockfd, recv_buf, BUFSIZE, 0);
 		recv_buf[nbyte_recvd] = '\0';
 		printf("%s", recv_buf);
@@ -26,7 +24,6 @@ void Client::send_recv(int i, int sockfd)
 			
 void Client::connect_request(int *sockfd, struct sockaddr_in *server_addr)
 {
-	cout << "connection request " << endl;
 	if ((*sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
 		perror("Socket");
 		exit(1);
@@ -49,7 +46,6 @@ string Client::toString()
 
 void Client::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in server_addr, fd_set master, fd_set read_fds) 
 {
-	cout << "tcp listern begin" << endl;
 	connect_request(&sockfd, &server_addr);
 	FD_ZERO(&master);
 	FD_ZERO(&read_fds);
@@ -57,9 +53,7 @@ void Client::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in server
 	FD_SET(sockfd, &master);
 	fdmax = sockfd;
 	send_clientInformation(sockfd);
-	cout << "tcp listerner middle" << endl;
 	while(1){
-		cout << "repeat start" << endl;
 		read_fds = master;
 		if(select(fdmax+1, &read_fds, NULL, NULL, NULL) == -1){
 			perror("select");
@@ -89,26 +83,23 @@ int main()
 ///////////////////////////////////////////////////////////
 string Client::setClientInformation()
 {
-	cout << "send 1" << endl;
-	string clientInfo = "";
+	string clientInfo = "clientInformation:";
 	string temp = "";
 	cout << "Username: ";
 	cin >> temp;
 	clientInfo = clientInfo + temp;
 	cout << "Password: ";
 	cin >> temp;
-	clientInfo = clientInfo + "," + temp + ",0," + to_string(sockfd);
-	cout << "send 2" << endl;
+	clientInfo = clientInfo + "," + temp + ",0";
 	return clientInfo;
 }
 
 void Client::send_clientInformation(int sockfd)
 {
 	string s = setClientInformation();
+	cout << s << endl;
 	char send_buf[BUFSIZE];
 	strcpy(send_buf, s.c_str());
-	cout << "send client info" << endl;
-			cout << s << endl;
-			send(sockfd, send_buf, strlen(send_buf), 0);
+	send(sockfd, send_buf, strlen(send_buf), 0);
 }
 ///////////////////////////////////////////////////////////
