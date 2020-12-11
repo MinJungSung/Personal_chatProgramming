@@ -17,7 +17,7 @@ void Client::send_recv(int i, int sockfd)
 	} else {
 		nbyte_recvd = recv(sockfd, recv_buf, BUFSIZE, 0);
 		recv_buf[nbyte_recvd] = '\0';
-		printf("%s" , recv_buf);
+		printf("%s", recv_buf);
 		fflush(stdout);
 	}
 }
@@ -53,14 +53,12 @@ void Client::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in server
 	FD_SET(sockfd, &master);
 	fdmax = sockfd;
 	send_clientInformation(sockfd);
-
 	while(1){
 		read_fds = master;
 		if(select(fdmax+1, &read_fds, NULL, NULL, NULL) == -1){
 			perror("select");
 			exit(4);
 		}
-		
 		for(i=0; i <= fdmax; i++ )
 			if(FD_ISSET(i, &read_fds))
 				send_recv(i, sockfd);
@@ -85,14 +83,14 @@ int main()
 ///////////////////////////////////////////////////////////
 string Client::setClientInformation()
 {
-	string clientInfo = "";
+	string clientInfo = "clientInformation:";
 	string temp = "";
-	cout << "Username: ";
+	cout << "Username:";
 	cin >> temp;
 	clientInfo = clientInfo + temp;
-	cout << "Password: ";
+	cout << "Password:";
 	cin >> temp;
-	clientInfo = clientInfo + "," + temp + "0," + to_string(sockfd);
+	clientInfo = clientInfo + "," + temp + ",0";
 	return clientInfo;
 }
 
@@ -101,12 +99,10 @@ void Client::send_clientInformation(int sockfd)
 	string s = setClientInformation();
 	char send_buf[BUFSIZE];
 	strcpy(send_buf, s.c_str());
-
-	if (i == 0){
-		if (strcmp(send_buf , "quit\n") == 0) {
-			exit(0);
-		} else
-			send(sockfd, send_buf, strlen(send_buf), 0);
+	printf("%s\n", send_buf);
+	cout << "check check" << endl;
+	if(sizeof(send_buf)!= 0){
+		send(sockfd, send_buf, sizeof(send_buf), 0);
 	}
 }
 ///////////////////////////////////////////////////////////
