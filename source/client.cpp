@@ -85,10 +85,10 @@ string Client::setClientInformation()
 {
 	string clientInfo = "clientInformation:";
 	string temp = "";
-	cout << "Username: ";
+	cout << "Username:";
 	cin >> temp;
 	clientInfo = clientInfo + temp;
-	cout << "Password: ";
+	cout << "Password:";
 	cin >> temp;
 	clientInfo = clientInfo + "," + temp + ",0";
 	return clientInfo;
@@ -97,9 +97,12 @@ string Client::setClientInformation()
 void Client::send_clientInformation(int sockfd)
 {
 	string s = setClientInformation();
-	cout << s << endl;
 	char send_buf[BUFSIZE];
 	strcpy(send_buf, s.c_str());
-	send(sockfd, send_buf, strlen(send_buf), 0);
+	printf("%s\n", send_buf);
+	cout << "check check" << endl;
+	if(sizeof(send_buf)!= 0){
+		send(sockfd, send_buf, sizeof(send_buf), 0);
+	}
 }
 ///////////////////////////////////////////////////////////

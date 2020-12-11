@@ -28,7 +28,7 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 
 	// If message received, send except i
 	// When connection is not made
-	if ((nbytes_recvd = recv(i, recv_buf, BUFSIZE, 0)) <= 0) {
+	if ((nbytes_recvd = recv(i, recv_buf, sizeof(recv_buf) - 1, 0)) <= 0) {
 		if (nbytes_recvd == 0) {
 			printf("socket %d hung up\n", i);
 		}else {
@@ -41,6 +41,7 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 		// Provide sender information in front of messages
 		/////////////////////////////////////
 		string recv_buf_toString(recv_buf);
+		printf("characeter %s", recv_buf);
 		cout << recv_buf_toString << endl;
 		// When the recv_buf for client Information
 		if((recv_buf_toString.substr(0,18)).compare("clientInformation:") == 0){
@@ -73,7 +74,8 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 					break;
 				}
 			}
-			senderUsername = senderUsername + " : " + string(recv_buf, nbytes_recvd);	
+			senderUsername = senderUsername + ":";
+			senderUsername = senderUsername.append(string(recv_buf, nbytes_recvd));	
 
 
 			// When the recv_buf is for messages
@@ -89,14 +91,16 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 			strcpy(sockfd_char, senderUsername.c_str());
 
 			cout << "room:" << room << endl;
-
-
-			for(vector<string> ci : clientInfo_list){
-				if(stoi(ci[2]) == room){
-					cout << "room check: " << ci[2] << endl;
-					cout << "port check: " << ci[3] << endl;
-				
-					send_to_all(stoi(ci[3]), i, sockfd, strlen(sockfd_char), sockfd_char, master);
+			cout << "nbytes_recvd:" << nbytes_recvd << endl;
+			printf("%s\n",sockfd_char);
+			if(nbytes_recvd > 1){
+				for(vector<string> ci : clientInfo_list){
+					if(stoi(ci[2]) == room){
+						cout << "room check: " << ci[2] << endl;
+						cout << "port check: " << ci[3] << endl;
+					
+						send_to_all(stoi(ci[3]), i, sockfd, strlen(sockfd_char), sockfd_char, master);
+					}
 				}
 			}
 			/*
