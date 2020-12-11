@@ -22,6 +22,7 @@
 #include <boost/serialization/string.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
+#include <boost/algorithm/string.hpp>
 //////////////////////////////
 
 #define PORT 4950
@@ -52,7 +53,8 @@ public:
 	// socketfd == portNo
 	// std::map<int, std::list<int>> roomClient;	//map<roomNo, portNo>
 	// std::map<int, ClientInfo> onlineClient;		//map<portNo, id an password>
-	std::vector<vector<string>> clientInfo_list;		//clientInfo_list<username, password, roomNumber, sockfd>
+	vector<vector<string>> clientInfo_list;			//clientInfo_list<username, password, roomNumber, sockfd>
+	map<int, int> room_list = {{0,0}};
 
 	fd_set master;
 	fd_set read_fds;
