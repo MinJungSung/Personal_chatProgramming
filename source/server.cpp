@@ -73,6 +73,20 @@ for(vector<vector<string>>::iterator it = room_list.begin(); it != room_list.end
 		
 		// 2) CreateRoom
 		} else if((recv_buf_toString.substr(0,10)).compare("createRoom") == 0) {
+
+
+
+			for(vector<string> ci : clientInfo_list){
+				if(stoi(ci[3]) == i){
+					if(stoi(ci[2]) == 0) {
+						//TODO:send error message
+					} else {
+						//TODO:goto rest of the code
+					}
+				}
+			}
+
+
 			int room = 0;
 			// Skipped room
 			for(map<int,int>::iterator it = room_list.begin(); it != room_list.end(); ++it){
@@ -83,7 +97,7 @@ for(vector<vector<string>>::iterator it = room_list.begin(); it != room_list.end
 				}else{
 					room_list.emplace(room,1);
 					for(vector<string> ci : clientInfo_list){
-						cout << "rrom " << ci[2] << endl;
+						cout << "room " << ci[2] << endl;
 						if(stoi(ci[3]) == i){
 							// Decrease number for original room
 							cout << "original room: " << ci[2] << endl;
@@ -98,22 +112,29 @@ for(vector<vector<string>>::iterator it = room_list.begin(); it != room_list.end
 				}
 			}
 			room_list.emplace(room,1);
-			for(vector<string> ci : clientInfo_list){
-				string s="";
-				for_each(ci.begin(),ci.end(),[&](const string &piece){s+=piece;});
-				cout << s << endl;
-				if(stoi(ci[3]) == i){
-					cout << "original room " << ci[2] << endl;
-					int originalRoom = stoi(ci[2]);
+			for (int num = 0; num < clientInfo_list.size(); num++) {
+				if (stoi(clientInfo_list[num][3]) == i) {
+				 	string s="";
+				 	for_each(clientInfo_list[num].begin(), clientInfo_list[num].end(),[&](const string &piece){s+=piece;});
+				 	cout << s << endl;
+					cout << "original room " << clientInfo_list[num][2] << endl;
+					int originalRoom = stoi(clientInfo_list[num][2]);
 					((room_list.find(originalRoom))->second)--;
-					ci[2] = to_string(room);
+					clientInfo_list[num][2] = to_string(room);
 					string k="";
-					for_each(ci.begin(),ci.end(),[&](const string &piece){k+=piece;});
+					for_each(clientInfo_list[num].begin(), clientInfo_list[num].end(),[&](const string &piece){k+=piece;});
 					cout << k << endl;
-					cout << "moved to " << ci[2] << endl;
+					cout << "moved to " << clientInfo_list[num][2] << endl;
 					break;
 				}
 			}
+
+			for(vector<string> ci : clientInfo_list){
+				string s1="";
+				for_each(ci.begin(),ci.end(),[&](const string &piece){s1+=piece;});
+				cout << "== end of createRoom ==" << s1 << endl;
+			}
+
 			string s = "You created room " + to_string(room) + "\n";
 			char* sockfd_char = new char[s.length() + 1];
 			strcpy(sockfd_char, s.c_str());
@@ -123,20 +144,21 @@ for(vector<vector<string>>::iterator it = room_list.begin(); it != room_list.end
 		} else if((recv_buf_toString.substr(0,8)).compare("exitRoom") == 0){
 			int room = 0;
 			string leftUser = "";
-			for(vector<string> ci : clientInfo_list){
+			for(int num = 0; num < clientInfo_list.size(); num++){
 				string s = "";
-				for_each(ci.begin(),ci.end(),[&](const string &piece){s+=piece;});
+				for_each(clientInfo_list[num].begin(),clientInfo_list[num].end(),[&](const string &piece){s+=piece;});
 				cout << s << endl;
 				// Find who left room
-				if(stoi(ci[3]) == i){
-					room_list.find(room)->second = room_list.find(room)->second - 1;
-					room_list.find(0)->second - room_list.find(0)->second + 1; 
+				if(stoi(clientInfo_list[num][3]) == i){
+					room = clientInfo_list[num][2];
+					room_list.find(room)->second--;
+					room_list.find(0)->second++; 
 	
-					leftUser = ci[0];
+					leftUser = clientInfo_list[num][0];
 					// Send messages
 					cout << "currRoom " << room << endl;
 					cout << "Exit room " << room_list.find(room)->second << endl;
-					if((room_list.find(room)->second) <= 1 && room != 0){
+					if((room_list.find(room)->second) == 0 && room != 0){
 						printf("Room %d disappeared\n", room);
 						room_list.erase(room);
 					} else {
@@ -145,9 +167,9 @@ for(vector<vector<string>>::iterator it = room_list.begin(); it != room_list.end
 						char* sockfd_char_toOthers = new char[leftMessageToOthers.length() + 1];
 						strcpy(sockfd_char_toOthers, leftMessageToOthers.c_str());
 
-						for(vector<string> ci : clientInfo_list){
-							if(stoi(ci[2]) == room){
-								send_to_all(stoi(ci[3]), i, sockfd, strlen(sockfd_char_toOthers), sockfd_char_toOthers, master);
+						for(int n = 0; n < clientInfo_list.size(); n++){
+							if(stoi(clientInfo_list[num][2]) == room){
+								send_to_all(stoi(clientInfo_list[num][3]), i, sockfd, strlen(sockfd_char_toOthers), sockfd_char_toOthers, master);
 							}
 						}
 					}
@@ -156,14 +178,14 @@ for(vector<vector<string>>::iterator it = room_list.begin(); it != room_list.end
 					char* sockfd_char_toMyself = new char[leftMessage_toMyself.length() + 1];
 					strcpy(sockfd_char_toMyself, leftMessage_toMyself.c_str());
 					send_to_all(i, i+1, sockfd, strlen(sockfd_char_toMyself), sockfd_char_toMyself, master);
-					ci[2] = "0";
+					clientInfo_list[num][2] = "0";
 					break;
 				}
 			}
 
 		// 4) JoinRoom
 		} else if((recv_buf_toString.substr(0,8)).compare("joinRoom") == 0){
-
+			
 
 		// 5) ShowRoom
 		} else if((recv_buf_toString.substr(0,8)).compare("showRoom") == 0){
@@ -175,12 +197,12 @@ for(vector<vector<string>>::iterator it = room_list.begin(); it != room_list.end
 		} else {
 			int room = 0;
 			string senderUsername = "";
-			for(vector<string> ci : clientInfo_list){
+			for(int num = 0; num < clientInfo_list.size(); num++){
 				// Find which socket sends the message
-				if(stoi(ci[3]) == i){
+				if(stoi(clientInfo_list[num][3]) == i){
 					// find room to send
-					room = stoi(ci[2]);
-					senderUsername = ci[0];
+					room = stoi(clientInfo_list[num][2]);
+					senderUsername = clientInfo_list[num][0];
 					break;
 				}
 			}
