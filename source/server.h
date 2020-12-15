@@ -49,10 +49,6 @@ public:
 	void connect_request(int* sockfd, struct sockaddr_in* my_addr);
 	void tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in my_addr, struct sockaddr_in client_addr, fd_set master, fd_set read_fds);
 
-	// Create ClientInfo list
-	// socketfd == portNo
-	// std::map<int, std::list<int>> roomClient;	//map<roomNo, portNo>
-	// std::map<int, ClientInfo> onlineClient;		//map<portNo, id an password>
 	vector<vector<string>> clientInfo_list;			//clientInfo_list<username, password, roomNumber, sockfd>
 	map<int, int> room_list = {{0,0}};
 
@@ -63,7 +59,7 @@ public:
 	// j == iterator
 	// sockfd == openned socket
 	// fdmax == highest socket number
-	int fdmax, i, room;
+	int fdmax, i;
 	int sockfd = 0;
 	struct sockaddr_in my_addr, client_addr;	
 };
