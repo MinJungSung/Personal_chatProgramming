@@ -90,7 +90,7 @@ string Client::setClientInformation()
 	clientInfo = clientInfo + temp;
 	cout << "Password:";
 	cin >> temp;
-	clientInfo = clientInfo + "," + temp + ",0";
+	clientInfo = clientInfo + "," + temp;
 	return clientInfo;
 }
 
