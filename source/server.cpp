@@ -54,24 +54,30 @@ for(vector<vector<string>>::iterator it = room_list.begin(); it != room_list.end
 		// 1) ClientInformation
 		if((recv_buf_toString.substr(0,18)).compare("clientInformation:") == 0){
 			recv_buf_toString = recv_buf_toString.substr(18);
-			vector<string> clientInformation;	
-			cout << "clientInformation" << endl;
-			while(!recv_buf_toString.empty()){
-				if (recv_buf_toString.find_first_of(",") != string::npos) {
-					clientInformation.push_back(recv_buf_toString.substr(0,recv_buf_toString.find_first_of(",")));
-					recv_buf_toString = recv_buf_toString.substr(recv_buf_toString.find_first_of(",") + 1);
-				} else {
-					clientInformation.push_back(recv_buf_toString);
-					clientInformation.push_back("0");
-					clientInformation.push_back(to_string(i));
-					recv_buf_toString = "";	
-				}
-			}
+			clientInfoList->setClientInformation(recv_buf_toString, i);
+			vector<string> temp = clientInfoList->getClientInformation(i);
 			string s = "";
-			for_each(clientInformation.begin(),clientInformation.end(),[&](const string &piece){s+=piece;});
-			clientInfo_list.push_back(clientInformation);
+			for_each(temp.begin(), temp.end(),[&](const string &piece){s+=piece;});
+			cout << s << endl;
+			//vector<string> clientInformation;	
+			//cout << "clientInformation" << endl;
+			//while(!recv_buf_toString.empty()){
+			//	if (recv_buf_toString.find_first_of(",") != string::npos) {
+			//		clientInformation.push_back(recv_buf_toString.substr(0,recv_buf_toString.find_first_of(",")));
+			//		recv_buf_toString = recv_buf_toString.substr(recv_buf_toString.find_first_of(",") + 1);
+			//	} else {
+			//		clientInformation.push_back(recv_buf_toString);
+			//		clientInformation.push_back("0");
+			//		clientInformation.push_back(to_string(i));
+			//		recv_buf_toString = "";	
+			//	}
+			//}
+			//string s = "";
+			//for_each(clientInformation.begin(),clientInformation.end(),[&](const string &piece){s+=piece;});
+			//clientInfo_list.push_back(clientInformation);
 		
 		// 2) CreateRoom
+		/*
 		} else if((recv_buf_toString.substr(0,10)).compare("createRoom") == 0) {
 
 
@@ -112,6 +118,7 @@ for(vector<vector<string>>::iterator it = room_list.begin(); it != room_list.end
 				}
 			}
 			room_list.emplace(room,1);
+			//TODO: ci = ClientInfoList.getClientInformation(i);
 			for (int num = 0; num < clientInfo_list.size(); num++) {
 				if (stoi(clientInfo_list[num][3]) == i) {
 				 	string s="";
@@ -221,6 +228,7 @@ for(vector<vector<string>>::iterator it = room_list.begin(); it != room_list.end
 					send_to_all(stoi(ci[3]), i, sockfd, strlen(sockfd_char), sockfd_char, master);
 				}
 			}
+			*/
 		}
 	}	
 }
@@ -233,9 +241,9 @@ void Server::connection_accept(fd_set *master, int *fdmax, int sockfd, struct so
 	addrlen = sizeof(struct sockaddr_in);
 	if((newsockfd = accept(sockfd, (struct sockaddr *)client_addr, &addrlen)) == -1) {
 		// TODO
-		for(vector<string> ci : clientInfo_list){
+		//for(vector<string> ci : clientInfo_list){
 
-		}
+		//}
 		perror("accept");
 		exit(1);
 	}else {

@@ -17,6 +17,7 @@
 ///////////////////////////////
 #include <fstream>
 #include <string>
+#include "clientInfoList.h"
 
 #include <boost/serialization/serialization.hpp>
 #include <boost/serialization/string.hpp>
@@ -49,7 +50,8 @@ public:
 	void connect_request(int* sockfd, struct sockaddr_in* my_addr);
 	void tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in my_addr, struct sockaddr_in client_addr, fd_set master, fd_set read_fds);
 
-	vector<vector<string>> clientInfo_list;			//clientInfo_list<username, password, roomNumber, sockfd>
+
+	ClientInfoList* clientInfoList;
 	map<int, int> room_list = {{0,0}};
 
 	fd_set master;
