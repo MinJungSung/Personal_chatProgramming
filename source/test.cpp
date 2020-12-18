@@ -10,19 +10,23 @@
 #include <pthread.h>
 #include <cstdint>
 #include <iostream>
+#include <vector>
 
-
-void PrintPointers(char *value)
-{
-	printf("%s", value);
-}
+using namespace std;
 
 int main() {
 
-char* prt1 = "memory";
-char* prt2 = "issue";
+vector<vector<string>> vs;
+vs.push_back({ "xyzzy", "plugh", "abracadabra" }); 
+vs.push_back({ "xyzzy", "plugh", "abracadabra" });
+vs.push_back({ "xyzzy", "plugh", "abracadabra" });
 
-std::cout << prt1;
+
+for(auto it = vs.begin(); it != vs.end(); it++){
+	cout << (*it)[0] << endl;
+
+}
+
 
 return 0;
 }
