@@ -32,6 +32,32 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 		}else {
 			perror("recv");
 		}
+
+		for(map<int,ClientInfo>::iterator it = client_list.begin(); it != client_list.end(); ++it){
+			if(it->second.getSockfd() == i){
+				//Decrease roomNum count
+				((room_list.find(it->second.getRoomNumber()))->second)--;
+				//Remove Room if 0	
+				if((room_list.find(it->second.getRoomNumber())->second) == 0 && it->second.getRoomNumber() != 0){
+					printf("Room %d disappeared\n", it->second.getRoomNumber());
+					room_list.erase(it->second.getRoomNumber());
+				} else {
+					// Message to others in chat
+					string leftMessageToOthers = it->second.getUsername() + " left this chat\n";
+					char* sockfd_char_toOthers = new char[leftMessageToOthers.length() + 1];
+					strcpy(sockfd_char_toOthers, leftMessageToOthers.c_str());
+					for(map<int,ClientInfo>::iterator others = client_list.begin(); others != client_list.end(); ++others){
+						if(others->second.getRoomNumber() == it->second.getRoomNumber()){
+							send_to_all(others->second.getRoomNumber(), i, sockfd, strlen(sockfd_char_toOthers), sockfd_char_toOthers, master);
+						}
+					}
+				}									
+				it->second.setSockfd(-1);
+				it->second.setRoomNumber(-1);	
+				break;
+			}
+		}
+
 		close(i);
 		FD_CLR(i, master);
 	// Connection success
@@ -39,6 +65,7 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 
 		string recv_buf_toString(recv_buf);
 		trim(recv_buf_toString);
+
 		// 1) ClientInformation
 		if((recv_buf_toString.substr(0,18)).compare("clientInformation:") == 0){
 			recv_buf_toString = recv_buf_toString.substr(18);
@@ -63,7 +90,7 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 			client_list.emplace(i, clientInfo);
 			
 			cout << "check2" << endl;
-			for(map<int,ClientInfo>::const_iterator it = client_list.begin(); it != client_list.end(); ++it){
+			for(map<int,ClientInfo>::iterator it = client_list.begin(); it != client_list.end(); ++it){
 				cout << it->first << " " << it->second.getUsername() <<  "\n";
 			}
 			
@@ -148,7 +175,7 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 						leftMessageToOthers = it->second.getUsername() + " left this chat\n";
 						char* sockfd_char_toOthers = new char[leftMessageToOthers.length() + 1];
 						strcpy(sockfd_char_toOthers, leftMessageToOthers.c_str());
-						for(map<int,ClientInfo>::const_iterator others = client_list.begin(); others != client_list.end(); ++others){
+						for(map<int,ClientInfo>::iterator others = client_list.begin(); others != client_list.end(); ++others){
 							if(others->second.getRoomNumber() == it->second.getRoomNumber()){
 								send_to_all(others->second.getRoomNumber(), i, sockfd, strlen(sockfd_char_toOthers), sockfd_char_toOthers, master);
 							}
@@ -183,26 +210,75 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 				} else {
 					printf("recv");
 				}
+
+				for(map<int,ClientInfo>::iterator it = client_list.begin(); it != client_list.end(); ++it){
+					if(it->second.getSockfd() == i){
+						//Decrease roomNum count
+						room_list.find(it->second.getRoomNumber())->second--;
+						//Remove Room if 0	
+						if((room_list.find(it->second.getRoomNumber())->second) == 0 && it->second.getRoomNumber() != 0){
+							printf("Room %d disappeared\n", it->second.getRoomNumber());
+							room_list.erase(it->second.getRoomNumber());
+						} else {
+							// Message to others in chat
+							string leftMessageToOthers = it->second.getUsername() + " left this chat\n";
+							char* sockfd_char_toOthers = new char[leftMessageToOthers.length() + 1];
+							strcpy(sockfd_char_toOthers, leftMessageToOthers.c_str());
+							for(map<int,ClientInfo>::iterator others = client_list.begin(); others != client_list.end(); ++others){
+								if(others->second.getRoomNumber() == it->second.getRoomNumber()){
+									send_to_all(others->second.getRoomNumber(), i, sockfd, strlen(sockfd_char_toOthers), sockfd_char_toOthers, master);
+								}
+							}
+						}									
+						it->second.setSockfd(-1);
+						it->second.setRoomNumber(-1);	
+						break;
+					}
+				}
+
 				close(i);
 				FD_CLR(i,master);
 			} else if (room_nbytes_recvd > 1) {
 				cout << "received" << endl;
 				string room_recv_buf_toString(room_recv_buf);
 				trim(room_recv_buf_toString);
+				cout << "Join " << room_recv_buf_toString << endl;
 
 				bool joinedRoom = false;
 				string errorMessage = "";
 							
 				//Find room
-				for(map<int,ClientInfo>::iterator it = client_list.begin(); it != client_list.end(); ++it){
-					if(it->second.getRoomNumber() == stoi(room_recv_buf_toString)){
-						it->second.setRoomNumber(stoi(room_recv_buf_toString));
-						joinedRoom = true;
-						cout << "found room" << endl;
-						break;
+				map<int,int>::iterator room_it = room_list.find(stoi(room_recv_buf_toString));
+				if(room_it != room_list.end()){
+					joinedRoom = true;
+					for(map<int,ClientInfo>::iterator client_it = client_list.begin(); client_it != client_list.end(); ++client_it){
+						if(client_it->second.getSockfd() == i){
+							room_it->second++;
+							room_list.find(client_it->second.getRoomNumber())->second--;
+
+							//Remove Room if 0	
+							if((room_list.find(client_it->second.getRoomNumber())->second) == 0 && client_it->second.getRoomNumber() != 0){
+								printf("Room %d disappeared\n", client_it->second.getRoomNumber());
+								room_list.erase(client_it->second.getRoomNumber());
+							} else {
+								// Message to others in chat
+								string leftMessageToOthers = client_it->second.getUsername() + " left this chat\n";
+								char* sockfd_char_toOthers = new char[leftMessageToOthers.length() + 1];
+								strcpy(sockfd_char_toOthers, leftMessageToOthers.c_str());
+								for(map<int,ClientInfo>::iterator others = client_list.begin(); others != client_list.end(); ++others){
+									if(others->second.getRoomNumber() == client_it->second.getRoomNumber()){
+										send_to_all(others->second.getRoomNumber(), i, sockfd, strlen(sockfd_char_toOthers), sockfd_char_toOthers, master);
+									}
+								}
+							}	
+
+							client_it->second.setRoomNumber(stoi(room_recv_buf_toString));
+							break;
+						}	
 					}
-				}
-				
+				}	
+
+
 				//Send result message
 				if(joinedRoom){
 					errorMessage = "You sucessfully joined room\n";

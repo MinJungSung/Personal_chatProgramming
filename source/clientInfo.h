@@ -30,16 +30,16 @@ public:
 
 	//Function
 	void setUsername(string username);
-	string getUsername()const;
+	string getUsername();
 
 	void setPassword(string password);
-	string getPassword()const;
+	string getPassword();
 
 	void setRoomNumber(int roomNumber);
-	int getRoomNumber()const;
+	int getRoomNumber();
 
 	void setSockfd(int sockfd);
-	int getSockfd()const;
+	int getSockfd();
 
 private:
 	string username;

@@ -23,7 +23,7 @@ void ClientInfo::setUsername(string username){
 	this->username = username;
 }
 
-string ClientInfo::getUsername() const{
+string ClientInfo::getUsername(){
 	return username;
 }
 
@@ -31,7 +31,7 @@ void ClientInfo::setPassword(string password){
 	this->password = password;
 }
 
-string ClientInfo::getPassword()const{
+string ClientInfo::getPassword(){
 	return password;
 }
 
@@ -39,7 +39,7 @@ void ClientInfo::setRoomNumber(int roomNumber){
 	this->roomNumber = roomNumber;
 }
 
-int ClientInfo::getRoomNumber() const{
+int ClientInfo::getRoomNumber(){
 	return roomNumber;
 }
 
@@ -47,7 +47,7 @@ void ClientInfo::setSockfd(int sockfd){
 	this->sockfd = sockfd;
 }
 
-int ClientInfo::getSockfd()const{
+int ClientInfo::getSockfd(){
 	return sockfd;
 }
 
