@@ -50,9 +50,6 @@ public:
 	void connect_request(int* sockfd, struct sockaddr_in* my_addr);
 	void tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in my_addr, struct sockaddr_in client_addr, fd_set master, fd_set read_fds);
 
-	map<int, int> room_list = {{0,0}};
-	map<int, ClientInfo> client_list;		//map<sockfd, ClientInfo>
-
 	fd_set master;
 	fd_set read_fds;
 	

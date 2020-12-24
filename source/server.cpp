@@ -32,7 +32,8 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 		}else {
 			perror("recv");
 		}
-
+		requestHandler.connectionHandler(i,"disconnected");
+		/*
 		for(map<int,ClientInfo>::iterator it = client_list.begin(); it != client_list.end(); ++it){
 			if(it->second.getSockfd() == i){
 				//Decrease roomNum count
@@ -57,15 +58,15 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 				break;
 			}
 		}
-
+		*/
 		close(i);
 		FD_CLR(i, master);
 	// Connection success
 	} else if(nbytes_recvd > 1){ 	
-
 		string recv_buf_toString(recv_buf);
 		trim(recv_buf_toString);
-
+		requestHandler.requestDispatcher(i, recv_buf_toString);
+		/*
 		// 1) ClientInformation
 		if((recv_buf_toString.substr(0,18)).compare("clientInformation:") == 0){
 			recv_buf_toString = recv_buf_toString.substr(18);
@@ -96,7 +97,6 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 			
 		
 		// 2) CreateRoom
-		
 		} else if((recv_buf_toString.substr(0,10)).compare("createRoom") == 0) {
 
 			int room = 0;
@@ -278,7 +278,6 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 					}
 				}	
 
-
 				//Send result message
 				if(joinedRoom){
 					errorMessage = "You sucessfully joined room\n";
@@ -330,6 +329,8 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 				}
 			}
 		}
+
+		*/
 	}	
 }
 
@@ -390,6 +391,9 @@ void Server::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in my_add
 	connect_request(&sockfd, &my_addr);
 	FD_SET(sockfd, &master);
 	fdmax = sockfd;
+
+	RequestHandler requestHandler(sockfd, master);
+
 	while(1){
 		read_fds = master;
 		if(select(fdmax+1, &read_fds, NULL, NULL, NULL) == -1){
