@@ -2,10 +2,10 @@
 
 using namespace std;
 
-int createRoom(){
+int RoomList::createRoom(){
 	int room = 1;
 	map<int,int>::iterator it;
-	for(it = room_list.begin(); it != client_list.end(); ++it){
+	for(it = room_list.begin(); it != room_list.end(); ++it){
 		if(it->first == room){
 			room++;
 		} else {
@@ -13,28 +13,28 @@ int createRoom(){
 			break;
 		}
 	}
-	if(it == client_list.end()){
+	if(it == room_list.end()){
 		room_list.emplace(room,1);
 	}
 	return room;
 }
 
-void removeRoom(int roomNum){
+void RoomList::removeRoom(int roomNum){
 	room_list.erase(roomNum);
 }
 
-void increaseNum(int roomNum){
+void RoomList::increaseNum(int roomNum){
 	room_list.find(roomNum)->second++;
 }
 
-void decreaseNum(int roomNum){
+void RoomList::decreaseNum(int roomNum){
 	room_list.find(roomNum)->second--;
 	if(room_list.find(roomNum)->second == 0){
 		removeRoom(roomNum);
 	}
 }
 
-bool findRoom(int roomNum){
+bool RoomList::findRoom(int roomNum){
 	for(map<int,int>::iterator it = room_list.begin(); it != room_list.end(); ++it){
 		if(it->first == roomNum){
 			return true;
@@ -43,7 +43,7 @@ bool findRoom(int roomNum){
 	return false;
 }
 
-int findNum(int roomNum){
+int RoomList::findNum(int roomNum){
 	for(map<int,int>::iterator it = room_list.begin(); it != room_list.end(); ++it){
 		if(it->first == roomNum){
 			return it->second;	
@@ -52,10 +52,10 @@ int findNum(int roomNum){
 	return -1;
 }
 
-string showRoom(){
+string RoomList::showRoom(){
 	string roomString = "";
 	for(map<int,int>::iterator it = room_list.begin(); it != room_list.end(); ++it){
-		roomString = "Room " + (*it).first + " -> " + (*it).second + " users\n";
+		roomString += "Room " + to_string((*it).first) + " -> " + to_string((*it).second) + " users\n";
 	}	
 	return roomString;
 }

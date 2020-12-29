@@ -7,7 +7,6 @@ using namespace std;
 
 class RoomList {
 public:
-	RoomList();
 	
 	int createRoom();
 	void removeRoom(int roomNum);
@@ -17,6 +16,5 @@ public:
 	int findNum(int roomNum);
 	string showRoom();
 
-private:
 	map<int,int> room_list = {{0,0}};
 };

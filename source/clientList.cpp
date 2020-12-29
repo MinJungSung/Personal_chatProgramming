@@ -2,9 +2,10 @@
 
 using namespace std;
 
-ClientList::ClientList(){}
+ClientList::ClientList(fd_set master){
+	this->master = master;
+}
 
-//clientInformation: will come in
 bool ClientList::create(int sender, string ci){
 	vector<string> information;
 	while(!ci.empty()){
@@ -20,25 +21,20 @@ bool ClientList::create(int sender, string ci){
 	}
 	map<int,ClientInfo>::iterator it;
 	for(it = client_list.begin(); it != client_list.end(); ++it){
-		if(it->second.getUsername().comparare(information[0]){
-			messageHandler.sendToSender(sockfd, master, sender, "Same username already exists\n");
+		if(it->second.getUsername().compare(information[0]) == 0){
+			messageHandler.sendTo(&master, sender, {sender}, 9, "");
 			return false;
 		}
 	}
-	if(it == client_list.end()){
-		ClientInfo clientInfo(information);
-		client_list.emplace(sender, clientInfo);
-	}
+	ClientInfo clientInfo(information);
+	client_list.emplace(sender, clientInfo);
 	return true;
 }
 
-//Username and password will come in as clientInformation
-//information[0]=username;
-//information[1]=password;
 bool ClientList::connect(int sender, string ci){
 	vector<string> information;
 	while(!ci.empty()){
-		if(ci.find_first_of(",") != string::npost){
+		if(ci.find_first_of(",") != string::npos){
 			information.push_back(ci.substr(0,ci.find_first_of(",")));
 			ci = ci.substr(ci.find_first_of(",") + 1);
 		} else {
@@ -48,16 +44,20 @@ bool ClientList::connect(int sender, string ci){
 	}
 	map<int,ClientInfo>::iterator it;
 	for(it = client_list.begin(); it != client_list.end(); ++it){
-		if(it->second.getUsername().compare(information[0]){
-			if(it->second.getPassword().compare(information[1]){
-				messageHandler.sendToSender(sockfd, master, sender, "Successfully connected\n");
-				it->first = sender;
+		if(it->second.getUsername().compare(information[0])){
+			if(it->second.getPassword().compare(information[1])){
+				messageHandler.sendTo(&master, sender, {sender}, 11, "");
+
+				auto const value = move(it->second);
+				client_list.erase(it->first);
+				client_list.insert({sender, move(value)});
+
 				return true;
 			}
 		} 			
 	}
 	if(it == client_list.end()){
-		messageHandler.sendToSender(sockfd, master, sender, "Connection failed\n");
+		messageHandler.sendTo(&master, sender, {sender}, 12, "");
 		return false;
 	}			
 	return false;
@@ -67,9 +67,13 @@ bool ClientList::disconnect(int sender){
 	map<int,ClientInfo>::iterator it;
 	for(it = client_list.begin(); it != client_list.end(); ++it){
 		if(it->first == sender){
-			it->first = -1;
 			it->second.setSockfd(-1);
 			it->second.setRoomNumber(-1);
+
+			auto const value = move(it->second);
+			client_list.erase(sender);
+			client_list.insert({-1, move(value)});
+
 			return true;
 		}	
 	}	
@@ -84,27 +88,31 @@ bool ClientList::changeClient(int sender, int index, string change){
 				//Username
 				case 0:
 					it->second.setUsername(change);
-					messageHandler.sendToSender(sockfd, master, sender, "Username changed\n");
+					messageHandler.sendTo(&master, sender, {sender}, 13, "Username");
 					return true;
 				//Password
 				case 1:
 					it->second.setPassword(change);
-					messageHandler.sendToSender(sockfd, master, sender, "Password changed\n");
+					messageHandler.sendTo(&master, sender, {sender}, 13, "Password");
 					return true;
 				//RoomNumber
 				case 2:
 					it->second.setRoomNumber(stoi(change));
-					messageHandler.sendToSender(sockfd, master, sender, "RoomNumber changed\n");
+					messageHandler.sendTo(&master, sender, {sender}, 13, "RoomNumber");
 					return true;
 				//Sockfd
 				case 3:
-					it->first = stoi(change);
+					{
 					it->second.setSockfd(stoi(change));
-					messageHandler.sendToSender(sockfd, master, sender, "Sockfd changed\n");
+					auto const value = move(it->second);
+					client_list.erase(sender);
+					client_list.insert({stoi(change), move(value)});
+					messageHandler.sendTo(&master, sender, {sender}, 13, "Sockfd");
 					return true;
+					}
 				//default
 				default:
-					messageHandler.sendToSender(sockfd, master, sender, "Couldn't change clientInfo\n");
+					messageHandler.sendTo(&master, sender, {sender}, 14, "");
 					return false;
 			}
 		}
@@ -112,28 +120,30 @@ bool ClientList::changeClient(int sender, int index, string change){
 }
 
 string ClientList::getClientInfo(int sender, int index){
+	string result = "";
 	map<int,ClientInfo>::iterator it;
 	for(it = client_list.begin(); it != client_list.end(); ++it){
 		if(it->first == sender){
 			switch(index){
 				case 0:
-					it->second.getUsername();
+					result += it->second.getUsername();
 					break;
 				case 1:
-					it->second.getPassword();
+					result += it->second.getPassword();
 					break;	
 				case 2:
-					it->second.getRoomNumber();
+					result += it->second.getRoomNumber();
 					break;
 				case 3:
-					it->second.getSockfd();
+					result += it->second.getSockfd();
 					break;
 				default:
-					messageHandler.sendToSender(sockfd, master, sender, "Couldn't get clientInfo\n");
+					messageHandler.sendTo(&master, sender, {sender}, 14, "");
 					break;
 			}
 		}
 	}
+	return result;
 }
 
 vector<int> ClientList::sendTo(int sender){
@@ -146,4 +156,12 @@ vector<int> ClientList::sendTo(int sender){
 		}
 	}	
 	return sendList;
+}
+
+string ClientList::showClient(){
+	string clientString = "";
+	for(map<int,ClientInfo>::iterator it = client_list.begin(); it != client_list.end(); ++it){
+		clientString += "Socket " + to_string(it->first) + " Username: " +  it->second.getUsername() + "\n";
+	}
+	return clientString;
 }

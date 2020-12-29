@@ -13,6 +13,9 @@ void Client::send_recv(int i, int sockfd)
 		if (strcmp(send_buf , "quit\n") == 0) {
 			exit(0);
 		} else
+
+			printf("Clientside message %s\n", send_buf);
+
 			send(sockfd, send_buf, strlen(send_buf), 0);
 	} else {
 		nbyte_recvd = recv(sockfd, recv_buf, BUFSIZE, 0);

@@ -1,12 +1,25 @@
 #include <string>
 #include <string.h>
 #include <iostream>
+#include <map>
+#include <vector>
+#include <sstream>
+#include <algorithm>
 
-using namespace std;
+#include <unistd.h>
+#include <netdb.h>
+#include <cstdint>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
-class MessageHandler {
+#include "clientInfo.h"
+#include "messageList.h"
+
+class MessageHandler : public MessageList{
+
 public:
-	void sendToSender(int sockfd, fd_set* master, int sender, string message);
-	void sendToAll(int sockfd, fd_set* master, int sender, map<int,ClientInfo> receiver, string message);
-	void sendToOthersInRoom(int sockfd, fd_set* master, int sender, vector<int> receiver, string message);
+	void sendTo(fd_set* master, int sender, vector<int> receiver, int messageChoice, string param);
+
 };
