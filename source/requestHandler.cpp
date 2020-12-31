@@ -14,6 +14,7 @@ void RequestHandler::setDefault(int sockfd, fd_set* master){
 void RequestHandler::requestDispatcher(int sender, string request){
 	this->sender = sender;
 
+	cout << "RequestDispatcher sender: " << to_string(sender) << endl;
 	if((request.substr(0,18)).compare("clientInformation:") == 0){
 		clientInformation(sender, request);
 	} else if((request.substr(0,10)).compare("createRoom") == 0){
@@ -40,7 +41,9 @@ void RequestHandler::clientInformation(int sender, string request){
 }
 	
 void RequestHandler::createRoom(int sender){
+	cout << "CreateRoom sender: " << to_string(sender) << endl;
 
+	cout << clientList.getClientInfo(sender, ROOMNUMBER) << endl;
 	if(stoi(clientList.getClientInfo(sender, ROOMNUMBER)) != LOUNGE){
 		messageHandler.sendTo(&master, sender, {sender}, 7, "");
 	} else {
@@ -109,7 +112,11 @@ void RequestHandler::joinRoom(int sender){
 }
 
 void RequestHandler::connected(int sender){
-	roomList.increaseNum(LOUNGE);
+	if(!roomList.findRoom(LOUNGE)){
+		roomList.createRoom();
+	} else {
+		roomList.increaseNum(LOUNGE);
+	}
 }
 
 void RequestHandler::disconnected(int sender){

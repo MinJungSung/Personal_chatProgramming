@@ -28,7 +28,6 @@ class Server {
 public:
 
 	void send_recv(int i, fd_set* master, int sockfd, int fmax);
-	void temprecv(int i, fd_set* master, int sockfd, int fmax);
 	void connection_accept(fd_set* master, int* fdmax, int sockfd, struct sockaddr_in* client_addr);
 	void connect_request(int* sockfd, struct sockaddr_in* my_addr);
 	void tcpListener(int sockfd, int fdmax, struct sockaddr_in my_addr, struct sockaddr_in client_addr, fd_set master, fd_set read_fds);

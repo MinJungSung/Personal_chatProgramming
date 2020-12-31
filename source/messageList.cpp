@@ -51,5 +51,5 @@ string MessageList::printMessage(int m_choice, string m_param){
 			result += "Cannot change clientInfo";
 			break;
 	} 
-	return result;
+	return result += "\n";
 }

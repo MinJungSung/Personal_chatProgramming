@@ -3,7 +3,8 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 {
 	int nbytes_recvd;
 	char recv_buf[BUFSIZE];
-
+	memset(recv_buf, 0, sizeof(recv_buf));
+	
 	if ((nbytes_recvd = recv(i, recv_buf, sizeof(recv_buf) - 1, 0)) <= 0) {
 		if (nbytes_recvd == 0) {
 			requestHandler.requestDispatcher(i, "disconnected");
@@ -16,11 +17,7 @@ void Server::send_recv(int i, fd_set *master, int sockfd, int fdmax)
 	} else if(nbytes_recvd > 1){ 	
 		string recv_buf_toString(recv_buf);
 		trim(recv_buf_toString);
-		printf("Server side received message: %s \n", recv_buf);
-		//printf("Size of recv_buf %s \n", sizeof(recv_buf));
-		//printf("Strlen of recv_buf %s \n", strlen(recv_buf));
-		cout << sizeof(recv_buf) << endl;
-		cout << strlen(recv_buf) << endl;
+		cout << "server sender: " << to_string(i) << endl;
 		requestHandler.requestDispatcher(i, recv_buf_toString);
 	}	
 }

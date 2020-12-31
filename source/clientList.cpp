@@ -19,6 +19,10 @@ bool ClientList::create(int sender, string ci){
 			ci = "";
 		}
 	}
+	for(vector<string>::const_iterator i = information.begin(); i != information.end(); ++i){
+		cout << *i << ' ';
+	}
+
 	map<int,ClientInfo>::iterator it;
 	for(it = client_list.begin(); it != client_list.end(); ++it){
 		if(it->second.getUsername().compare(information[0]) == 0){
@@ -51,7 +55,7 @@ bool ClientList::connect(int sender, string ci){
 				auto const value = move(it->second);
 				client_list.erase(it->first);
 				client_list.insert({sender, move(value)});
-
+				
 				return true;
 			}
 		} 			
@@ -120,29 +124,39 @@ bool ClientList::changeClient(int sender, int index, string change){
 }
 
 string ClientList::getClientInfo(int sender, int index){
-	string result = "";
+	string result;
 	map<int,ClientInfo>::iterator it;
+	cout << "Index: " << index << endl;
+	cout << "sender: " << to_string(sender) << endl;
 	for(it = client_list.begin(); it != client_list.end(); ++it){
+		cout << "Username: " << it->second.getUsername() << endl;
+		cout << "Password: " << it->second.getPassword() << endl;
+		cout << "RoomNumber: " << it->second.getRoomNumber() << endl;
+		cout << "Sockfd: " << it->second.getSockfd() << endl;
+		cout << to_string(it->first) << endl;
 		if(it->first == sender){
+			cout << "Found clientInfo" << endl;
 			switch(index){
 				case 0:
-					result += it->second.getUsername();
+					result = it->second.getUsername();
 					break;
 				case 1:
-					result += it->second.getPassword();
+					result = it->second.getPassword();
 					break;	
 				case 2:
-					result += it->second.getRoomNumber();
+					result = to_string(it->second.getRoomNumber());
 					break;
 				case 3:
-					result += it->second.getSockfd();
+					result = to_string(it->second.getSockfd());
 					break;
 				default:
 					messageHandler.sendTo(&master, sender, {sender}, 14, "");
+					cout << "NotApplied" << endl;
 					break;
 			}
 		}
 	}
+	cout << "ClientList returning: " << result << endl;
 	return result;
 }
 

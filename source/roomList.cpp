@@ -3,7 +3,7 @@
 using namespace std;
 
 int RoomList::createRoom(){
-	int room = 1;
+	int room = 0;
 	map<int,int>::iterator it;
 	for(it = room_list.begin(); it != room_list.end(); ++it){
 		if(it->first == room){
@@ -29,7 +29,7 @@ void RoomList::increaseNum(int roomNum){
 
 void RoomList::decreaseNum(int roomNum){
 	room_list.find(roomNum)->second--;
-	if(room_list.find(roomNum)->second == 0){
+	if(room_list.find(roomNum)->second == 0 && roomNum != 0){
 		removeRoom(roomNum);
 	}
 }
