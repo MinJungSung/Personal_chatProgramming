@@ -68,19 +68,6 @@ void Client::tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in server
 	close(sockfd);
 }
 
-int main()
-{
-	int sockfd, fdmax, i;
-	struct sockaddr_in server_addr;
-	fd_set master;
-	fd_set read_fds;;
-
-	Client client;
-	client.tcpListener(sockfd, fdmax, i, server_addr, master, read_fds);
-	return 0;
-}
-
-///////////////////////////////////////////////////////////
 string Client::setClientInformation()
 {
 	string clientInfo = "clientInformation:";
@@ -99,10 +86,21 @@ void Client::send_clientInformation(int sockfd)
 	string s = setClientInformation();
 	char send_buf[BUFSIZE];
 	strcpy(send_buf, s.c_str());
-	printf("%s\n", send_buf);
-	cout << "check check" << endl;
 	if(sizeof(send_buf)!= 0){
 		send(sockfd, send_buf, sizeof(send_buf), 0);
 	}
 }
-///////////////////////////////////////////////////////////
+
+int main()
+{
+	int sockfd, fdmax, i;
+	struct sockaddr_in server_addr;
+	fd_set master;
+	fd_set read_fds;;
+
+	Client client;
+	client.tcpListener(sockfd, fdmax, i, server_addr, master, read_fds);
+	return 0;
+}
+
+
