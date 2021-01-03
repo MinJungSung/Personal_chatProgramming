@@ -1,0 +1,70 @@
+\hypertarget{client_8cpp}{}\section{source/client.cpp File Reference}
+\label{client_8cpp}\index{source/client.\+cpp@{source/client.\+cpp}}
+{\ttfamily \#include \char`\"{}client.\+h\char`\"{}}\\*
+Include dependency graph for client.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{client_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{client_8cpp_aeca034f67218340ecb2261a22c2f3dcd}{B\+U\+F\+S\+I\+ZE}~1024
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{client_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{client.\+cpp@{client.\+cpp}!B\+U\+F\+S\+I\+ZE@{B\+U\+F\+S\+I\+ZE}}
+\index{B\+U\+F\+S\+I\+ZE@{B\+U\+F\+S\+I\+ZE}!client.\+cpp@{client.\+cpp}}
+\subsubsection[{\texorpdfstring{B\+U\+F\+S\+I\+ZE}{BUFSIZE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\+U\+F\+S\+I\+ZE~1024}\hypertarget{client_8cpp_aeca034f67218340ecb2261a22c2f3dcd}{}\label{client_8cpp_aeca034f67218340ecb2261a22c2f3dcd}
+
+
+Definition at line 3 of file client.\+cpp.
+
+
+
+\subsection{Function Documentation}
+\index{client.\+cpp@{client.\+cpp}!main@{main}}
+\index{main@{main}!client.\+cpp@{client.\+cpp}}
+\subsubsection[{\texorpdfstring{main()}{main()}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{client_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{}\label{client_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}
+
+
+Definition at line 94 of file client.\+cpp.
+
+
+\begin{DoxyCode}
+95 \{
+96     \textcolor{keywordtype}{int} sockfd, fdmax, i;
+97     \textcolor{keyword}{struct }sockaddr\_in server\_addr;
+98     fd\_set master;
+99     fd\_set read\_fds;;
+100 
+101     \hyperlink{class_client}{Client} client;
+102     client.\hyperlink{class_client_a3e98bb9f68d2fc456e772bb88df85374}{tcpListener}(sockfd, fdmax, i, server\_addr, master, read\_fds);
+103     \textcolor{keywordflow}{return} 0;
+104 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{client_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph}
+\end{center}
+\end{figure}
+
+

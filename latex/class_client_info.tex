@@ -1,0 +1,256 @@
+\hypertarget{class_client_info}{}\section{Client\+Info Class Reference}
+\label{class_client_info}\index{Client\+Info@{Client\+Info}}
+
+
+{\ttfamily \#include $<$client\+Info.\+h$>$}
+
+
+
+Collaboration diagram for Client\+Info\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=186pt]{class_client_info__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_client_info_ac0c713eb6ebbab4dc690621fa300b6bb}{Client\+Info} (vector$<$ string $>$ client\+Information)
+\item 
+void \hyperlink{class_client_info_a0e1fccf03cefb8bfe74cc8a3a3ef255e}{set\+Username} (string \hyperlink{class_client_info_abb5d48a0c38e02d8ae706be2cfd63877}{username})
+\item 
+string \hyperlink{class_client_info_a8e1748f9727f05de37606cdd906d6558}{get\+Username} ()
+\item 
+void \hyperlink{class_client_info_a5096e8c7946d4256d7c8523292858577}{set\+Password} (string \hyperlink{class_client_info_aef295b0c02aed068c75eef7d24b0739d}{password})
+\item 
+string \hyperlink{class_client_info_a710aaf777b1cf2dde1507ecf521a44a8}{get\+Password} ()
+\item 
+void \hyperlink{class_client_info_a699860324454ebd9cc0b59c36484f5a1}{set\+Room\+Number} (int \hyperlink{class_client_info_a7058c5f8b9c7295eb02e79f64ceb8919}{room\+Number})
+\item 
+int \hyperlink{class_client_info_a9ae9d4b036b61419126519bdcacd0edc}{get\+Room\+Number} ()
+\item 
+void \hyperlink{class_client_info_aa82745ad2790f5a3d4ecd3a6432ad377}{set\+Sockfd} (int \hyperlink{class_client_info_a45f3edd658463cb224352e237104790e}{sockfd})
+\item 
+int \hyperlink{class_client_info_ab0308d4b24054f68b158b1c5cc514734}{get\+Sockfd} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{class_client_info_abb5d48a0c38e02d8ae706be2cfd63877}{username}
+\item 
+string \hyperlink{class_client_info_aef295b0c02aed068c75eef7d24b0739d}{password}
+\item 
+int \hyperlink{class_client_info_a7058c5f8b9c7295eb02e79f64ceb8919}{room\+Number}
+\item 
+int \hyperlink{class_client_info_a45f3edd658463cb224352e237104790e}{sockfd}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 22 of file client\+Info.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Client\+Info@{Client\+Info}!Client\+Info@{Client\+Info}}
+\index{Client\+Info@{Client\+Info}!Client\+Info@{Client\+Info}}
+\subsubsection[{\texorpdfstring{Client\+Info(vector$<$ string $>$ client\+Information)}{ClientInfo(vector< string > clientInformation)}}]{\setlength{\rightskip}{0pt plus 5cm}Client\+Info\+::\+Client\+Info (
+\begin{DoxyParamCaption}
+\item[{vector$<$ string $>$}]{client\+Information}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_info_ac0c713eb6ebbab4dc690621fa300b6bb}{}\label{class_client_info_ac0c713eb6ebbab4dc690621fa300b6bb}
+
+
+Definition at line 9 of file client\+Info.\+cpp.
+
+
+\begin{DoxyCode}
+9                                                       \{
+10     this->\hyperlink{class_client_info_abb5d48a0c38e02d8ae706be2cfd63877}{username} = clientInformation[\hyperlink{client_info_8h_a3a747cf18fa28f0de7920de0f89f5144}{USERNAME}];
+11     this->\hyperlink{class_client_info_aef295b0c02aed068c75eef7d24b0739d}{password} = clientInformation[\hyperlink{client_info_8h_a9e8538fad4eee548302ad9f60e6d47ca}{PASSWORD}];
+12     this->\hyperlink{class_client_info_a7058c5f8b9c7295eb02e79f64ceb8919}{roomNumber} = stoi(clientInformation[\hyperlink{client_info_8h_a7c5f42de5023abf160f7a2d8e444be6d}{ROOMNUMBER}]);
+13     this->\hyperlink{class_client_info_a45f3edd658463cb224352e237104790e}{sockfd} = stoi(clientInformation[\hyperlink{client_info_8h_aae5c7532c68c3db38bf82151971a6ea4}{SOCKFD}]);
+14 
+15     std::cout << \textcolor{stringliteral}{"ClientInfo is created"} << std::endl;
+16 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Client\+Info@{Client\+Info}!get\+Password@{get\+Password}}
+\index{get\+Password@{get\+Password}!Client\+Info@{Client\+Info}}
+\subsubsection[{\texorpdfstring{get\+Password()}{getPassword()}}]{\setlength{\rightskip}{0pt plus 5cm}string Client\+Info\+::get\+Password (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_info_a710aaf777b1cf2dde1507ecf521a44a8}{}\label{class_client_info_a710aaf777b1cf2dde1507ecf521a44a8}
+
+
+Definition at line 34 of file client\+Info.\+cpp.
+
+
+\begin{DoxyCode}
+34                               \{
+35     \textcolor{keywordflow}{return} \hyperlink{class_client_info_aef295b0c02aed068c75eef7d24b0739d}{password};
+36 \}
+\end{DoxyCode}
+\index{Client\+Info@{Client\+Info}!get\+Room\+Number@{get\+Room\+Number}}
+\index{get\+Room\+Number@{get\+Room\+Number}!Client\+Info@{Client\+Info}}
+\subsubsection[{\texorpdfstring{get\+Room\+Number()}{getRoomNumber()}}]{\setlength{\rightskip}{0pt plus 5cm}int Client\+Info\+::get\+Room\+Number (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_info_a9ae9d4b036b61419126519bdcacd0edc}{}\label{class_client_info_a9ae9d4b036b61419126519bdcacd0edc}
+
+
+Definition at line 42 of file client\+Info.\+cpp.
+
+
+\begin{DoxyCode}
+42                              \{
+43     \textcolor{keywordflow}{return} \hyperlink{class_client_info_a7058c5f8b9c7295eb02e79f64ceb8919}{roomNumber};
+44 \}
+\end{DoxyCode}
+\index{Client\+Info@{Client\+Info}!get\+Sockfd@{get\+Sockfd}}
+\index{get\+Sockfd@{get\+Sockfd}!Client\+Info@{Client\+Info}}
+\subsubsection[{\texorpdfstring{get\+Sockfd()}{getSockfd()}}]{\setlength{\rightskip}{0pt plus 5cm}int Client\+Info\+::get\+Sockfd (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_info_ab0308d4b24054f68b158b1c5cc514734}{}\label{class_client_info_ab0308d4b24054f68b158b1c5cc514734}
+
+
+Definition at line 50 of file client\+Info.\+cpp.
+
+
+\begin{DoxyCode}
+50                          \{
+51     \textcolor{keywordflow}{return} \hyperlink{class_client_info_a45f3edd658463cb224352e237104790e}{sockfd};
+52 \}
+\end{DoxyCode}
+\index{Client\+Info@{Client\+Info}!get\+Username@{get\+Username}}
+\index{get\+Username@{get\+Username}!Client\+Info@{Client\+Info}}
+\subsubsection[{\texorpdfstring{get\+Username()}{getUsername()}}]{\setlength{\rightskip}{0pt plus 5cm}string Client\+Info\+::get\+Username (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_info_a8e1748f9727f05de37606cdd906d6558}{}\label{class_client_info_a8e1748f9727f05de37606cdd906d6558}
+
+
+Definition at line 26 of file client\+Info.\+cpp.
+
+
+\begin{DoxyCode}
+26                               \{
+27     \textcolor{keywordflow}{return} \hyperlink{class_client_info_abb5d48a0c38e02d8ae706be2cfd63877}{username};
+28 \}
+\end{DoxyCode}
+\index{Client\+Info@{Client\+Info}!set\+Password@{set\+Password}}
+\index{set\+Password@{set\+Password}!Client\+Info@{Client\+Info}}
+\subsubsection[{\texorpdfstring{set\+Password(string password)}{setPassword(string password)}}]{\setlength{\rightskip}{0pt plus 5cm}void Client\+Info\+::set\+Password (
+\begin{DoxyParamCaption}
+\item[{string}]{password}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_info_a5096e8c7946d4256d7c8523292858577}{}\label{class_client_info_a5096e8c7946d4256d7c8523292858577}
+
+
+Definition at line 30 of file client\+Info.\+cpp.
+
+
+\begin{DoxyCode}
+30                                            \{
+31     this->\hyperlink{class_client_info_aef295b0c02aed068c75eef7d24b0739d}{password} = \hyperlink{class_client_info_aef295b0c02aed068c75eef7d24b0739d}{password};
+32 \}
+\end{DoxyCode}
+\index{Client\+Info@{Client\+Info}!set\+Room\+Number@{set\+Room\+Number}}
+\index{set\+Room\+Number@{set\+Room\+Number}!Client\+Info@{Client\+Info}}
+\subsubsection[{\texorpdfstring{set\+Room\+Number(int room\+Number)}{setRoomNumber(int roomNumber)}}]{\setlength{\rightskip}{0pt plus 5cm}void Client\+Info\+::set\+Room\+Number (
+\begin{DoxyParamCaption}
+\item[{int}]{room\+Number}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_info_a699860324454ebd9cc0b59c36484f5a1}{}\label{class_client_info_a699860324454ebd9cc0b59c36484f5a1}
+
+
+Definition at line 38 of file client\+Info.\+cpp.
+
+
+\begin{DoxyCode}
+38                                             \{
+39     this->\hyperlink{class_client_info_a7058c5f8b9c7295eb02e79f64ceb8919}{roomNumber} = \hyperlink{class_client_info_a7058c5f8b9c7295eb02e79f64ceb8919}{roomNumber};
+40 \}
+\end{DoxyCode}
+\index{Client\+Info@{Client\+Info}!set\+Sockfd@{set\+Sockfd}}
+\index{set\+Sockfd@{set\+Sockfd}!Client\+Info@{Client\+Info}}
+\subsubsection[{\texorpdfstring{set\+Sockfd(int sockfd)}{setSockfd(int sockfd)}}]{\setlength{\rightskip}{0pt plus 5cm}void Client\+Info\+::set\+Sockfd (
+\begin{DoxyParamCaption}
+\item[{int}]{sockfd}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_info_aa82745ad2790f5a3d4ecd3a6432ad377}{}\label{class_client_info_aa82745ad2790f5a3d4ecd3a6432ad377}
+
+
+Definition at line 46 of file client\+Info.\+cpp.
+
+
+\begin{DoxyCode}
+46                                     \{
+47     this->\hyperlink{class_client_info_a45f3edd658463cb224352e237104790e}{sockfd} = \hyperlink{class_client_info_a45f3edd658463cb224352e237104790e}{sockfd};
+48 \}
+\end{DoxyCode}
+\index{Client\+Info@{Client\+Info}!set\+Username@{set\+Username}}
+\index{set\+Username@{set\+Username}!Client\+Info@{Client\+Info}}
+\subsubsection[{\texorpdfstring{set\+Username(string username)}{setUsername(string username)}}]{\setlength{\rightskip}{0pt plus 5cm}void Client\+Info\+::set\+Username (
+\begin{DoxyParamCaption}
+\item[{string}]{username}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_info_a0e1fccf03cefb8bfe74cc8a3a3ef255e}{}\label{class_client_info_a0e1fccf03cefb8bfe74cc8a3a3ef255e}
+
+
+Definition at line 22 of file client\+Info.\+cpp.
+
+
+\begin{DoxyCode}
+22                                            \{
+23     this->\hyperlink{class_client_info_abb5d48a0c38e02d8ae706be2cfd63877}{username} = \hyperlink{class_client_info_abb5d48a0c38e02d8ae706be2cfd63877}{username};
+24 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Client\+Info@{Client\+Info}!password@{password}}
+\index{password@{password}!Client\+Info@{Client\+Info}}
+\subsubsection[{\texorpdfstring{password}{password}}]{\setlength{\rightskip}{0pt plus 5cm}string Client\+Info\+::password\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_client_info_aef295b0c02aed068c75eef7d24b0739d}{}\label{class_client_info_aef295b0c02aed068c75eef7d24b0739d}
+
+
+Definition at line 46 of file client\+Info.\+h.
+
+\index{Client\+Info@{Client\+Info}!room\+Number@{room\+Number}}
+\index{room\+Number@{room\+Number}!Client\+Info@{Client\+Info}}
+\subsubsection[{\texorpdfstring{room\+Number}{roomNumber}}]{\setlength{\rightskip}{0pt plus 5cm}int Client\+Info\+::room\+Number\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_client_info_a7058c5f8b9c7295eb02e79f64ceb8919}{}\label{class_client_info_a7058c5f8b9c7295eb02e79f64ceb8919}
+
+
+Definition at line 47 of file client\+Info.\+h.
+
+\index{Client\+Info@{Client\+Info}!sockfd@{sockfd}}
+\index{sockfd@{sockfd}!Client\+Info@{Client\+Info}}
+\subsubsection[{\texorpdfstring{sockfd}{sockfd}}]{\setlength{\rightskip}{0pt plus 5cm}int Client\+Info\+::sockfd\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_client_info_a45f3edd658463cb224352e237104790e}{}\label{class_client_info_a45f3edd658463cb224352e237104790e}
+
+
+Definition at line 48 of file client\+Info.\+h.
+
+\index{Client\+Info@{Client\+Info}!username@{username}}
+\index{username@{username}!Client\+Info@{Client\+Info}}
+\subsubsection[{\texorpdfstring{username}{username}}]{\setlength{\rightskip}{0pt plus 5cm}string Client\+Info\+::username\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_client_info_abb5d48a0c38e02d8ae706be2cfd63877}{}\label{class_client_info_abb5d48a0c38e02d8ae706be2cfd63877}
+
+
+Definition at line 45 of file client\+Info.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+source/\hyperlink{client_info_8h}{client\+Info.\+h}\item 
+source/\hyperlink{client_info_8cpp}{client\+Info.\+cpp}\end{DoxyCompactItemize}

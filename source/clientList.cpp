@@ -43,6 +43,8 @@ bool ClientList::connect(int sender, string ci){
 			ci = ci.substr(ci.find_first_of(",") + 1);
 		} else {
 			information.push_back(ci);
+			information.push_back("0");
+			information.push_back(to_string(sender));
 			ci = "";
 		}
 	}
@@ -52,9 +54,9 @@ bool ClientList::connect(int sender, string ci){
 			if(it->second.getPassword().compare(information[1])){
 				messageHandler.sendTo(&master, sender, {sender}, 11, "");
 
-				auto const value = move(it->second);
+				ClientInfo clientInfo(information);
 				client_list.erase(it->first);
-				client_list.insert({sender, move(value)});
+				client_list.insert({sender, clientInfo});
 				
 				return true;
 			}
@@ -126,14 +128,7 @@ bool ClientList::changeClient(int sender, int index, string change){
 string ClientList::getClientInfo(int sender, int index){
 	string result;
 	map<int,ClientInfo>::iterator it;
-	cout << "Index: " << index << endl;
-	cout << "sender: " << to_string(sender) << endl;
 	for(it = client_list.begin(); it != client_list.end(); ++it){
-		cout << "Username: " << it->second.getUsername() << endl;
-		cout << "Password: " << it->second.getPassword() << endl;
-		cout << "RoomNumber: " << it->second.getRoomNumber() << endl;
-		cout << "Sockfd: " << it->second.getSockfd() << endl;
-		cout << to_string(it->first) << endl;
 		if(it->first == sender){
 			cout << "Found clientInfo" << endl;
 			switch(index){

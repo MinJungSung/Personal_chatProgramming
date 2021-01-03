@@ -42,7 +42,7 @@ string MessageList::printMessage(int m_choice, string m_param){
 			result += "Successfully connected";
 			break;
 		case 12:
-			result += "Connection failed";
+			result += "Username or password is incorrect";
 			break;
 		case 13:
 			result += m_param + " changed";

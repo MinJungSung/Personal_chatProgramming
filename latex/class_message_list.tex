@@ -1,0 +1,113 @@
+\hypertarget{class_message_list}{}\section{Message\+List Class Reference}
+\label{class_message_list}\index{Message\+List@{Message\+List}}
+
+
+{\ttfamily \#include $<$message\+List.\+h$>$}
+
+
+
+Inheritance diagram for Message\+List\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=174pt]{class_message_list__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Message\+List\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{class_message_list__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{class_message_list_afb4e1522ab3d886c6cffb698ea139d2a}{print\+Message} (int m\+\_\+choice, string m\+\_\+param)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 7 of file message\+List.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Message\+List@{Message\+List}!print\+Message@{print\+Message}}
+\index{print\+Message@{print\+Message}!Message\+List@{Message\+List}}
+\subsubsection[{\texorpdfstring{print\+Message(int m\+\_\+choice, string m\+\_\+param)}{printMessage(int m_choice, string m_param)}}]{\setlength{\rightskip}{0pt plus 5cm}string Message\+List\+::print\+Message (
+\begin{DoxyParamCaption}
+\item[{int}]{m\+\_\+choice, }
+\item[{string}]{m\+\_\+param}
+\end{DoxyParamCaption}
+)}\hypertarget{class_message_list_afb4e1522ab3d886c6cffb698ea139d2a}{}\label{class_message_list_afb4e1522ab3d886c6cffb698ea139d2a}
+
+
+Definition at line 5 of file message\+List.\+cpp.
+
+
+\begin{DoxyCode}
+5                                                             \{
+6     \textcolor{keywordtype}{string} result = \textcolor{stringliteral}{""};
+7     \textcolor{keywordflow}{switch}(m\_choice)\{
+8         \textcolor{keywordflow}{case} 0:
+9             result += \textcolor{stringliteral}{"You successfully created a room"};
+10             \textcolor{keywordflow}{break};
+11         \textcolor{keywordflow}{case} 1:
+12             result += \textcolor{stringliteral}{"You successfully joined the chat"};
+13             \textcolor{keywordflow}{break};
+14         \textcolor{keywordflow}{case} 2:
+15             result += \textcolor{stringliteral}{"You left the chat"};
+16             \textcolor{keywordflow}{break};
+17         \textcolor{keywordflow}{case} 3:
+18             result += m\_param + \textcolor{stringliteral}{" joined the chat"};
+19             \textcolor{keywordflow}{break};
+20         \textcolor{keywordflow}{case} 4:
+21             result += m\_param + \textcolor{stringliteral}{" left the chat"};
+22             \textcolor{keywordflow}{break};
+23         \textcolor{keywordflow}{case} 5:
+24             result += m\_param + \textcolor{stringliteral}{" is incorrect input"};
+25             \textcolor{keywordflow}{break};
+26         \textcolor{keywordflow}{case} 6:
+27             result += \textcolor{stringliteral}{"Which room do you want to join?"};
+28             \textcolor{keywordflow}{break};
+29         \textcolor{keywordflow}{case} 7:
+30             result += \textcolor{stringliteral}{"You are already in the chat"};
+31             \textcolor{keywordflow}{break};
+32         \textcolor{keywordflow}{case} 8:
+33             result += \textcolor{stringliteral}{"You are already in the lounge"};
+34             \textcolor{keywordflow}{break};
+35         \textcolor{keywordflow}{case} 9:
+36             result += \textcolor{stringliteral}{"Same username already exitst"};
+37             \textcolor{keywordflow}{break};
+38         \textcolor{keywordflow}{case} 10:
+39             result += m\_param;
+40             \textcolor{keywordflow}{break};
+41         \textcolor{keywordflow}{case} 11:
+42             result += \textcolor{stringliteral}{"Successfully connected"};
+43             \textcolor{keywordflow}{break};
+44         \textcolor{keywordflow}{case} 12:
+45             result += \textcolor{stringliteral}{"Connection failed"};
+46             \textcolor{keywordflow}{break};
+47         \textcolor{keywordflow}{case} 13:
+48             result += m\_param + \textcolor{stringliteral}{" changed"};
+49             \textcolor{keywordflow}{break};
+50         \textcolor{keywordflow}{case} 14:
+51             result += \textcolor{stringliteral}{"Cannot change clientInfo"};
+52             \textcolor{keywordflow}{break};
+53     \} 
+54     \textcolor{keywordflow}{return} result += \textcolor{stringliteral}{"\(\backslash\)n"};
+55 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+source/\hyperlink{message_list_8h}{message\+List.\+h}\item 
+source/\hyperlink{message_list_8cpp}{message\+List.\+cpp}\end{DoxyCompactItemize}

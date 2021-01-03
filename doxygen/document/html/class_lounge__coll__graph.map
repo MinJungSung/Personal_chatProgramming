@@ -1,4 +1,0 @@
-<map id="Lounge" name="Lounge">
-<area shape="rect" id="node2" href="$class_room.html" title="{Room\n|# RoomNo\l# clientInfo_list\l|+ Room()\l+ Room()\l+ ~Room()\l+ enter()\l+ exit()\l+ enterExitMessage()\l}" alt="" coords="5,205,155,371"/>
-<area shape="rect" id="node4" href="$class_client_info.html" title="{ClientInfo\n|&#45; id\l&#45; password\l|+ setId()\l+ setPassword()\l+ getId()\l+ getPassword()\l}" alt="" coords="19,5,141,141"/>
-</map>
