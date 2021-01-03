@@ -1,0 +1,6 @@
+<map id="RequestHandler::requestDispatcher" name="RequestHandler::requestDispatcher">
+<area shape="rect" id="node3" href="$class_server.html#a60449f7427eb90721474016c4cfe1f9a" title="Server::send_recv" alt="" coords="292,5,425,32"/>
+<area shape="rect" id="node9" href="$class_server.html#af59e99baec721a57a03ded0e310765e1" title="Server::connection\l_accept" alt="" coords="291,57,426,98"/>
+<area shape="rect" id="node5" href="$class_server.html#a040742461af78653870017c356d5a226" title="Server::tcpListener" alt="" coords="475,35,610,61"/>
+<area shape="rect" id="node7" href="$server_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="main" alt="" coords="659,35,709,61"/>
+</map>

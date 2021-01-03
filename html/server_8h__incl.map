@@ -1,0 +1,8 @@
+<map id="source/server.h" name="source/server.h">
+<area shape="rect" id="node31" href="$request_handler_8h.html" title="requestHandler.h" alt="" coords="1281,80,1404,107"/>
+<area shape="rect" id="node40" href="$client_list_8h.html" title="clientList.h" alt="" coords="1301,155,1383,181"/>
+<area shape="rect" id="node75" href="$room_list_8h.html" title="roomList.h" alt="" coords="1431,229,1512,256"/>
+<area shape="rect" id="node46" href="$message_handler_8h.html" title="messageHandler.h" alt="" coords="756,229,891,256"/>
+<area shape="rect" id="node64" href="$client_info_8h.html" title="clientInfo.h" alt="" coords="989,304,1072,331"/>
+<area shape="rect" id="node70" href="$message_list_8h.html" title="messageList.h" alt="" coords="1097,304,1207,331"/>
+</map>

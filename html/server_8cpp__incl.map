@@ -1,0 +1,9 @@
+<map id="source/server.cpp" name="source/server.cpp">
+<area shape="rect" id="node3" href="$server_8h.html" title="server.h" alt="" coords="479,80,549,107"/>
+<area shape="rect" id="node33" href="$request_handler_8h.html" title="requestHandler.h" alt="" coords="1281,155,1404,181"/>
+<area shape="rect" id="node42" href="$client_list_8h.html" title="clientList.h" alt="" coords="1301,229,1383,256"/>
+<area shape="rect" id="node77" href="$room_list_8h.html" title="roomList.h" alt="" coords="1431,304,1512,331"/>
+<area shape="rect" id="node48" href="$message_handler_8h.html" title="messageHandler.h" alt="" coords="756,304,891,331"/>
+<area shape="rect" id="node66" href="$client_info_8h.html" title="clientInfo.h" alt="" coords="989,379,1072,405"/>
+<area shape="rect" id="node72" href="$message_list_8h.html" title="messageList.h" alt="" coords="1097,379,1207,405"/>
+</map>

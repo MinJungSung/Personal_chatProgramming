@@ -1,0 +1,380 @@
+\hypertarget{class_client_list}{}\section{Client\+List Class Reference}
+\label{class_client_list}\index{Client\+List@{Client\+List}}
+
+
+{\ttfamily \#include $<$client\+List.\+h$>$}
+
+
+
+Collaboration diagram for Client\+List\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{class_client_list__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_client_list_a78d1f60f3a818066df0da1d868c6776e}{Client\+List} (fd\+\_\+set \hyperlink{class_client_list_a819f5455b1afa484d846d5b6ef4209a7}{master})
+\item 
+bool \hyperlink{class_client_list_addcac03e71cbdbbb7fbf878f5c88cc98}{create} (int sender, string ci)
+\item 
+bool \hyperlink{class_client_list_a005bf6c281313258e0a4ca42a7155f7f}{connect} (int sender, string ci)
+\item 
+bool \hyperlink{class_client_list_abbd18177e7004dec854a32b2fd47461b}{disconnect} (int sender)
+\item 
+bool \hyperlink{class_client_list_aa3e5dedccb72e114e7501bfa21939b1e}{change\+Client} (int sender, int index, string change)
+\item 
+string \hyperlink{class_client_list_a6c3d393ac36a1227dab58228b696ac4c}{get\+Client\+Info} (int sender, int index)
+\item 
+vector$<$ int $>$ \hyperlink{class_client_list_a260ee1c56cb4472c240839875c3bdf78}{send\+To} (int sender)
+\item 
+string \hyperlink{class_client_list_a1d7694b77ac65472acc2e7fed05da544}{show\+Client} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+map$<$ int, \hyperlink{class_client_info}{Client\+Info} $>$ \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\+\_\+list}
+\item 
+\hyperlink{class_message_handler}{Message\+Handler} \hyperlink{class_client_list_a15fd10297f79e0d1278d3b106c715390}{message\+Handler}
+\item 
+fd\+\_\+set \hyperlink{class_client_list_a819f5455b1afa484d846d5b6ef4209a7}{master}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 9 of file client\+List.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Client\+List@{Client\+List}!Client\+List@{Client\+List}}
+\index{Client\+List@{Client\+List}!Client\+List@{Client\+List}}
+\subsubsection[{\texorpdfstring{Client\+List(fd\+\_\+set master)}{ClientList(fd_set master)}}]{\setlength{\rightskip}{0pt plus 5cm}Client\+List\+::\+Client\+List (
+\begin{DoxyParamCaption}
+\item[{fd\+\_\+set}]{master}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_list_a78d1f60f3a818066df0da1d868c6776e}{}\label{class_client_list_a78d1f60f3a818066df0da1d868c6776e}
+
+
+Definition at line 5 of file client\+List.\+cpp.
+
+
+\begin{DoxyCode}
+5                                    \{
+6     this->\hyperlink{class_client_list_a819f5455b1afa484d846d5b6ef4209a7}{master} = \hyperlink{class_client_list_a819f5455b1afa484d846d5b6ef4209a7}{master};
+7 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Client\+List@{Client\+List}!change\+Client@{change\+Client}}
+\index{change\+Client@{change\+Client}!Client\+List@{Client\+List}}
+\subsubsection[{\texorpdfstring{change\+Client(int sender, int index, string change)}{changeClient(int sender, int index, string change)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Client\+List\+::change\+Client (
+\begin{DoxyParamCaption}
+\item[{int}]{sender, }
+\item[{int}]{index, }
+\item[{string}]{change}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_list_aa3e5dedccb72e114e7501bfa21939b1e}{}\label{class_client_list_aa3e5dedccb72e114e7501bfa21939b1e}
+
+
+Definition at line 87 of file client\+List.\+cpp.
+
+
+\begin{DoxyCode}
+87                                                                  \{
+88     map<int,ClientInfo>::iterator it;
+89     \textcolor{keywordflow}{for}(it = \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.begin(); it != \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.end(); ++it)\{
+90         \textcolor{keywordflow}{if}(it->first == sender)\{
+91             \textcolor{keywordflow}{switch}(index)\{
+92                 \textcolor{comment}{//Username}
+93                 \textcolor{keywordflow}{case} 0:
+94                     it->second.setUsername(change);
+95                     \hyperlink{class_client_list_a15fd10297f79e0d1278d3b106c715390}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_client_list_a819f5455b1afa484d846d5b6ef4209a7}{master}, sender, \{sender\}, 13, \textcolor{stringliteral}{"
+      Username"});
+96                     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+97                 \textcolor{comment}{//Password}
+98                 \textcolor{keywordflow}{case} 1:
+99                     it->second.setPassword(change);
+100                     \hyperlink{class_client_list_a15fd10297f79e0d1278d3b106c715390}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_client_list_a819f5455b1afa484d846d5b6ef4209a7}{master}, sender, \{sender\}, 13, \textcolor{stringliteral}{"
+      Password"});
+101                     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+102                 \textcolor{comment}{//RoomNumber}
+103                 \textcolor{keywordflow}{case} 2:
+104                     it->second.setRoomNumber(stoi(change));
+105                     \hyperlink{class_client_list_a15fd10297f79e0d1278d3b106c715390}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_client_list_a819f5455b1afa484d846d5b6ef4209a7}{master}, sender, \{sender\}, 13, \textcolor{stringliteral}{"
+      RoomNumber"});
+106                     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+107                 \textcolor{comment}{//Sockfd}
+108                 \textcolor{keywordflow}{case} 3:
+109                     \{
+110                     it->second.setSockfd(stoi(change));
+111                     \textcolor{keyword}{auto} \textcolor{keyword}{const} value = move(it->second);
+112                     \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.erase(sender);
+113                     \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.insert(\{stoi(change), move(value)\});
+114                     \hyperlink{class_client_list_a15fd10297f79e0d1278d3b106c715390}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_client_list_a819f5455b1afa484d846d5b6ef4209a7}{master}, sender, \{sender\}, 13, \textcolor{stringliteral}{"Sockfd"}
+      );
+115                     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+116                     \}
+117                 \textcolor{comment}{//default}
+118                 \textcolor{keywordflow}{default}:
+119                     \hyperlink{class_client_list_a15fd10297f79e0d1278d3b106c715390}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_client_list_a819f5455b1afa484d846d5b6ef4209a7}{master}, sender, \{sender\}, 14, \textcolor{stringliteral}{""});
+120                     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+121             \}
+122         \}
+123     \}
+124 \}
+\end{DoxyCode}
+\index{Client\+List@{Client\+List}!connect@{connect}}
+\index{connect@{connect}!Client\+List@{Client\+List}}
+\subsubsection[{\texorpdfstring{connect(int sender, string ci)}{connect(int sender, string ci)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Client\+List\+::connect (
+\begin{DoxyParamCaption}
+\item[{int}]{sender, }
+\item[{string}]{ci}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_list_a005bf6c281313258e0a4ca42a7155f7f}{}\label{class_client_list_a005bf6c281313258e0a4ca42a7155f7f}
+
+
+Definition at line 38 of file client\+List.\+cpp.
+
+
+\begin{DoxyCode}
+38                                              \{
+39     vector<string> information;
+40     \textcolor{keywordflow}{while}(!ci.empty())\{
+41         \textcolor{keywordflow}{if}(ci.find\_first\_of(\textcolor{stringliteral}{","}) != string::npos)\{
+42             information.push\_back(ci.substr(0,ci.find\_first\_of(\textcolor{stringliteral}{","})));
+43             ci = ci.substr(ci.find\_first\_of(\textcolor{stringliteral}{","}) + 1);
+44         \} \textcolor{keywordflow}{else} \{
+45             information.push\_back(ci);
+46             ci = \textcolor{stringliteral}{""};
+47         \}
+48     \}
+49     map<int,ClientInfo>::iterator it;
+50     \textcolor{keywordflow}{for}(it = \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.begin(); it != \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.end(); ++it)\{
+51         \textcolor{keywordflow}{if}(it->second.getUsername().compare(information[0]))\{
+52             \textcolor{keywordflow}{if}(it->second.getPassword().compare(information[1]))\{
+53                 \hyperlink{class_client_list_a15fd10297f79e0d1278d3b106c715390}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_client_list_a819f5455b1afa484d846d5b6ef4209a7}{master}, sender, \{sender\}, 11, \textcolor{stringliteral}{""});
+54 
+55                 \textcolor{keyword}{auto} \textcolor{keyword}{const} value = move(it->second);
+56                 \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.erase(it->first);
+57                 \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.insert(\{sender, move(value)\});
+58                 
+59                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+60             \}
+61         \}           
+62     \}
+63     \textcolor{keywordflow}{if}(it == \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.end())\{
+64         \hyperlink{class_client_list_a15fd10297f79e0d1278d3b106c715390}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_client_list_a819f5455b1afa484d846d5b6ef4209a7}{master}, sender, \{sender\}, 12, \textcolor{stringliteral}{""});
+65         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+66     \}           
+67     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+68 \}
+\end{DoxyCode}
+\index{Client\+List@{Client\+List}!create@{create}}
+\index{create@{create}!Client\+List@{Client\+List}}
+\subsubsection[{\texorpdfstring{create(int sender, string ci)}{create(int sender, string ci)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Client\+List\+::create (
+\begin{DoxyParamCaption}
+\item[{int}]{sender, }
+\item[{string}]{ci}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_list_addcac03e71cbdbbb7fbf878f5c88cc98}{}\label{class_client_list_addcac03e71cbdbbb7fbf878f5c88cc98}
+
+
+Definition at line 9 of file client\+List.\+cpp.
+
+
+\begin{DoxyCode}
+9                                             \{
+10     vector<string> information;
+11     \textcolor{keywordflow}{while}(!ci.empty())\{
+12         \textcolor{keywordflow}{if}(ci.find\_first\_of(\textcolor{stringliteral}{","}) != string::npos)\{
+13             information.push\_back(ci.substr(0,ci.find\_first\_of(\textcolor{stringliteral}{","})));
+14             ci = ci.substr(ci.find\_first\_of(\textcolor{stringliteral}{","}) + 1);
+15         \} \textcolor{keywordflow}{else} \{
+16             information.push\_back(ci);
+17             information.push\_back(\textcolor{stringliteral}{"0"});
+18             information.push\_back(to\_string(sender));
+19             ci = \textcolor{stringliteral}{""};
+20         \}
+21     \}
+22     \textcolor{keywordflow}{for}(vector<string>::const\_iterator i = information.begin(); i != information.end(); ++i)\{
+23         cout << *i << \textcolor{charliteral}{' '};
+24     \}
+25 
+26     map<int,ClientInfo>::iterator it;
+27     \textcolor{keywordflow}{for}(it = \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.begin(); it != \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.end(); ++it)\{
+28         \textcolor{keywordflow}{if}(it->second.getUsername().compare(information[0]) == 0)\{
+29             \hyperlink{class_client_list_a15fd10297f79e0d1278d3b106c715390}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_client_list_a819f5455b1afa484d846d5b6ef4209a7}{master}, sender, \{sender\}, 9, \textcolor{stringliteral}{""});
+30             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+31         \}
+32     \}
+33     \hyperlink{class_client_info}{ClientInfo} clientInfo(information);
+34     \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.emplace(sender, clientInfo);
+35     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+36 \}
+\end{DoxyCode}
+\index{Client\+List@{Client\+List}!disconnect@{disconnect}}
+\index{disconnect@{disconnect}!Client\+List@{Client\+List}}
+\subsubsection[{\texorpdfstring{disconnect(int sender)}{disconnect(int sender)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Client\+List\+::disconnect (
+\begin{DoxyParamCaption}
+\item[{int}]{sender}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_list_abbd18177e7004dec854a32b2fd47461b}{}\label{class_client_list_abbd18177e7004dec854a32b2fd47461b}
+
+
+Definition at line 70 of file client\+List.\+cpp.
+
+
+\begin{DoxyCode}
+70                                      \{
+71     map<int,ClientInfo>::iterator it;
+72     \textcolor{keywordflow}{for}(it = \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.begin(); it != \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.end(); ++it)\{
+73         \textcolor{keywordflow}{if}(it->first == sender)\{
+74             it->second.setSockfd(-1);
+75             it->second.setRoomNumber(-1);
+76 
+77             \textcolor{keyword}{auto} \textcolor{keyword}{const} value = move(it->second);
+78             \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.erase(sender);
+79             \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.insert(\{-1, move(value)\});
+80 
+81             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+82         \}   
+83     \}   
+84     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+85 \}
+\end{DoxyCode}
+\index{Client\+List@{Client\+List}!get\+Client\+Info@{get\+Client\+Info}}
+\index{get\+Client\+Info@{get\+Client\+Info}!Client\+List@{Client\+List}}
+\subsubsection[{\texorpdfstring{get\+Client\+Info(int sender, int index)}{getClientInfo(int sender, int index)}}]{\setlength{\rightskip}{0pt plus 5cm}string Client\+List\+::get\+Client\+Info (
+\begin{DoxyParamCaption}
+\item[{int}]{sender, }
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_list_a6c3d393ac36a1227dab58228b696ac4c}{}\label{class_client_list_a6c3d393ac36a1227dab58228b696ac4c}
+
+
+Definition at line 126 of file client\+List.\+cpp.
+
+
+\begin{DoxyCode}
+126                                                      \{
+127     \textcolor{keywordtype}{string} result;
+128     map<int,ClientInfo>::iterator it;
+129     cout << \textcolor{stringliteral}{"Index: "} << index << endl;
+130     cout << \textcolor{stringliteral}{"sender: "} << to\_string(sender) << endl;
+131     \textcolor{keywordflow}{for}(it = \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.begin(); it != \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.end(); ++it)\{
+132         cout << \textcolor{stringliteral}{"Username: "} << it->second.getUsername() << endl;
+133         cout << \textcolor{stringliteral}{"Password: "} << it->second.getPassword() << endl;
+134         cout << \textcolor{stringliteral}{"RoomNumber: "} << it->second.getRoomNumber() << endl;
+135         cout << \textcolor{stringliteral}{"Sockfd: "} << it->second.getSockfd() << endl;
+136         cout << to\_string(it->first) << endl;
+137         \textcolor{keywordflow}{if}(it->first == sender)\{
+138             cout << \textcolor{stringliteral}{"Found clientInfo"} << endl;
+139             \textcolor{keywordflow}{switch}(index)\{
+140                 \textcolor{keywordflow}{case} 0:
+141                     result = it->second.getUsername();
+142                     \textcolor{keywordflow}{break};
+143                 \textcolor{keywordflow}{case} 1:
+144                     result = it->second.getPassword();
+145                     \textcolor{keywordflow}{break};  
+146                 \textcolor{keywordflow}{case} 2:
+147                     result = to\_string(it->second.getRoomNumber());
+148                     \textcolor{keywordflow}{break};
+149                 \textcolor{keywordflow}{case} 3:
+150                     result = to\_string(it->second.getSockfd());
+151                     \textcolor{keywordflow}{break};
+152                 \textcolor{keywordflow}{default}:
+153                     \hyperlink{class_client_list_a15fd10297f79e0d1278d3b106c715390}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_client_list_a819f5455b1afa484d846d5b6ef4209a7}{master}, sender, \{sender\}, 14, \textcolor{stringliteral}{""});
+154                     cout << \textcolor{stringliteral}{"NotApplied"} << endl;
+155                     \textcolor{keywordflow}{break};
+156             \}
+157         \}
+158     \}
+159     cout << \textcolor{stringliteral}{"ClientList returning: "} << result << endl;
+160     \textcolor{keywordflow}{return} result;
+161 \}
+\end{DoxyCode}
+\index{Client\+List@{Client\+List}!send\+To@{send\+To}}
+\index{send\+To@{send\+To}!Client\+List@{Client\+List}}
+\subsubsection[{\texorpdfstring{send\+To(int sender)}{sendTo(int sender)}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ int $>$ Client\+List\+::send\+To (
+\begin{DoxyParamCaption}
+\item[{int}]{sender}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_list_a260ee1c56cb4472c240839875c3bdf78}{}\label{class_client_list_a260ee1c56cb4472c240839875c3bdf78}
+
+
+Definition at line 163 of file client\+List.\+cpp.
+
+
+\begin{DoxyCode}
+163                                         \{
+164     vector<int> sendList;
+165     \textcolor{keywordtype}{int} roomNum = \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.find(sender)->second.getRoomNumber();
+166     map<int,ClientInfo>::iterator it;
+167     \textcolor{keywordflow}{for}(it = \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.begin(); it != \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.end(); ++it)\{
+168         \textcolor{keywordflow}{if}(it->second.getRoomNumber() == roomNum)\{
+169             sendList.push\_back(it->first);
+170         \}
+171     \}   
+172     \textcolor{keywordflow}{return} sendList;
+173 \}
+\end{DoxyCode}
+\index{Client\+List@{Client\+List}!show\+Client@{show\+Client}}
+\index{show\+Client@{show\+Client}!Client\+List@{Client\+List}}
+\subsubsection[{\texorpdfstring{show\+Client()}{showClient()}}]{\setlength{\rightskip}{0pt plus 5cm}string Client\+List\+::show\+Client (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_list_a1d7694b77ac65472acc2e7fed05da544}{}\label{class_client_list_a1d7694b77ac65472acc2e7fed05da544}
+
+
+Definition at line 175 of file client\+List.\+cpp.
+
+
+\begin{DoxyCode}
+175                              \{
+176     \textcolor{keywordtype}{string} clientString = \textcolor{stringliteral}{""};
+177     \textcolor{keywordflow}{for}(map<int,ClientInfo>::iterator it = \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.begin(); it != 
+      \hyperlink{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{client\_list}.end(); ++it)\{
+178         clientString += \textcolor{stringliteral}{"Socket "} + to\_string(it->first) + \textcolor{stringliteral}{" Username: "} +  it->second.getUsername() + \textcolor{stringliteral}{"\(\backslash\)n"}
+      ;
+179     \}
+180     \textcolor{keywordflow}{return} clientString;
+181 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Client\+List@{Client\+List}!client\+\_\+list@{client\+\_\+list}}
+\index{client\+\_\+list@{client\+\_\+list}!Client\+List@{Client\+List}}
+\subsubsection[{\texorpdfstring{client\+\_\+list}{client_list}}]{\setlength{\rightskip}{0pt plus 5cm}map$<$int,{\bf Client\+Info}$>$ Client\+List\+::client\+\_\+list\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}{}\label{class_client_list_a53c73362bff032aa6fceab4b8b5b39de}
+
+
+Definition at line 22 of file client\+List.\+h.
+
+\index{Client\+List@{Client\+List}!master@{master}}
+\index{master@{master}!Client\+List@{Client\+List}}
+\subsubsection[{\texorpdfstring{master}{master}}]{\setlength{\rightskip}{0pt plus 5cm}fd\+\_\+set Client\+List\+::master\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_client_list_a819f5455b1afa484d846d5b6ef4209a7}{}\label{class_client_list_a819f5455b1afa484d846d5b6ef4209a7}
+
+
+Definition at line 24 of file client\+List.\+h.
+
+\index{Client\+List@{Client\+List}!message\+Handler@{message\+Handler}}
+\index{message\+Handler@{message\+Handler}!Client\+List@{Client\+List}}
+\subsubsection[{\texorpdfstring{message\+Handler}{messageHandler}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Message\+Handler} Client\+List\+::message\+Handler\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_client_list_a15fd10297f79e0d1278d3b106c715390}{}\label{class_client_list_a15fd10297f79e0d1278d3b106c715390}
+
+
+Definition at line 23 of file client\+List.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+source/\hyperlink{client_list_8h}{client\+List.\+h}\item 
+source/\hyperlink{client_list_8cpp}{client\+List.\+cpp}\end{DoxyCompactItemize}

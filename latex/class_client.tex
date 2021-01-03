@@ -1,0 +1,286 @@
+\hypertarget{class_client}{}\section{Client Class Reference}
+\label{class_client}\index{Client@{Client}}
+
+
+{\ttfamily \#include $<$client.\+h$>$}
+
+
+
+Collaboration diagram for Client\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=210pt]{class_client__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_client_a7d7ba78b63357fe2c7566018e30e9767}{send\+\_\+recv} (int \hyperlink{class_client_a8086f64d20f268817ef23bc81cbea059}{i}, int \hyperlink{class_client_ab0cf9b759ba4da79ccb0a64242d944c4}{sockfd})
+\item 
+void \hyperlink{class_client_a63a0074432524094592cc95ec3b8c31c}{connect\+\_\+request} (int $\ast$\hyperlink{class_client_ab0cf9b759ba4da79ccb0a64242d944c4}{sockfd}, struct sockaddr\+\_\+in $\ast$\hyperlink{class_client_a3787f155329f63a3bae120e9deca92d6}{server\+\_\+addr})
+\item 
+void \hyperlink{class_client_a3e98bb9f68d2fc456e772bb88df85374}{tcp\+Listener} (int \hyperlink{class_client_ab0cf9b759ba4da79ccb0a64242d944c4}{sockfd}, int \hyperlink{class_client_a99ae6181165c7b5119a4c93f3b1908c8}{fdmax}, int \hyperlink{class_client_a8086f64d20f268817ef23bc81cbea059}{i}, struct sockaddr\+\_\+in \hyperlink{class_client_a3787f155329f63a3bae120e9deca92d6}{server\+\_\+addr}, fd\+\_\+set \hyperlink{class_client_a56c611a99e0ba2a2efaddeb9ae021618}{master}, fd\+\_\+set \hyperlink{class_client_a3631a848d923649af981576df2c83506}{read\+\_\+fds})
+\item 
+string \hyperlink{class_client_aec25a8f180a794c7ef03cc8570598740}{to\+String} ()
+\item 
+string \hyperlink{class_client_a9ce44f82168a9c1952dcee11e058d413}{set\+Client\+Information} ()
+\item 
+void \hyperlink{class_client_a7aeddfbf62fb0044949597be14e91082}{send\+\_\+client\+Information} (int \hyperlink{class_client_ab0cf9b759ba4da79ccb0a64242d944c4}{sockfd})
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_client_ab0cf9b759ba4da79ccb0a64242d944c4}{sockfd}
+\item 
+int \hyperlink{class_client_a99ae6181165c7b5119a4c93f3b1908c8}{fdmax}
+\item 
+int \hyperlink{class_client_a8086f64d20f268817ef23bc81cbea059}{i}
+\item 
+struct sockaddr\+\_\+in \hyperlink{class_client_a3787f155329f63a3bae120e9deca92d6}{server\+\_\+addr}
+\item 
+fd\+\_\+set \hyperlink{class_client_a56c611a99e0ba2a2efaddeb9ae021618}{master}
+\item 
+fd\+\_\+set \hyperlink{class_client_a3631a848d923649af981576df2c83506}{read\+\_\+fds}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 21 of file client.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Client@{Client}!connect\+\_\+request@{connect\+\_\+request}}
+\index{connect\+\_\+request@{connect\+\_\+request}!Client@{Client}}
+\subsubsection[{\texorpdfstring{connect\+\_\+request(int $\ast$sockfd, struct sockaddr\+\_\+in $\ast$server\+\_\+addr)}{connect_request(int *sockfd, struct sockaddr_in *server_addr)}}]{\setlength{\rightskip}{0pt plus 5cm}void Client\+::connect\+\_\+request (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{sockfd, }
+\item[{struct sockaddr\+\_\+in $\ast$}]{server\+\_\+addr}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_a63a0074432524094592cc95ec3b8c31c}{}\label{class_client_a63a0074432524094592cc95ec3b8c31c}
+
+
+Definition at line 25 of file client.\+cpp.
+
+
+\begin{DoxyCode}
+26 \{
+27     \textcolor{keywordflow}{if} ((*\hyperlink{class_client_ab0cf9b759ba4da79ccb0a64242d944c4}{sockfd} = socket(AF\_INET, SOCK\_STREAM, 0)) == -1) \{
+28         perror(\textcolor{stringliteral}{"Socket"});
+29         exit(1);
+30     \}
+31     \hyperlink{class_client_a3787f155329f63a3bae120e9deca92d6}{server\_addr}->sin\_family = AF\_INET;
+32     \hyperlink{class_client_a3787f155329f63a3bae120e9deca92d6}{server\_addr}->sin\_port = htons(4950);
+33     \hyperlink{class_client_a3787f155329f63a3bae120e9deca92d6}{server\_addr}->sin\_addr.s\_addr = inet\_addr(\textcolor{stringliteral}{"127.0.0.1"});
+34     memset(\hyperlink{class_client_a3787f155329f63a3bae120e9deca92d6}{server\_addr}->sin\_zero, \textcolor{charliteral}{'\(\backslash\)0'}, \textcolor{keyword}{sizeof} \hyperlink{class_client_a3787f155329f63a3bae120e9deca92d6}{server\_addr}->sin\_zero);
+35 
+36     \textcolor{keywordflow}{if}(connect(*\hyperlink{class_client_ab0cf9b759ba4da79ccb0a64242d944c4}{sockfd}, (\textcolor{keyword}{struct} sockaddr *)\hyperlink{class_client_a3787f155329f63a3bae120e9deca92d6}{server\_addr}, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} sockaddr)) == -1) \{
+37         perror(\textcolor{stringliteral}{"connect"});
+38         exit(1);
+39     \}
+40 \}
+\end{DoxyCode}
+\index{Client@{Client}!send\+\_\+client\+Information@{send\+\_\+client\+Information}}
+\index{send\+\_\+client\+Information@{send\+\_\+client\+Information}!Client@{Client}}
+\subsubsection[{\texorpdfstring{send\+\_\+client\+Information(int sockfd)}{send_clientInformation(int sockfd)}}]{\setlength{\rightskip}{0pt plus 5cm}void Client\+::send\+\_\+client\+Information (
+\begin{DoxyParamCaption}
+\item[{int}]{sockfd}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_a7aeddfbf62fb0044949597be14e91082}{}\label{class_client_a7aeddfbf62fb0044949597be14e91082}
+
+
+Definition at line 84 of file client.\+cpp.
+
+
+\begin{DoxyCode}
+85 \{
+86     \textcolor{keywordtype}{string} s = \hyperlink{class_client_a9ce44f82168a9c1952dcee11e058d413}{setClientInformation}();
+87     \textcolor{keywordtype}{char} send\_buf[\hyperlink{client_8cpp_aeca034f67218340ecb2261a22c2f3dcd}{BUFSIZE}];
+88     strcpy(send\_buf, s.c\_str());
+89     \textcolor{keywordflow}{if}(\textcolor{keyword}{sizeof}(send\_buf)!= 0)\{
+90         send(\hyperlink{class_client_ab0cf9b759ba4da79ccb0a64242d944c4}{sockfd}, send\_buf, \textcolor{keyword}{sizeof}(send\_buf), 0);
+91     \}
+92 \}
+\end{DoxyCode}
+\index{Client@{Client}!send\+\_\+recv@{send\+\_\+recv}}
+\index{send\+\_\+recv@{send\+\_\+recv}!Client@{Client}}
+\subsubsection[{\texorpdfstring{send\+\_\+recv(int i, int sockfd)}{send_recv(int i, int sockfd)}}]{\setlength{\rightskip}{0pt plus 5cm}void Client\+::send\+\_\+recv (
+\begin{DoxyParamCaption}
+\item[{int}]{i, }
+\item[{int}]{sockfd}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_a7d7ba78b63357fe2c7566018e30e9767}{}\label{class_client_a7d7ba78b63357fe2c7566018e30e9767}
+
+
+Definition at line 6 of file client.\+cpp.
+
+
+\begin{DoxyCode}
+7 \{
+8     \textcolor{keywordtype}{char} send\_buf[\hyperlink{client_8cpp_aeca034f67218340ecb2261a22c2f3dcd}{BUFSIZE}];
+9     \textcolor{keywordtype}{char} recv\_buf[\hyperlink{client_8cpp_aeca034f67218340ecb2261a22c2f3dcd}{BUFSIZE}];
+10     \textcolor{keywordtype}{int} nbyte\_recvd;
+11     \textcolor{keywordflow}{if} (\hyperlink{class_client_a8086f64d20f268817ef23bc81cbea059}{i} == 0)\{
+12         fgets(send\_buf, \hyperlink{client_8cpp_aeca034f67218340ecb2261a22c2f3dcd}{BUFSIZE}, stdin);
+13         \textcolor{keywordflow}{if} (strcmp(send\_buf , \textcolor{stringliteral}{"quit\(\backslash\)n"}) == 0) \{
+14             exit(0);
+15         \} \textcolor{keywordflow}{else}
+16             send(\hyperlink{class_client_ab0cf9b759ba4da79ccb0a64242d944c4}{sockfd}, send\_buf, strlen(send\_buf), 0);
+17     \} \textcolor{keywordflow}{else} \{
+18         nbyte\_recvd = recv(\hyperlink{class_client_ab0cf9b759ba4da79ccb0a64242d944c4}{sockfd}, recv\_buf, \hyperlink{client_8cpp_aeca034f67218340ecb2261a22c2f3dcd}{BUFSIZE}, 0);
+19         recv\_buf[nbyte\_recvd] = \textcolor{charliteral}{'\(\backslash\)0'};
+20         printf(\textcolor{stringliteral}{"%s"}, recv\_buf);
+21         fflush(stdout);
+22     \}
+23 \}
+\end{DoxyCode}
+\index{Client@{Client}!set\+Client\+Information@{set\+Client\+Information}}
+\index{set\+Client\+Information@{set\+Client\+Information}!Client@{Client}}
+\subsubsection[{\texorpdfstring{set\+Client\+Information()}{setClientInformation()}}]{\setlength{\rightskip}{0pt plus 5cm}string Client\+::set\+Client\+Information (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_a9ce44f82168a9c1952dcee11e058d413}{}\label{class_client_a9ce44f82168a9c1952dcee11e058d413}
+
+
+Definition at line 71 of file client.\+cpp.
+
+
+\begin{DoxyCode}
+72 \{
+73     \textcolor{keywordtype}{string} clientInfo = \textcolor{stringliteral}{"clientInformation:"};
+74     \textcolor{keywordtype}{string} temp = \textcolor{stringliteral}{""};
+75     cout << \textcolor{stringliteral}{"Username:"};
+76     cin >> temp;
+77     clientInfo = clientInfo + temp;
+78     cout << \textcolor{stringliteral}{"Password:"};
+79     cin >> temp;
+80     clientInfo = clientInfo + \textcolor{stringliteral}{","} + temp;
+81     \textcolor{keywordflow}{return} clientInfo;
+82 \}
+\end{DoxyCode}
+\index{Client@{Client}!tcp\+Listener@{tcp\+Listener}}
+\index{tcp\+Listener@{tcp\+Listener}!Client@{Client}}
+\subsubsection[{\texorpdfstring{tcp\+Listener(int sockfd, int fdmax, int i, struct sockaddr\+\_\+in server\+\_\+addr, fd\+\_\+set master, fd\+\_\+set read\+\_\+fds)}{tcpListener(int sockfd, int fdmax, int i, struct sockaddr_in server_addr, fd_set master, fd_set read_fds)}}]{\setlength{\rightskip}{0pt plus 5cm}void Client\+::tcp\+Listener (
+\begin{DoxyParamCaption}
+\item[{int}]{sockfd, }
+\item[{int}]{fdmax, }
+\item[{int}]{i, }
+\item[{struct sockaddr\+\_\+in}]{server\+\_\+addr, }
+\item[{fd\+\_\+set}]{master, }
+\item[{fd\+\_\+set}]{read\+\_\+fds}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_a3e98bb9f68d2fc456e772bb88df85374}{}\label{class_client_a3e98bb9f68d2fc456e772bb88df85374}
+
+
+Definition at line 47 of file client.\+cpp.
+
+
+\begin{DoxyCode}
+48 \{
+49     \hyperlink{class_client_a63a0074432524094592cc95ec3b8c31c}{connect\_request}(&\hyperlink{class_client_ab0cf9b759ba4da79ccb0a64242d944c4}{sockfd}, &\hyperlink{class_client_a3787f155329f63a3bae120e9deca92d6}{server\_addr});
+50     FD\_ZERO(&\hyperlink{class_client_a56c611a99e0ba2a2efaddeb9ae021618}{master});
+51     FD\_ZERO(&\hyperlink{class_client_a3631a848d923649af981576df2c83506}{read\_fds});
+52     FD\_SET(0, &\hyperlink{class_client_a56c611a99e0ba2a2efaddeb9ae021618}{master});
+53     FD\_SET(\hyperlink{class_client_ab0cf9b759ba4da79ccb0a64242d944c4}{sockfd}, &\hyperlink{class_client_a56c611a99e0ba2a2efaddeb9ae021618}{master});
+54     \hyperlink{class_client_a99ae6181165c7b5119a4c93f3b1908c8}{fdmax} = \hyperlink{class_client_ab0cf9b759ba4da79ccb0a64242d944c4}{sockfd};
+55     \hyperlink{class_client_a7aeddfbf62fb0044949597be14e91082}{send\_clientInformation}(\hyperlink{class_client_ab0cf9b759ba4da79ccb0a64242d944c4}{sockfd});
+56     \textcolor{keywordflow}{while}(1)\{
+57         \hyperlink{class_client_a3631a848d923649af981576df2c83506}{read\_fds} = \hyperlink{class_client_a56c611a99e0ba2a2efaddeb9ae021618}{master};
+58         \textcolor{keywordflow}{if}(select(\hyperlink{class_client_a99ae6181165c7b5119a4c93f3b1908c8}{fdmax}+1, &\hyperlink{class_client_a3631a848d923649af981576df2c83506}{read\_fds}, NULL, NULL, NULL) == -1)\{
+59             perror(\textcolor{stringliteral}{"select"});
+60             exit(4);
+61         \}
+62         \textcolor{keywordflow}{for}(\hyperlink{class_client_a8086f64d20f268817ef23bc81cbea059}{i}=0; \hyperlink{class_client_a8086f64d20f268817ef23bc81cbea059}{i} <= \hyperlink{class_client_a99ae6181165c7b5119a4c93f3b1908c8}{fdmax}; \hyperlink{class_client_a8086f64d20f268817ef23bc81cbea059}{i}++ )
+63             \textcolor{keywordflow}{if}(FD\_ISSET(\hyperlink{class_client_a8086f64d20f268817ef23bc81cbea059}{i}, &\hyperlink{class_client_a3631a848d923649af981576df2c83506}{read\_fds}))
+64                 \hyperlink{class_client_a7d7ba78b63357fe2c7566018e30e9767}{send\_recv}(\hyperlink{class_client_a8086f64d20f268817ef23bc81cbea059}{i}, \hyperlink{class_client_ab0cf9b759ba4da79ccb0a64242d944c4}{sockfd});
+65     
+66     \}
+67     printf(\textcolor{stringliteral}{"client-quited\(\backslash\)n"});
+68     close(\hyperlink{class_client_ab0cf9b759ba4da79ccb0a64242d944c4}{sockfd});
+69 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{class_client_a3e98bb9f68d2fc456e772bb88df85374_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Client@{Client}!to\+String@{to\+String}}
+\index{to\+String@{to\+String}!Client@{Client}}
+\subsubsection[{\texorpdfstring{to\+String()}{toString()}}]{\setlength{\rightskip}{0pt plus 5cm}string Client\+::to\+String (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_aec25a8f180a794c7ef03cc8570598740}{}\label{class_client_aec25a8f180a794c7ef03cc8570598740}
+
+
+Definition at line 42 of file client.\+cpp.
+
+
+\begin{DoxyCode}
+43 \{
+44     \textcolor{keywordflow}{return} to\_string(\hyperlink{class_client_ab0cf9b759ba4da79ccb0a64242d944c4}{sockfd});
+45 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Client@{Client}!fdmax@{fdmax}}
+\index{fdmax@{fdmax}!Client@{Client}}
+\subsubsection[{\texorpdfstring{fdmax}{fdmax}}]{\setlength{\rightskip}{0pt plus 5cm}int Client\+::fdmax\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_client_a99ae6181165c7b5119a4c93f3b1908c8}{}\label{class_client_a99ae6181165c7b5119a4c93f3b1908c8}
+
+
+Definition at line 37 of file client.\+h.
+
+\index{Client@{Client}!i@{i}}
+\index{i@{i}!Client@{Client}}
+\subsubsection[{\texorpdfstring{i}{i}}]{\setlength{\rightskip}{0pt plus 5cm}int Client\+::i\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_client_a8086f64d20f268817ef23bc81cbea059}{}\label{class_client_a8086f64d20f268817ef23bc81cbea059}
+
+
+Definition at line 37 of file client.\+h.
+
+\index{Client@{Client}!master@{master}}
+\index{master@{master}!Client@{Client}}
+\subsubsection[{\texorpdfstring{master}{master}}]{\setlength{\rightskip}{0pt plus 5cm}fd\+\_\+set Client\+::master\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_client_a56c611a99e0ba2a2efaddeb9ae021618}{}\label{class_client_a56c611a99e0ba2a2efaddeb9ae021618}
+
+
+Definition at line 39 of file client.\+h.
+
+\index{Client@{Client}!read\+\_\+fds@{read\+\_\+fds}}
+\index{read\+\_\+fds@{read\+\_\+fds}!Client@{Client}}
+\subsubsection[{\texorpdfstring{read\+\_\+fds}{read_fds}}]{\setlength{\rightskip}{0pt plus 5cm}fd\+\_\+set Client\+::read\+\_\+fds\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_client_a3631a848d923649af981576df2c83506}{}\label{class_client_a3631a848d923649af981576df2c83506}
+
+
+Definition at line 40 of file client.\+h.
+
+\index{Client@{Client}!server\+\_\+addr@{server\+\_\+addr}}
+\index{server\+\_\+addr@{server\+\_\+addr}!Client@{Client}}
+\subsubsection[{\texorpdfstring{server\+\_\+addr}{server_addr}}]{\setlength{\rightskip}{0pt plus 5cm}struct sockaddr\+\_\+in Client\+::server\+\_\+addr\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_client_a3787f155329f63a3bae120e9deca92d6}{}\label{class_client_a3787f155329f63a3bae120e9deca92d6}
+
+
+Definition at line 38 of file client.\+h.
+
+\index{Client@{Client}!sockfd@{sockfd}}
+\index{sockfd@{sockfd}!Client@{Client}}
+\subsubsection[{\texorpdfstring{sockfd}{sockfd}}]{\setlength{\rightskip}{0pt plus 5cm}int Client\+::sockfd\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_client_ab0cf9b759ba4da79ccb0a64242d944c4}{}\label{class_client_ab0cf9b759ba4da79ccb0a64242d944c4}
+
+
+Definition at line 37 of file client.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+source/\hyperlink{client_8h}{client.\+h}\item 
+source/\hyperlink{client_8cpp}{client.\+cpp}\end{DoxyCompactItemize}

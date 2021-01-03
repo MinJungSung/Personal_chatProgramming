@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['changeclient',['changeClient',['../class_client_list.html#aa3e5dedccb72e114e7501bfa21939b1e',1,'ClientList']]],
+  ['client',['Client',['../class_client.html',1,'']]],
+  ['client_2ecpp',['client.cpp',['../client_8cpp.html',1,'']]],
+  ['client_2eh',['client.h',['../client_8h.html',1,'']]],
+  ['client_5flist',['client_list',['../class_client_list.html#a53c73362bff032aa6fceab4b8b5b39de',1,'ClientList']]],
+  ['clientinfo',['ClientInfo',['../class_client_info.html',1,'ClientInfo'],['../class_client_info.html#ac0c713eb6ebbab4dc690621fa300b6bb',1,'ClientInfo::ClientInfo()']]],
+  ['clientinfo_2ecpp',['clientInfo.cpp',['../client_info_8cpp.html',1,'']]],
+  ['clientinfo_2eh',['clientInfo.h',['../client_info_8h.html',1,'']]],
+  ['clientinformation',['clientInformation',['../class_request_handler.html#a1d0e08b23da9fc32799770d4a54dfc19',1,'RequestHandler']]],
+  ['clientlist',['ClientList',['../class_client_list.html',1,'ClientList'],['../class_client_list.html#a78d1f60f3a818066df0da1d868c6776e',1,'ClientList::ClientList()'],['../class_request_handler.html#ae7e83bca62e779a7d642b955a2e3ec5c',1,'RequestHandler::clientList()']]],
+  ['clientlist_2ecpp',['clientList.cpp',['../client_list_8cpp.html',1,'']]],
+  ['clientlist_2eh',['clientList.h',['../client_list_8h.html',1,'']]],
+  ['connect',['connect',['../class_client_list.html#a005bf6c281313258e0a4ca42a7155f7f',1,'ClientList']]],
+  ['connect_5frequest',['connect_request',['../class_client.html#a63a0074432524094592cc95ec3b8c31c',1,'Client::connect_request()'],['../class_server.html#a89d62ab21574021dcd9042c6e817fa48',1,'Server::connect_request()']]],
+  ['connected',['connected',['../class_request_handler.html#a094d07998fe012848b608e962891f60f',1,'RequestHandler']]],
+  ['connection_5faccept',['connection_accept',['../class_server.html#af59e99baec721a57a03ded0e310765e1',1,'Server']]],
+  ['create',['create',['../class_client_list.html#addcac03e71cbdbbb7fbf878f5c88cc98',1,'ClientList']]],
+  ['createroom',['createRoom',['../class_request_handler.html#a760cd6fc41cc7f490c1d32ec81f82d5d',1,'RequestHandler::createRoom()'],['../class_room_list.html#aca4608d77d3d356697c4d1908e1d0980',1,'RoomList::createRoom()']]]
+];

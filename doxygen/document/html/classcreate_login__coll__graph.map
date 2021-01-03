@@ -1,3 +1,0 @@
-<map id="createLogin" name="createLogin">
-<area shape="rect" id="node2" href="$class_client_info.html" title="{ClientInfo\n|&#45; id\l&#45; password\l|+ setId()\l+ setPassword()\l+ getId()\l+ getPassword()\l}" alt="" coords="8,5,131,141"/>
-</map>

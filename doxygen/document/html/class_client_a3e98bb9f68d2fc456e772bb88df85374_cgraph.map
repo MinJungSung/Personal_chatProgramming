@@ -1,4 +1,0 @@
-<map id="Client::tcpListener" name="Client::tcpListener">
-<area shape="rect" id="node3" href="$class_client.html#a63a0074432524094592cc95ec3b8c31c" title="Client::connect_request" alt="" coords="181,5,344,32"/>
-<area shape="rect" id="node5" href="$class_client.html#a7d7ba78b63357fe2c7566018e30e9767" title="Client::send_recv" alt="" coords="199,56,326,83"/>
-</map>

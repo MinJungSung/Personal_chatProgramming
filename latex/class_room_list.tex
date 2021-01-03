@@ -1,0 +1,213 @@
+\hypertarget{class_room_list}{}\section{Room\+List Class Reference}
+\label{class_room_list}\index{Room\+List@{Room\+List}}
+
+
+{\ttfamily \#include $<$room\+List.\+h$>$}
+
+
+
+Collaboration diagram for Room\+List\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=174pt]{class_room_list__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_room_list_aca4608d77d3d356697c4d1908e1d0980}{create\+Room} ()
+\item 
+void \hyperlink{class_room_list_aef1e988c07857a4508a2bbe39243ad1f}{remove\+Room} (int room\+Num)
+\item 
+void \hyperlink{class_room_list_a71acb9f9b8aba6d58fdc81374831e47d}{increase\+Num} (int room\+Num)
+\item 
+void \hyperlink{class_room_list_a1f1e4ae92bf1e568f7a33147c4f894f2}{decrease\+Num} (int room\+Num)
+\item 
+bool \hyperlink{class_room_list_a71bcf58fd27f5be3d742743edc71470c}{find\+Room} (int room\+Num)
+\item 
+int \hyperlink{class_room_list_a25e9ff488f782df5b994f1a7ebe2a29f}{find\+Num} (int room\+Num)
+\item 
+string \hyperlink{class_room_list_a97fb616a29529bfa0379da8cffbb8c5a}{show\+Room} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+map$<$ int, int $>$ \hyperlink{class_room_list_abb18b2d9cafdb49884dea04a2999752e}{room\+\_\+list} = \{\{0,0\}\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 8 of file room\+List.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Room\+List@{Room\+List}!create\+Room@{create\+Room}}
+\index{create\+Room@{create\+Room}!Room\+List@{Room\+List}}
+\subsubsection[{\texorpdfstring{create\+Room()}{createRoom()}}]{\setlength{\rightskip}{0pt plus 5cm}int Room\+List\+::create\+Room (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_room_list_aca4608d77d3d356697c4d1908e1d0980}{}\label{class_room_list_aca4608d77d3d356697c4d1908e1d0980}
+
+
+Definition at line 5 of file room\+List.\+cpp.
+
+
+\begin{DoxyCode}
+5                         \{
+6     \textcolor{keywordtype}{int} room = 0;
+7     map<int,int>::iterator it;
+8     \textcolor{keywordflow}{for}(it = \hyperlink{class_room_list_abb18b2d9cafdb49884dea04a2999752e}{room\_list}.begin(); it != \hyperlink{class_room_list_abb18b2d9cafdb49884dea04a2999752e}{room\_list}.end(); ++it)\{
+9         \textcolor{keywordflow}{if}(it->first == room)\{
+10             room++;
+11         \} \textcolor{keywordflow}{else} \{
+12             \hyperlink{class_room_list_abb18b2d9cafdb49884dea04a2999752e}{room\_list}.emplace(room,1);
+13             \textcolor{keywordflow}{break};
+14         \}
+15     \}
+16     \textcolor{keywordflow}{if}(it == \hyperlink{class_room_list_abb18b2d9cafdb49884dea04a2999752e}{room\_list}.end())\{
+17         \hyperlink{class_room_list_abb18b2d9cafdb49884dea04a2999752e}{room\_list}.emplace(room,1);
+18     \}
+19     \textcolor{keywordflow}{return} room;
+20 \}
+\end{DoxyCode}
+\index{Room\+List@{Room\+List}!decrease\+Num@{decrease\+Num}}
+\index{decrease\+Num@{decrease\+Num}!Room\+List@{Room\+List}}
+\subsubsection[{\texorpdfstring{decrease\+Num(int room\+Num)}{decreaseNum(int roomNum)}}]{\setlength{\rightskip}{0pt plus 5cm}void Room\+List\+::decrease\+Num (
+\begin{DoxyParamCaption}
+\item[{int}]{room\+Num}
+\end{DoxyParamCaption}
+)}\hypertarget{class_room_list_a1f1e4ae92bf1e568f7a33147c4f894f2}{}\label{class_room_list_a1f1e4ae92bf1e568f7a33147c4f894f2}
+
+
+Definition at line 30 of file room\+List.\+cpp.
+
+
+\begin{DoxyCode}
+30                                      \{
+31     \hyperlink{class_room_list_abb18b2d9cafdb49884dea04a2999752e}{room\_list}.find(roomNum)->second--;
+32     \textcolor{keywordflow}{if}(\hyperlink{class_room_list_abb18b2d9cafdb49884dea04a2999752e}{room\_list}.find(roomNum)->second == 0 && roomNum != 0)\{
+33         \hyperlink{class_room_list_aef1e988c07857a4508a2bbe39243ad1f}{removeRoom}(roomNum);
+34     \}
+35 \}
+\end{DoxyCode}
+\index{Room\+List@{Room\+List}!find\+Num@{find\+Num}}
+\index{find\+Num@{find\+Num}!Room\+List@{Room\+List}}
+\subsubsection[{\texorpdfstring{find\+Num(int room\+Num)}{findNum(int roomNum)}}]{\setlength{\rightskip}{0pt plus 5cm}int Room\+List\+::find\+Num (
+\begin{DoxyParamCaption}
+\item[{int}]{room\+Num}
+\end{DoxyParamCaption}
+)}\hypertarget{class_room_list_a25e9ff488f782df5b994f1a7ebe2a29f}{}\label{class_room_list_a25e9ff488f782df5b994f1a7ebe2a29f}
+
+
+Definition at line 46 of file room\+List.\+cpp.
+
+
+\begin{DoxyCode}
+46                                 \{
+47     \textcolor{keywordflow}{for}(map<int,int>::iterator it = \hyperlink{class_room_list_abb18b2d9cafdb49884dea04a2999752e}{room\_list}.begin(); it != \hyperlink{class_room_list_abb18b2d9cafdb49884dea04a2999752e}{room\_list}.end(); ++it)\{
+48         \textcolor{keywordflow}{if}(it->first == roomNum)\{
+49             \textcolor{keywordflow}{return} it->second;  
+50         \}
+51     \}
+52     \textcolor{keywordflow}{return} -1;
+53 \}
+\end{DoxyCode}
+\index{Room\+List@{Room\+List}!find\+Room@{find\+Room}}
+\index{find\+Room@{find\+Room}!Room\+List@{Room\+List}}
+\subsubsection[{\texorpdfstring{find\+Room(int room\+Num)}{findRoom(int roomNum)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Room\+List\+::find\+Room (
+\begin{DoxyParamCaption}
+\item[{int}]{room\+Num}
+\end{DoxyParamCaption}
+)}\hypertarget{class_room_list_a71bcf58fd27f5be3d742743edc71470c}{}\label{class_room_list_a71bcf58fd27f5be3d742743edc71470c}
+
+
+Definition at line 37 of file room\+List.\+cpp.
+
+
+\begin{DoxyCode}
+37                                   \{
+38     \textcolor{keywordflow}{for}(map<int,int>::iterator it = \hyperlink{class_room_list_abb18b2d9cafdb49884dea04a2999752e}{room\_list}.begin(); it != \hyperlink{class_room_list_abb18b2d9cafdb49884dea04a2999752e}{room\_list}.end(); ++it)\{
+39         \textcolor{keywordflow}{if}(it->first == roomNum)\{
+40             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+41         \}
+42     \}
+43     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+44 \}
+\end{DoxyCode}
+\index{Room\+List@{Room\+List}!increase\+Num@{increase\+Num}}
+\index{increase\+Num@{increase\+Num}!Room\+List@{Room\+List}}
+\subsubsection[{\texorpdfstring{increase\+Num(int room\+Num)}{increaseNum(int roomNum)}}]{\setlength{\rightskip}{0pt plus 5cm}void Room\+List\+::increase\+Num (
+\begin{DoxyParamCaption}
+\item[{int}]{room\+Num}
+\end{DoxyParamCaption}
+)}\hypertarget{class_room_list_a71acb9f9b8aba6d58fdc81374831e47d}{}\label{class_room_list_a71acb9f9b8aba6d58fdc81374831e47d}
+
+
+Definition at line 26 of file room\+List.\+cpp.
+
+
+\begin{DoxyCode}
+26                                      \{
+27     \hyperlink{class_room_list_abb18b2d9cafdb49884dea04a2999752e}{room\_list}.find(roomNum)->second++;
+28 \}
+\end{DoxyCode}
+\index{Room\+List@{Room\+List}!remove\+Room@{remove\+Room}}
+\index{remove\+Room@{remove\+Room}!Room\+List@{Room\+List}}
+\subsubsection[{\texorpdfstring{remove\+Room(int room\+Num)}{removeRoom(int roomNum)}}]{\setlength{\rightskip}{0pt plus 5cm}void Room\+List\+::remove\+Room (
+\begin{DoxyParamCaption}
+\item[{int}]{room\+Num}
+\end{DoxyParamCaption}
+)}\hypertarget{class_room_list_aef1e988c07857a4508a2bbe39243ad1f}{}\label{class_room_list_aef1e988c07857a4508a2bbe39243ad1f}
+
+
+Definition at line 22 of file room\+List.\+cpp.
+
+
+\begin{DoxyCode}
+22                                     \{
+23     \hyperlink{class_room_list_abb18b2d9cafdb49884dea04a2999752e}{room\_list}.erase(roomNum);
+24 \}
+\end{DoxyCode}
+\index{Room\+List@{Room\+List}!show\+Room@{show\+Room}}
+\index{show\+Room@{show\+Room}!Room\+List@{Room\+List}}
+\subsubsection[{\texorpdfstring{show\+Room()}{showRoom()}}]{\setlength{\rightskip}{0pt plus 5cm}string Room\+List\+::show\+Room (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_room_list_a97fb616a29529bfa0379da8cffbb8c5a}{}\label{class_room_list_a97fb616a29529bfa0379da8cffbb8c5a}
+
+
+Definition at line 55 of file room\+List.\+cpp.
+
+
+\begin{DoxyCode}
+55                          \{
+56     \textcolor{keywordtype}{string} roomString = \textcolor{stringliteral}{""};
+57     \textcolor{keywordflow}{for}(map<int,int>::iterator it = \hyperlink{class_room_list_abb18b2d9cafdb49884dea04a2999752e}{room\_list}.begin(); it != \hyperlink{class_room_list_abb18b2d9cafdb49884dea04a2999752e}{room\_list}.end(); ++it)\{
+58         roomString += \textcolor{stringliteral}{"Room "} + to\_string((*it).first) + \textcolor{stringliteral}{" -> "} + to\_string((*it).second) + \textcolor{stringliteral}{" users\(\backslash\)n"};
+59     \}   
+60     \textcolor{keywordflow}{return} roomString;
+61 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Room\+List@{Room\+List}!room\+\_\+list@{room\+\_\+list}}
+\index{room\+\_\+list@{room\+\_\+list}!Room\+List@{Room\+List}}
+\subsubsection[{\texorpdfstring{room\+\_\+list}{room_list}}]{\setlength{\rightskip}{0pt plus 5cm}map$<$int,int$>$ Room\+List\+::room\+\_\+list = \{\{0,0\}\}}\hypertarget{class_room_list_abb18b2d9cafdb49884dea04a2999752e}{}\label{class_room_list_abb18b2d9cafdb49884dea04a2999752e}
+
+
+Definition at line 19 of file room\+List.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+source/\hyperlink{room_list_8h}{room\+List.\+h}\item 
+source/\hyperlink{room_list_8cpp}{room\+List.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,93 @@
+\hypertarget{request_handler_8h}{}\section{source/request\+Handler.h File Reference}
+\label{request_handler_8h}\index{source/request\+Handler.\+h@{source/request\+Handler.\+h}}
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$sys/types.\+h$>$}\\*
+{\ttfamily \#include $<$sys/socket.\+h$>$}\\*
+{\ttfamily \#include $<$netinet/in.\+h$>$}\\*
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}client\+List.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}room\+List.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$boost/algorithm/string.\+hpp$>$}\\*
+Include dependency graph for request\+Handler.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{request_handler_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=326pt]{request_handler_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_request_handler}{Request\+Handler}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{request_handler_8h_aeca034f67218340ecb2261a22c2f3dcd}{B\+U\+F\+S\+I\+ZE}~1024
+\item 
+\#define \hyperlink{request_handler_8h_a4c34d8ddde639d515698f51571e071c0}{L\+O\+U\+N\+GE}~0
+\item 
+\#define \hyperlink{request_handler_8h_a3a747cf18fa28f0de7920de0f89f5144}{U\+S\+E\+R\+N\+A\+ME}~0
+\item 
+\#define \hyperlink{request_handler_8h_a9e8538fad4eee548302ad9f60e6d47ca}{P\+A\+S\+S\+W\+O\+RD}~1
+\item 
+\#define \hyperlink{request_handler_8h_a7c5f42de5023abf160f7a2d8e444be6d}{R\+O\+O\+M\+N\+U\+M\+B\+ER}~2
+\item 
+\#define \hyperlink{request_handler_8h_aae5c7532c68c3db38bf82151971a6ea4}{S\+O\+C\+K\+FD}~3
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{request\+Handler.\+h@{request\+Handler.\+h}!B\+U\+F\+S\+I\+ZE@{B\+U\+F\+S\+I\+ZE}}
+\index{B\+U\+F\+S\+I\+ZE@{B\+U\+F\+S\+I\+ZE}!request\+Handler.\+h@{request\+Handler.\+h}}
+\subsubsection[{\texorpdfstring{B\+U\+F\+S\+I\+ZE}{BUFSIZE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\+U\+F\+S\+I\+ZE~1024}\hypertarget{request_handler_8h_aeca034f67218340ecb2261a22c2f3dcd}{}\label{request_handler_8h_aeca034f67218340ecb2261a22c2f3dcd}
+
+
+Definition at line 14 of file request\+Handler.\+h.
+
+\index{request\+Handler.\+h@{request\+Handler.\+h}!L\+O\+U\+N\+GE@{L\+O\+U\+N\+GE}}
+\index{L\+O\+U\+N\+GE@{L\+O\+U\+N\+GE}!request\+Handler.\+h@{request\+Handler.\+h}}
+\subsubsection[{\texorpdfstring{L\+O\+U\+N\+GE}{LOUNGE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\+O\+U\+N\+GE~0}\hypertarget{request_handler_8h_a4c34d8ddde639d515698f51571e071c0}{}\label{request_handler_8h_a4c34d8ddde639d515698f51571e071c0}
+
+
+Definition at line 15 of file request\+Handler.\+h.
+
+\index{request\+Handler.\+h@{request\+Handler.\+h}!P\+A\+S\+S\+W\+O\+RD@{P\+A\+S\+S\+W\+O\+RD}}
+\index{P\+A\+S\+S\+W\+O\+RD@{P\+A\+S\+S\+W\+O\+RD}!request\+Handler.\+h@{request\+Handler.\+h}}
+\subsubsection[{\texorpdfstring{P\+A\+S\+S\+W\+O\+RD}{PASSWORD}}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+A\+S\+S\+W\+O\+RD~1}\hypertarget{request_handler_8h_a9e8538fad4eee548302ad9f60e6d47ca}{}\label{request_handler_8h_a9e8538fad4eee548302ad9f60e6d47ca}
+
+
+Definition at line 18 of file request\+Handler.\+h.
+
+\index{request\+Handler.\+h@{request\+Handler.\+h}!R\+O\+O\+M\+N\+U\+M\+B\+ER@{R\+O\+O\+M\+N\+U\+M\+B\+ER}}
+\index{R\+O\+O\+M\+N\+U\+M\+B\+ER@{R\+O\+O\+M\+N\+U\+M\+B\+ER}!request\+Handler.\+h@{request\+Handler.\+h}}
+\subsubsection[{\texorpdfstring{R\+O\+O\+M\+N\+U\+M\+B\+ER}{ROOMNUMBER}}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+O\+O\+M\+N\+U\+M\+B\+ER~2}\hypertarget{request_handler_8h_a7c5f42de5023abf160f7a2d8e444be6d}{}\label{request_handler_8h_a7c5f42de5023abf160f7a2d8e444be6d}
+
+
+Definition at line 19 of file request\+Handler.\+h.
+
+\index{request\+Handler.\+h@{request\+Handler.\+h}!S\+O\+C\+K\+FD@{S\+O\+C\+K\+FD}}
+\index{S\+O\+C\+K\+FD@{S\+O\+C\+K\+FD}!request\+Handler.\+h@{request\+Handler.\+h}}
+\subsubsection[{\texorpdfstring{S\+O\+C\+K\+FD}{SOCKFD}}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+O\+C\+K\+FD~3}\hypertarget{request_handler_8h_aae5c7532c68c3db38bf82151971a6ea4}{}\label{request_handler_8h_aae5c7532c68c3db38bf82151971a6ea4}
+
+
+Definition at line 20 of file request\+Handler.\+h.
+
+\index{request\+Handler.\+h@{request\+Handler.\+h}!U\+S\+E\+R\+N\+A\+ME@{U\+S\+E\+R\+N\+A\+ME}}
+\index{U\+S\+E\+R\+N\+A\+ME@{U\+S\+E\+R\+N\+A\+ME}!request\+Handler.\+h@{request\+Handler.\+h}}
+\subsubsection[{\texorpdfstring{U\+S\+E\+R\+N\+A\+ME}{USERNAME}}]{\setlength{\rightskip}{0pt plus 5cm}\#define U\+S\+E\+R\+N\+A\+ME~0}\hypertarget{request_handler_8h_a3a747cf18fa28f0de7920de0f89f5144}{}\label{request_handler_8h_a3a747cf18fa28f0de7920de0f89f5144}
+
+
+Definition at line 17 of file request\+Handler.\+h.
+

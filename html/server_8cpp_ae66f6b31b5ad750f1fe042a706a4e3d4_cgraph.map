@@ -1,0 +1,8 @@
+<map id="main" name="main">
+<area shape="rect" id="node3" href="$class_server.html#a040742461af78653870017c356d5a226" title="Server::tcpListener" alt="" coords="105,64,239,91"/>
+<area shape="rect" id="node5" href="$class_server.html#a89d62ab21574021dcd9042c6e817fa48" title="Server::connect_request" alt="" coords="289,5,458,32"/>
+<area shape="rect" id="node7" href="$class_server.html#af59e99baec721a57a03ded0e310765e1" title="Server::connection\l_accept" alt="" coords="306,57,441,98"/>
+<area shape="rect" id="node13" href="$class_server.html#a60449f7427eb90721474016c4cfe1f9a" title="Server::send_recv" alt="" coords="307,123,440,149"/>
+<area shape="rect" id="node9" href="$class_request_handler.html#a2e195879aa53692d5370d72dcc2a5878" title="RequestHandler::setDefault" alt="" coords="532,64,719,91"/>
+<area shape="rect" id="node11" href="$class_request_handler.html#a241962ea4c75b5e0be1937cfc129aae1" title="RequestHandler::requestDispatcher" alt="" coords="507,119,743,145"/>
+</map>

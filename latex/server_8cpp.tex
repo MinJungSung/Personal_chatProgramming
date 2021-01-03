@@ -1,0 +1,57 @@
+\hypertarget{server_8cpp}{}\section{source/server.cpp File Reference}
+\label{server_8cpp}\index{source/server.\+cpp@{source/server.\+cpp}}
+{\ttfamily \#include \char`\"{}server.\+h\char`\"{}}\\*
+Include dependency graph for server.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{server_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{server_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{server.\+cpp@{server.\+cpp}!main@{main}}
+\index{main@{main}!server.\+cpp@{server.\+cpp}}
+\subsubsection[{\texorpdfstring{main()}{main()}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{server_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{}\label{server_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}
+
+
+Definition at line 104 of file server.\+cpp.
+
+
+\begin{DoxyCode}
+105 \{
+106     
+107     fd\_set master;
+108     fd\_set read\_fds;
+109     \textcolor{keywordtype}{int} fdmax, i;
+110     \textcolor{keywordtype}{int} sockfd = 0;
+111     \textcolor{keyword}{struct }sockaddr\_in my\_addr, client\_addr;
+112 
+113     \hyperlink{class_server}{Server} server;
+114     server.\hyperlink{class_server_a040742461af78653870017c356d5a226}{tcpListener}(sockfd, fdmax, my\_addr, client\_addr, master, read\_fds);
+115     \textcolor{keywordflow}{return} 0;
+116 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{server_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph}
+\end{center}
+\end{figure}
+
+

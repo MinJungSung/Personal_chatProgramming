@@ -1,4 +1,0 @@
-<map id="Room" name="Room">
-<area shape="rect" id="node3" href="$class_chat_room.html" title="{ChatRoom\n|&#45; RoomNo\l&#45; message\l&#45; clientInfo_list\l&#45; numOfClient\l|+ ChatRoom()\l+ ChatRoom()\l+ ~ChatRoom()\l+ numberOfClient()\l&#45; sendMessage()\l&#45; printClientList()\l}" alt="" coords="5,235,139,429"/>
-<area shape="rect" id="node5" href="$class_lounge.html" title="{Lounge\n|&#45; clientInfo_list\l&#45; numOfClient\l|+ Lounge()\l+ ~Lounge()\l+ printClientList()\l+ numberOfClient()\l}" alt="" coords="163,264,296,400"/>
-</map>

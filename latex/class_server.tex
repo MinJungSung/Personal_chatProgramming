@@ -1,0 +1,304 @@
+\hypertarget{class_server}{}\section{Server Class Reference}
+\label{class_server}\index{Server@{Server}}
+
+
+{\ttfamily \#include $<$server.\+h$>$}
+
+
+
+Collaboration diagram for Server\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_server__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_server_a60449f7427eb90721474016c4cfe1f9a}{send\+\_\+recv} (int i, fd\+\_\+set $\ast$master, int sockfd, int fmax)
+\item 
+void \hyperlink{class_server_af59e99baec721a57a03ded0e310765e1}{connection\+\_\+accept} (fd\+\_\+set $\ast$master, int $\ast$fdmax, int sockfd, struct sockaddr\+\_\+in $\ast$client\+\_\+addr)
+\item 
+void \hyperlink{class_server_a89d62ab21574021dcd9042c6e817fa48}{connect\+\_\+request} (int $\ast$sockfd, struct sockaddr\+\_\+in $\ast$my\+\_\+addr)
+\item 
+void \hyperlink{class_server_a040742461af78653870017c356d5a226}{tcp\+Listener} (int sockfd, int fdmax, struct sockaddr\+\_\+in my\+\_\+addr, struct sockaddr\+\_\+in client\+\_\+addr, fd\+\_\+set master, fd\+\_\+set read\+\_\+fds)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_request_handler}{Request\+Handler} \hyperlink{class_server_a2d4af75a0372efec768c76179e6aef78}{request\+Handler}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 27 of file server.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Server@{Server}!connect\+\_\+request@{connect\+\_\+request}}
+\index{connect\+\_\+request@{connect\+\_\+request}!Server@{Server}}
+\subsubsection[{\texorpdfstring{connect\+\_\+request(int $\ast$sockfd, struct sockaddr\+\_\+in $\ast$my\+\_\+addr)}{connect_request(int *sockfd, struct sockaddr_in *my_addr)}}]{\setlength{\rightskip}{0pt plus 5cm}void Server\+::connect\+\_\+request (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{sockfd, }
+\item[{struct sockaddr\+\_\+in $\ast$}]{my\+\_\+addr}
+\end{DoxyParamCaption}
+)}\hypertarget{class_server_a89d62ab21574021dcd9042c6e817fa48}{}\label{class_server_a89d62ab21574021dcd9042c6e817fa48}
+
+
+Definition at line 45 of file server.\+cpp.
+
+
+\begin{DoxyCode}
+46 \{
+47     \textcolor{keywordtype}{int} yes = 1;
+48         
+49     \textcolor{keywordflow}{if} ((*sockfd = socket(AF\_INET, SOCK\_STREAM, 0)) == -1) \{
+50         perror(\textcolor{stringliteral}{"Socket"});
+51         exit(1);
+52     \}
+53         
+54     my\_addr->sin\_family = AF\_INET;
+55     my\_addr->sin\_port = htons(4950);
+56     my\_addr->sin\_addr.s\_addr = INADDR\_ANY;
+57     memset(my\_addr->sin\_zero, \textcolor{charliteral}{'\(\backslash\)0'}, \textcolor{keyword}{sizeof} my\_addr->sin\_zero);
+58         
+59     \textcolor{keywordflow}{if} (setsockopt(*sockfd, SOL\_SOCKET, SO\_REUSEADDR, &yes, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int})) == -1) \{
+60         perror(\textcolor{stringliteral}{"setsockopt"});
+61         exit(1);
+62     \}
+63         
+64     \textcolor{keywordflow}{if} (bind(*sockfd, (\textcolor{keyword}{struct} sockaddr *)my\_addr, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} sockaddr)) == -1) \{
+65         perror(\textcolor{stringliteral}{"Unable to bind"});
+66         exit(1);
+67     \}
+68     \textcolor{keywordflow}{if} (listen(*sockfd, 10) == -1) \{
+69         perror(\textcolor{stringliteral}{"listen"});
+70         exit(1);
+71     \}
+72     printf(\textcolor{stringliteral}{"\(\backslash\)nTCPServer Waiting for client on port 4950\(\backslash\)n"});
+73     fflush(stdout);
+74 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_server_a89d62ab21574021dcd9042c6e817fa48_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Server@{Server}!connection\+\_\+accept@{connection\+\_\+accept}}
+\index{connection\+\_\+accept@{connection\+\_\+accept}!Server@{Server}}
+\subsubsection[{\texorpdfstring{connection\+\_\+accept(fd\+\_\+set $\ast$master, int $\ast$fdmax, int sockfd, struct sockaddr\+\_\+in $\ast$client\+\_\+addr)}{connection_accept(fd_set *master, int *fdmax, int sockfd, struct sockaddr_in *client_addr)}}]{\setlength{\rightskip}{0pt plus 5cm}void Server\+::connection\+\_\+accept (
+\begin{DoxyParamCaption}
+\item[{fd\+\_\+set $\ast$}]{master, }
+\item[{int $\ast$}]{fdmax, }
+\item[{int}]{sockfd, }
+\item[{struct sockaddr\+\_\+in $\ast$}]{client\+\_\+addr}
+\end{DoxyParamCaption}
+)}\hypertarget{class_server_af59e99baec721a57a03ded0e310765e1}{}\label{class_server_af59e99baec721a57a03ded0e310765e1}
+
+
+Definition at line 25 of file server.\+cpp.
+
+
+\begin{DoxyCode}
+26 \{
+27     socklen\_t addrlen;
+28     \textcolor{keywordtype}{int} newsockfd;
+29     
+30     addrlen = \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct }sockaddr\_in);
+31     \textcolor{keywordflow}{if}((newsockfd = accept(sockfd, (\textcolor{keyword}{struct} sockaddr *)client\_addr, &addrlen)) == -1) \{
+32         perror(\textcolor{stringliteral}{"accept"});
+33         exit(1);
+34     \}\textcolor{keywordflow}{else} \{
+35         FD\_SET(newsockfd, master);
+36         \hyperlink{class_server_a2d4af75a0372efec768c76179e6aef78}{requestHandler}.\hyperlink{class_request_handler_a2e195879aa53692d5370d72dcc2a5878}{setDefault}(newsockfd, master);
+37         \textcolor{keywordflow}{if}(newsockfd > *fdmax)\{
+38             *fdmax = newsockfd;
+39         \}
+40         \hyperlink{class_server_a2d4af75a0372efec768c76179e6aef78}{requestHandler}.\hyperlink{class_request_handler_a241962ea4c75b5e0be1937cfc129aae1}{requestDispatcher}(sockfd, \textcolor{stringliteral}{"connected"});
+41         printf(\textcolor{stringliteral}{"new connection from %s on port %d \(\backslash\)n"},inet\_ntoa(client\_addr->sin\_addr), ntohs(client\_addr->
+      sin\_port));
+42     \}
+43 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_server_af59e99baec721a57a03ded0e310765e1_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_server_af59e99baec721a57a03ded0e310765e1_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Server@{Server}!send\+\_\+recv@{send\+\_\+recv}}
+\index{send\+\_\+recv@{send\+\_\+recv}!Server@{Server}}
+\subsubsection[{\texorpdfstring{send\+\_\+recv(int i, fd\+\_\+set $\ast$master, int sockfd, int fmax)}{send_recv(int i, fd_set *master, int sockfd, int fmax)}}]{\setlength{\rightskip}{0pt plus 5cm}void Server\+::send\+\_\+recv (
+\begin{DoxyParamCaption}
+\item[{int}]{i, }
+\item[{fd\+\_\+set $\ast$}]{master, }
+\item[{int}]{sockfd, }
+\item[{int}]{fmax}
+\end{DoxyParamCaption}
+)}\hypertarget{class_server_a60449f7427eb90721474016c4cfe1f9a}{}\label{class_server_a60449f7427eb90721474016c4cfe1f9a}
+
+
+Definition at line 2 of file server.\+cpp.
+
+
+\begin{DoxyCode}
+3 \{
+4     \textcolor{keywordtype}{int} nbytes\_recvd;
+5     \textcolor{keywordtype}{char} recv\_buf[\hyperlink{client_8cpp_aeca034f67218340ecb2261a22c2f3dcd}{BUFSIZE}];
+6     memset(recv\_buf, 0, \textcolor{keyword}{sizeof}(recv\_buf));
+7     
+8     \textcolor{keywordflow}{if} ((nbytes\_recvd = recv(i, recv\_buf, \textcolor{keyword}{sizeof}(recv\_buf) - 1, 0)) <= 0) \{
+9         \textcolor{keywordflow}{if} (nbytes\_recvd == 0) \{
+10             \hyperlink{class_server_a2d4af75a0372efec768c76179e6aef78}{requestHandler}.\hyperlink{class_request_handler_a241962ea4c75b5e0be1937cfc129aae1}{requestDispatcher}(i, \textcolor{stringliteral}{"disconnected"});
+11             printf(\textcolor{stringliteral}{"socket %d hung up\(\backslash\)n"}, i);
+12         \}\textcolor{keywordflow}{else} \{
+13             perror(\textcolor{stringliteral}{"recv"});
+14         \}
+15         close(i);
+16         FD\_CLR(i, master);
+17     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(nbytes\_recvd > 1)\{    
+18         \textcolor{keywordtype}{string} recv\_buf\_toString(recv\_buf);
+19         trim(recv\_buf\_toString);
+20         cout << \textcolor{stringliteral}{"server sender: "} << to\_string(i) << endl;
+21         \hyperlink{class_server_a2d4af75a0372efec768c76179e6aef78}{requestHandler}.\hyperlink{class_request_handler_a241962ea4c75b5e0be1937cfc129aae1}{requestDispatcher}(i, recv\_buf\_toString);
+22     \}   
+23 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_server_a60449f7427eb90721474016c4cfe1f9a_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_server_a60449f7427eb90721474016c4cfe1f9a_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Server@{Server}!tcp\+Listener@{tcp\+Listener}}
+\index{tcp\+Listener@{tcp\+Listener}!Server@{Server}}
+\subsubsection[{\texorpdfstring{tcp\+Listener(int sockfd, int fdmax, struct sockaddr\+\_\+in my\+\_\+addr, struct sockaddr\+\_\+in client\+\_\+addr, fd\+\_\+set master, fd\+\_\+set read\+\_\+fds)}{tcpListener(int sockfd, int fdmax, struct sockaddr_in my_addr, struct sockaddr_in client_addr, fd_set master, fd_set read_fds)}}]{\setlength{\rightskip}{0pt plus 5cm}void Server\+::tcp\+Listener (
+\begin{DoxyParamCaption}
+\item[{int}]{sockfd, }
+\item[{int}]{fdmax, }
+\item[{struct sockaddr\+\_\+in}]{my\+\_\+addr, }
+\item[{struct sockaddr\+\_\+in}]{client\+\_\+addr, }
+\item[{fd\+\_\+set}]{master, }
+\item[{fd\+\_\+set}]{read\+\_\+fds}
+\end{DoxyParamCaption}
+)}\hypertarget{class_server_a040742461af78653870017c356d5a226}{}\label{class_server_a040742461af78653870017c356d5a226}
+
+
+Definition at line 76 of file server.\+cpp.
+
+
+\begin{DoxyCode}
+77 \{
+78     
+79     FD\_ZERO(&master);
+80     FD\_ZERO(&read\_fds);
+81     \hyperlink{class_server_a89d62ab21574021dcd9042c6e817fa48}{connect\_request}(&sockfd, &my\_addr);
+82     FD\_SET(sockfd, &master);
+83     fdmax = sockfd;
+84     
+85     \textcolor{keywordflow}{while}(1)\{
+86         read\_fds = master;
+87         \textcolor{keywordflow}{if}(select(fdmax+1, &read\_fds, NULL, NULL, NULL) == -1)\{
+88             perror(\textcolor{stringliteral}{"select"});
+89             exit(4);
+90         \}
+91         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i <= fdmax; i++)\{
+92             \textcolor{keywordflow}{if} (FD\_ISSET(i, &read\_fds))\{
+93                 \textcolor{keywordflow}{if} (i == sockfd)\{
+94                     \hyperlink{class_server_af59e99baec721a57a03ded0e310765e1}{connection\_accept}(&master, &fdmax, sockfd, &client\_addr);
+95                 \} \textcolor{keywordflow}{else}\{
+96                     \hyperlink{class_server_a60449f7427eb90721474016c4cfe1f9a}{send\_recv}(i, &master, sockfd, fdmax);
+97                 \}
+98             \}
+99         \}
+100     \}
+101 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_server_a040742461af78653870017c356d5a226_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{class_server_a040742461af78653870017c356d5a226_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Server@{Server}!request\+Handler@{request\+Handler}}
+\index{request\+Handler@{request\+Handler}!Server@{Server}}
+\subsubsection[{\texorpdfstring{request\+Handler}{requestHandler}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Request\+Handler} Server\+::request\+Handler}\hypertarget{class_server_a2d4af75a0372efec768c76179e6aef78}{}\label{class_server_a2d4af75a0372efec768c76179e6aef78}
+
+
+Definition at line 35 of file server.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+source/\hyperlink{server_8h}{server.\+h}\item 
+source/\hyperlink{server_8cpp}{server.\+cpp}\end{DoxyCompactItemize}

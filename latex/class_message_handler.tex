@@ -1,0 +1,159 @@
+\hypertarget{class_message_handler}{}\section{Message\+Handler Class Reference}
+\label{class_message_handler}\index{Message\+Handler@{Message\+Handler}}
+
+
+{\ttfamily \#include $<$message\+Handler.\+h$>$}
+
+
+
+Inheritance diagram for Message\+Handler\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=174pt]{class_message_handler__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Message\+Handler\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=174pt]{class_message_handler__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{send\+To} (fd\+\_\+set $\ast$master, int sender, vector$<$ int $>$ receiver, int message\+Choice, string param)
+\item 
+string \hyperlink{class_message_list_afb4e1522ab3d886c6cffb698ea139d2a}{print\+Message} (int m\+\_\+choice, string m\+\_\+param)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 20 of file message\+Handler.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Message\+Handler@{Message\+Handler}!print\+Message@{print\+Message}}
+\index{print\+Message@{print\+Message}!Message\+Handler@{Message\+Handler}}
+\subsubsection[{\texorpdfstring{print\+Message(int m\+\_\+choice, string m\+\_\+param)}{printMessage(int m_choice, string m_param)}}]{\setlength{\rightskip}{0pt plus 5cm}string Message\+List\+::print\+Message (
+\begin{DoxyParamCaption}
+\item[{int}]{m\+\_\+choice, }
+\item[{string}]{m\+\_\+param}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inherited]}}\hypertarget{class_message_list_afb4e1522ab3d886c6cffb698ea139d2a}{}\label{class_message_list_afb4e1522ab3d886c6cffb698ea139d2a}
+
+
+Definition at line 5 of file message\+List.\+cpp.
+
+
+\begin{DoxyCode}
+5                                                             \{
+6     \textcolor{keywordtype}{string} result = \textcolor{stringliteral}{""};
+7     \textcolor{keywordflow}{switch}(m\_choice)\{
+8         \textcolor{keywordflow}{case} 0:
+9             result += \textcolor{stringliteral}{"You successfully created a room"};
+10             \textcolor{keywordflow}{break};
+11         \textcolor{keywordflow}{case} 1:
+12             result += \textcolor{stringliteral}{"You successfully joined the chat"};
+13             \textcolor{keywordflow}{break};
+14         \textcolor{keywordflow}{case} 2:
+15             result += \textcolor{stringliteral}{"You left the chat"};
+16             \textcolor{keywordflow}{break};
+17         \textcolor{keywordflow}{case} 3:
+18             result += m\_param + \textcolor{stringliteral}{" joined the chat"};
+19             \textcolor{keywordflow}{break};
+20         \textcolor{keywordflow}{case} 4:
+21             result += m\_param + \textcolor{stringliteral}{" left the chat"};
+22             \textcolor{keywordflow}{break};
+23         \textcolor{keywordflow}{case} 5:
+24             result += m\_param + \textcolor{stringliteral}{" is incorrect input"};
+25             \textcolor{keywordflow}{break};
+26         \textcolor{keywordflow}{case} 6:
+27             result += \textcolor{stringliteral}{"Which room do you want to join?"};
+28             \textcolor{keywordflow}{break};
+29         \textcolor{keywordflow}{case} 7:
+30             result += \textcolor{stringliteral}{"You are already in the chat"};
+31             \textcolor{keywordflow}{break};
+32         \textcolor{keywordflow}{case} 8:
+33             result += \textcolor{stringliteral}{"You are already in the lounge"};
+34             \textcolor{keywordflow}{break};
+35         \textcolor{keywordflow}{case} 9:
+36             result += \textcolor{stringliteral}{"Same username already exitst"};
+37             \textcolor{keywordflow}{break};
+38         \textcolor{keywordflow}{case} 10:
+39             result += m\_param;
+40             \textcolor{keywordflow}{break};
+41         \textcolor{keywordflow}{case} 11:
+42             result += \textcolor{stringliteral}{"Successfully connected"};
+43             \textcolor{keywordflow}{break};
+44         \textcolor{keywordflow}{case} 12:
+45             result += \textcolor{stringliteral}{"Connection failed"};
+46             \textcolor{keywordflow}{break};
+47         \textcolor{keywordflow}{case} 13:
+48             result += m\_param + \textcolor{stringliteral}{" changed"};
+49             \textcolor{keywordflow}{break};
+50         \textcolor{keywordflow}{case} 14:
+51             result += \textcolor{stringliteral}{"Cannot change clientInfo"};
+52             \textcolor{keywordflow}{break};
+53     \} 
+54     \textcolor{keywordflow}{return} result += \textcolor{stringliteral}{"\(\backslash\)n"};
+55 \}
+\end{DoxyCode}
+\index{Message\+Handler@{Message\+Handler}!send\+To@{send\+To}}
+\index{send\+To@{send\+To}!Message\+Handler@{Message\+Handler}}
+\subsubsection[{\texorpdfstring{send\+To(fd\+\_\+set $\ast$master, int sender, vector$<$ int $>$ receiver, int message\+Choice, string param)}{sendTo(fd_set *master, int sender, vector< int > receiver, int messageChoice, string param)}}]{\setlength{\rightskip}{0pt plus 5cm}void Message\+Handler\+::send\+To (
+\begin{DoxyParamCaption}
+\item[{fd\+\_\+set $\ast$}]{master, }
+\item[{int}]{sender, }
+\item[{vector$<$ int $>$}]{receiver, }
+\item[{int}]{message\+Choice, }
+\item[{string}]{param}
+\end{DoxyParamCaption}
+)}\hypertarget{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{}\label{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}
+
+
+Definition at line 5 of file message\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+5                                                                                                            
+       \{
+6 
+7     \textcolor{keywordtype}{string} message = \hyperlink{class_message_list_afb4e1522ab3d886c6cffb698ea139d2a}{printMessage}(messageChoice, param);
+8 
+9     \textcolor{keywordtype}{char}* sockfd\_char = \textcolor{keyword}{new} \textcolor{keywordtype}{char}[message.length() + 1];
+10     strcpy(sockfd\_char, message.c\_str());
+11     
+12     \textcolor{keywordflow}{if}(receiver.size() == 1)\{
+13         \textcolor{keywordflow}{if}(FD\_ISSET(sender, master))\{
+14             \textcolor{keywordflow}{if}(send(sender, sockfd\_char, strlen(sockfd\_char), 0) == -1)\{
+15                 perror(\textcolor{stringliteral}{"send"});
+16             \}
+17         \}
+18     \} \textcolor{keywordflow}{else} \{
+19         vector<int>::iterator it;
+20     
+21         \textcolor{keywordflow}{for}(it = receiver.begin(); it != receiver.end(); ++it)\{
+22             \textcolor{keywordflow}{if}(FD\_ISSET(*it, master) && *it != sender)\{
+23                 \textcolor{keywordflow}{if}(send(*it, sockfd\_char, strlen(sockfd\_char), 0) == -1)\{
+24                     perror(\textcolor{stringliteral}{"send"});
+25                 \}
+26             \}   
+27         \}
+28     \}
+29 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+source/\hyperlink{message_handler_8h}{message\+Handler.\+h}\item 
+source/\hyperlink{message_handler_8cpp}{message\+Handler.\+cpp}\end{DoxyCompactItemize}

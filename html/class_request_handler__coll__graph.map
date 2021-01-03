@@ -1,0 +1,6 @@
+<map id="RequestHandler" name="RequestHandler">
+<area shape="rect" id="node2" href="$class_room_list.html" title="{RoomList\n|+ room_list\l|+ createRoom()\l+ removeRoom()\l+ increaseNum()\l+ decreaseNum()\l+ findRoom()\l+ findNum()\l+ showRoom()\l}" alt="" coords="5,289,131,455"/>
+<area shape="rect" id="node4" href="$class_message_handler.html" title="{MessageHandler\n||+ sendTo()\l}" alt="" coords="138,133,264,211"/>
+<area shape="rect" id="node8" href="$class_client_list.html" title="{ClientList\n|&#45; client_list\l&#45; master\l|+ ClientList()\l+ create()\l+ connect()\l+ disconnect()\l+ changeClient()\l+ getClientInfo()\l+ sendTo()\l+ showClient()\l}" alt="" coords="318,275,439,469"/>
+<area shape="rect" id="node6" href="$class_message_list.html" title="{MessageList\n||+ printMessage()\l}" alt="" coords="140,5,263,83"/>
+</map>

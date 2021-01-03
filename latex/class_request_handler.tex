@@ -1,0 +1,449 @@
+\hypertarget{class_request_handler}{}\section{Request\+Handler Class Reference}
+\label{class_request_handler}\index{Request\+Handler@{Request\+Handler}}
+
+
+{\ttfamily \#include $<$request\+Handler.\+h$>$}
+
+
+
+Collaboration diagram for Request\+Handler\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_request_handler__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_request_handler_a5f47febd4b90dd6fc49b1f8303247c69}{Request\+Handler} ()
+\item 
+void \hyperlink{class_request_handler_a2e195879aa53692d5370d72dcc2a5878}{set\+Default} (int \hyperlink{class_request_handler_a6f7f37ba12f014dafca8cb78cff298c8}{sockfd}, fd\+\_\+set $\ast$\hyperlink{class_request_handler_a213fc8dcf839e70561a591633546d98f}{master})
+\item 
+void \hyperlink{class_request_handler_a241962ea4c75b5e0be1937cfc129aae1}{request\+Dispatcher} (int \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, string request)
+\item 
+void \hyperlink{class_request_handler_a1d0e08b23da9fc32799770d4a54dfc19}{client\+Information} (int \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, string request)
+\item 
+void \hyperlink{class_request_handler_a760cd6fc41cc7f490c1d32ec81f82d5d}{create\+Room} (int \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender})
+\item 
+void \hyperlink{class_request_handler_abaea528a55051c351eb29e95a4826b33}{exit\+Room} (int \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender})
+\item 
+void \hyperlink{class_request_handler_a202db33f029e005e3c5eba9ef7c8556b}{join\+Room} (int \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender})
+\item 
+void \hyperlink{class_request_handler_a46d7477e46fad683391de05b86427ad8}{show\+Room} (int \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender})
+\item 
+void \hyperlink{class_request_handler_a094d07998fe012848b608e962891f60f}{connected} (int \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender})
+\item 
+void \hyperlink{class_request_handler_ac017e06204f80a122cfa537b99fcba42}{disconnected} (int \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender})
+\item 
+void \hyperlink{class_request_handler_a41f02a201ac3fd366db9f51ee90814b3}{message} (int \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, string request)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}
+\item 
+int \hyperlink{class_request_handler_a6f7f37ba12f014dafca8cb78cff298c8}{sockfd}
+\item 
+fd\+\_\+set \hyperlink{class_request_handler_a213fc8dcf839e70561a591633546d98f}{master}
+\item 
+\hyperlink{class_client_list}{Client\+List} \hyperlink{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{client\+List} = \hyperlink{class_client_list}{Client\+List}(\hyperlink{class_request_handler_a213fc8dcf839e70561a591633546d98f}{master})
+\item 
+\hyperlink{class_room_list}{Room\+List} \hyperlink{class_request_handler_ab9b9a6905d1204e15670b780a381d1bf}{room\+List}
+\item 
+\hyperlink{class_message_handler}{Message\+Handler} \hyperlink{class_request_handler_aada097c13d8b393e1c067aad65e3df1f}{message\+Handler}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 25 of file request\+Handler.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Request\+Handler@{Request\+Handler}!Request\+Handler@{Request\+Handler}}
+\index{Request\+Handler@{Request\+Handler}!Request\+Handler@{Request\+Handler}}
+\subsubsection[{\texorpdfstring{Request\+Handler()}{RequestHandler()}}]{\setlength{\rightskip}{0pt plus 5cm}Request\+Handler\+::\+Request\+Handler (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_request_handler_a5f47febd4b90dd6fc49b1f8303247c69}{}\label{class_request_handler_a5f47febd4b90dd6fc49b1f8303247c69}
+
+
+Definition at line 5 of file request\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+5                               \{
+6 
+7 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Request\+Handler@{Request\+Handler}!client\+Information@{client\+Information}}
+\index{client\+Information@{client\+Information}!Request\+Handler@{Request\+Handler}}
+\subsubsection[{\texorpdfstring{client\+Information(int sender, string request)}{clientInformation(int sender, string request)}}]{\setlength{\rightskip}{0pt plus 5cm}void Request\+Handler\+::client\+Information (
+\begin{DoxyParamCaption}
+\item[{int}]{sender, }
+\item[{string}]{request}
+\end{DoxyParamCaption}
+)}\hypertarget{class_request_handler_a1d0e08b23da9fc32799770d4a54dfc19}{}\label{class_request_handler_a1d0e08b23da9fc32799770d4a54dfc19}
+
+
+Definition at line 37 of file request\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+37                                                                 \{
+38 
+39     \textcolor{keywordtype}{string} requestWithoutPrefix = request.substr(18);
+40     \hyperlink{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{clientList}.\hyperlink{class_client_list_addcac03e71cbdbbb7fbf878f5c88cc98}{create}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, requestWithoutPrefix);
+41 \}
+\end{DoxyCode}
+\index{Request\+Handler@{Request\+Handler}!connected@{connected}}
+\index{connected@{connected}!Request\+Handler@{Request\+Handler}}
+\subsubsection[{\texorpdfstring{connected(int sender)}{connected(int sender)}}]{\setlength{\rightskip}{0pt plus 5cm}void Request\+Handler\+::connected (
+\begin{DoxyParamCaption}
+\item[{int}]{sender}
+\end{DoxyParamCaption}
+)}\hypertarget{class_request_handler_a094d07998fe012848b608e962891f60f}{}\label{class_request_handler_a094d07998fe012848b608e962891f60f}
+
+
+Definition at line 114 of file request\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+114                                         \{
+115     \textcolor{keywordflow}{if}(!\hyperlink{class_request_handler_ab9b9a6905d1204e15670b780a381d1bf}{roomList}.\hyperlink{class_room_list_a71bcf58fd27f5be3d742743edc71470c}{findRoom}(\hyperlink{request_handler_8h_a4c34d8ddde639d515698f51571e071c0}{LOUNGE}))\{
+116         \hyperlink{class_request_handler_ab9b9a6905d1204e15670b780a381d1bf}{roomList}.\hyperlink{class_room_list_aca4608d77d3d356697c4d1908e1d0980}{createRoom}();
+117     \} \textcolor{keywordflow}{else} \{
+118         \hyperlink{class_request_handler_ab9b9a6905d1204e15670b780a381d1bf}{roomList}.\hyperlink{class_room_list_a71acb9f9b8aba6d58fdc81374831e47d}{increaseNum}(\hyperlink{request_handler_8h_a4c34d8ddde639d515698f51571e071c0}{LOUNGE});
+119     \}
+120 \}
+\end{DoxyCode}
+\index{Request\+Handler@{Request\+Handler}!create\+Room@{create\+Room}}
+\index{create\+Room@{create\+Room}!Request\+Handler@{Request\+Handler}}
+\subsubsection[{\texorpdfstring{create\+Room(int sender)}{createRoom(int sender)}}]{\setlength{\rightskip}{0pt plus 5cm}void Request\+Handler\+::create\+Room (
+\begin{DoxyParamCaption}
+\item[{int}]{sender}
+\end{DoxyParamCaption}
+)}\hypertarget{class_request_handler_a760cd6fc41cc7f490c1d32ec81f82d5d}{}\label{class_request_handler_a760cd6fc41cc7f490c1d32ec81f82d5d}
+
+
+Definition at line 43 of file request\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+43                                          \{
+44     cout << \textcolor{stringliteral}{"CreateRoom sender: "} << to\_string(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}) << endl;
+45 
+46     cout << \hyperlink{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{clientList}.\hyperlink{class_client_list_a6c3d393ac36a1227dab58228b696ac4c}{getClientInfo}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, 
+      \hyperlink{client_info_8h_a7c5f42de5023abf160f7a2d8e444be6d}{ROOMNUMBER}) << endl;
+47     \textcolor{keywordflow}{if}(stoi(\hyperlink{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{clientList}.\hyperlink{class_client_list_a6c3d393ac36a1227dab58228b696ac4c}{getClientInfo}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, 
+      \hyperlink{client_info_8h_a7c5f42de5023abf160f7a2d8e444be6d}{ROOMNUMBER})) != \hyperlink{request_handler_8h_a4c34d8ddde639d515698f51571e071c0}{LOUNGE})\{
+48         \hyperlink{class_request_handler_aada097c13d8b393e1c067aad65e3df1f}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_request_handler_a213fc8dcf839e70561a591633546d98f}{master}, \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, \{
+      \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}\}, 7, \textcolor{stringliteral}{""});
+49     \} \textcolor{keywordflow}{else} \{
+50         \textcolor{keywordtype}{int} createdRoom = \hyperlink{class_request_handler_ab9b9a6905d1204e15670b780a381d1bf}{roomList}.\hyperlink{class_room_list_aca4608d77d3d356697c4d1908e1d0980}{createRoom}();
+51         \hyperlink{class_request_handler_ab9b9a6905d1204e15670b780a381d1bf}{roomList}.\hyperlink{class_room_list_a1f1e4ae92bf1e568f7a33147c4f894f2}{decreaseNum}(\hyperlink{request_handler_8h_a4c34d8ddde639d515698f51571e071c0}{LOUNGE});
+52         \textcolor{keywordflow}{if}(\hyperlink{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{clientList}.\hyperlink{class_client_list_aa3e5dedccb72e114e7501bfa21939b1e}{changeClient}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, 
+      \hyperlink{client_info_8h_a7c5f42de5023abf160f7a2d8e444be6d}{ROOMNUMBER}, to\_string(createdRoom)))\{
+53             \hyperlink{class_request_handler_aada097c13d8b393e1c067aad65e3df1f}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_request_handler_a213fc8dcf839e70561a591633546d98f}{master}, \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, \{
+      \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}\}, 0, \textcolor{stringliteral}{""});
+54         \}
+55     \}
+56 \}
+\end{DoxyCode}
+\index{Request\+Handler@{Request\+Handler}!disconnected@{disconnected}}
+\index{disconnected@{disconnected}!Request\+Handler@{Request\+Handler}}
+\subsubsection[{\texorpdfstring{disconnected(int sender)}{disconnected(int sender)}}]{\setlength{\rightskip}{0pt plus 5cm}void Request\+Handler\+::disconnected (
+\begin{DoxyParamCaption}
+\item[{int}]{sender}
+\end{DoxyParamCaption}
+)}\hypertarget{class_request_handler_ac017e06204f80a122cfa537b99fcba42}{}\label{class_request_handler_ac017e06204f80a122cfa537b99fcba42}
+
+
+Definition at line 122 of file request\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+122                                            \{
+123     \textcolor{keywordtype}{int} originalRoom = 0;
+124     originalRoom = stoi(\hyperlink{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{clientList}.\hyperlink{class_client_list_a6c3d393ac36a1227dab58228b696ac4c}{getClientInfo}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender},
+      \hyperlink{client_info_8h_a7c5f42de5023abf160f7a2d8e444be6d}{ROOMNUMBER}));
+125 
+126     \hyperlink{class_request_handler_ab9b9a6905d1204e15670b780a381d1bf}{roomList}.\hyperlink{class_room_list_a1f1e4ae92bf1e568f7a33147c4f894f2}{decreaseNum}(originalRoom);
+127     \textcolor{keywordflow}{if}(\hyperlink{class_request_handler_ab9b9a6905d1204e15670b780a381d1bf}{roomList}.\hyperlink{class_room_list_a25e9ff488f782df5b994f1a7ebe2a29f}{findNum}(originalRoom) != 0 && originalRoom != 
+      \hyperlink{request_handler_8h_a4c34d8ddde639d515698f51571e071c0}{LOUNGE})\{
+128         \hyperlink{class_request_handler_aada097c13d8b393e1c067aad65e3df1f}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_request_handler_a213fc8dcf839e70561a591633546d98f}{master}, \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, 
+      \hyperlink{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{clientList}.\hyperlink{class_client_list_a260ee1c56cb4472c240839875c3bdf78}{sendTo}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}), 4, \hyperlink{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{clientList}.
+      \hyperlink{class_client_list_a6c3d393ac36a1227dab58228b696ac4c}{getClientInfo}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, \hyperlink{client_info_8h_a3a747cf18fa28f0de7920de0f89f5144}{USERNAME}));
+129     \}
+130     \hyperlink{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{clientList}.\hyperlink{class_client_list_abbd18177e7004dec854a32b2fd47461b}{disconnect}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender});
+131 \} 
+\end{DoxyCode}
+\index{Request\+Handler@{Request\+Handler}!exit\+Room@{exit\+Room}}
+\index{exit\+Room@{exit\+Room}!Request\+Handler@{Request\+Handler}}
+\subsubsection[{\texorpdfstring{exit\+Room(int sender)}{exitRoom(int sender)}}]{\setlength{\rightskip}{0pt plus 5cm}void Request\+Handler\+::exit\+Room (
+\begin{DoxyParamCaption}
+\item[{int}]{sender}
+\end{DoxyParamCaption}
+)}\hypertarget{class_request_handler_abaea528a55051c351eb29e95a4826b33}{}\label{class_request_handler_abaea528a55051c351eb29e95a4826b33}
+
+
+Definition at line 58 of file request\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+58                                        \{
+59 
+60     \textcolor{keywordflow}{if}(stoi(\hyperlink{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{clientList}.\hyperlink{class_client_list_a6c3d393ac36a1227dab58228b696ac4c}{getClientInfo}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, 
+      \hyperlink{client_info_8h_a7c5f42de5023abf160f7a2d8e444be6d}{ROOMNUMBER})) == \hyperlink{request_handler_8h_a4c34d8ddde639d515698f51571e071c0}{LOUNGE})\{
+61         \hyperlink{class_request_handler_aada097c13d8b393e1c067aad65e3df1f}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_request_handler_a213fc8dcf839e70561a591633546d98f}{master}, \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, \{
+      \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}\}, 8, \textcolor{stringliteral}{""});
+62     \} \textcolor{keywordflow}{else} \{
+63         \textcolor{keywordtype}{int} originalRoom = stoi(\hyperlink{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{clientList}.\hyperlink{class_client_list_a6c3d393ac36a1227dab58228b696ac4c}{getClientInfo}(
+      \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, \hyperlink{client_info_8h_a7c5f42de5023abf160f7a2d8e444be6d}{ROOMNUMBER}));
+64         \textcolor{keywordflow}{if}(\hyperlink{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{clientList}.\hyperlink{class_client_list_aa3e5dedccb72e114e7501bfa21939b1e}{changeClient}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender},\hyperlink{client_info_8h_a7c5f42de5023abf160f7a2d8e444be6d}{ROOMNUMBER},to\_string(
+      \hyperlink{request_handler_8h_a4c34d8ddde639d515698f51571e071c0}{LOUNGE})))\{
+65             \hyperlink{class_request_handler_ab9b9a6905d1204e15670b780a381d1bf}{roomList}.\hyperlink{class_room_list_a1f1e4ae92bf1e568f7a33147c4f894f2}{decreaseNum}(originalRoom);
+66             \hyperlink{class_request_handler_ab9b9a6905d1204e15670b780a381d1bf}{roomList}.\hyperlink{class_room_list_a71acb9f9b8aba6d58fdc81374831e47d}{increaseNum}(\hyperlink{request_handler_8h_a4c34d8ddde639d515698f51571e071c0}{LOUNGE});
+67             \hyperlink{class_request_handler_aada097c13d8b393e1c067aad65e3df1f}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_request_handler_a213fc8dcf839e70561a591633546d98f}{master}, \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, \{
+      \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}\}, 2, \textcolor{stringliteral}{""});
+68         \}
+69         \textcolor{keywordflow}{if}(\hyperlink{class_request_handler_ab9b9a6905d1204e15670b780a381d1bf}{roomList}.\hyperlink{class_room_list_a25e9ff488f782df5b994f1a7ebe2a29f}{findNum}(originalRoom) > 0)\{
+70             \hyperlink{class_request_handler_aada097c13d8b393e1c067aad65e3df1f}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_request_handler_a213fc8dcf839e70561a591633546d98f}{master}, \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, 
+      \hyperlink{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{clientList}.\hyperlink{class_client_list_a260ee1c56cb4472c240839875c3bdf78}{sendTo}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}), 4, \hyperlink{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{clientList}.
+      \hyperlink{class_client_list_a6c3d393ac36a1227dab58228b696ac4c}{getClientInfo}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, \hyperlink{client_info_8h_a3a747cf18fa28f0de7920de0f89f5144}{USERNAME}));
+71         \}
+72     \}
+73 \}
+\end{DoxyCode}
+\index{Request\+Handler@{Request\+Handler}!join\+Room@{join\+Room}}
+\index{join\+Room@{join\+Room}!Request\+Handler@{Request\+Handler}}
+\subsubsection[{\texorpdfstring{join\+Room(int sender)}{joinRoom(int sender)}}]{\setlength{\rightskip}{0pt plus 5cm}void Request\+Handler\+::join\+Room (
+\begin{DoxyParamCaption}
+\item[{int}]{sender}
+\end{DoxyParamCaption}
+)}\hypertarget{class_request_handler_a202db33f029e005e3c5eba9ef7c8556b}{}\label{class_request_handler_a202db33f029e005e3c5eba9ef7c8556b}
+
+
+Definition at line 80 of file request\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+80                                        \{
+81     \hyperlink{class_request_handler_aada097c13d8b393e1c067aad65e3df1f}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_request_handler_a213fc8dcf839e70561a591633546d98f}{master}, \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, \{
+      \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}\}, 6, \textcolor{stringliteral}{""});
+82 
+83     \textcolor{keywordtype}{int} room\_nbytes\_recvd;
+84     \textcolor{keywordtype}{char} room\_recv\_buf[\hyperlink{client_8cpp_aeca034f67218340ecb2261a22c2f3dcd}{BUFSIZE}];
+85 
+86     \textcolor{keywordflow}{if}((room\_nbytes\_recvd = recv(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, room\_recv\_buf, \textcolor{keyword}{sizeof}(room\_recv\_buf) - 1, 0)) <= 0)\{
+87         \textcolor{keywordflow}{if}(room\_nbytes\_recvd == 0)\{
+88             printf(\textcolor{stringliteral}{"socket %d hung up\(\backslash\)n"}, \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender});
+89         \} \textcolor{keywordflow}{else} \{    
+90             printf(\textcolor{stringliteral}{"recv"});
+91         \}
+92         \hyperlink{class_request_handler_ac017e06204f80a122cfa537b99fcba42}{disconnected}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}); 
+93 
+94     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(room\_nbytes\_recvd > 1) \{
+95         \textcolor{keywordtype}{string} room\_recv\_buf\_toString(room\_recv\_buf);
+96         trim(room\_recv\_buf\_toString);
+97     
+98         \textcolor{keywordflow}{if}(!\hyperlink{class_request_handler_ab9b9a6905d1204e15670b780a381d1bf}{roomList}.\hyperlink{class_room_list_a71bcf58fd27f5be3d742743edc71470c}{findRoom}(stoi(room\_recv\_buf\_toString)))\{
+99             \hyperlink{class_request_handler_aada097c13d8b393e1c067aad65e3df1f}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_request_handler_a213fc8dcf839e70561a591633546d98f}{master}, \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, \{
+      \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}\}, 5, room\_recv\_buf\_toString);
+100         \} \textcolor{keywordflow}{else} \{
+101             \textcolor{keywordtype}{int} originalRoom = stoi(\hyperlink{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{clientList}.\hyperlink{class_client_list_a6c3d393ac36a1227dab58228b696ac4c}{getClientInfo}(
+      \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender},\hyperlink{client_info_8h_a7c5f42de5023abf160f7a2d8e444be6d}{ROOMNUMBER}));
+102             \textcolor{keywordflow}{if}(\hyperlink{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{clientList}.\hyperlink{class_client_list_aa3e5dedccb72e114e7501bfa21939b1e}{changeClient}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender},
+      \hyperlink{client_info_8h_a7c5f42de5023abf160f7a2d8e444be6d}{ROOMNUMBER},room\_recv\_buf\_toString))\{
+103                 \hyperlink{class_request_handler_aada097c13d8b393e1c067aad65e3df1f}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_request_handler_a213fc8dcf839e70561a591633546d98f}{master}, \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, \{
+      \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}\}, 1, \textcolor{stringliteral}{""});
+104                 \hyperlink{class_request_handler_ab9b9a6905d1204e15670b780a381d1bf}{roomList}.\hyperlink{class_room_list_a1f1e4ae92bf1e568f7a33147c4f894f2}{decreaseNum}(originalRoom);
+105                 \textcolor{keywordflow}{if}(\hyperlink{class_request_handler_ab9b9a6905d1204e15670b780a381d1bf}{roomList}.\hyperlink{class_room_list_a25e9ff488f782df5b994f1a7ebe2a29f}{findNum}(originalRoom) > 0)\{
+106                     \hyperlink{class_request_handler_aada097c13d8b393e1c067aad65e3df1f}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_request_handler_a213fc8dcf839e70561a591633546d98f}{master}, 
+      \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, \hyperlink{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{clientList}.\hyperlink{class_client_list_a260ee1c56cb4472c240839875c3bdf78}{sendTo}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}), 4, \hyperlink{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{clientList}.
+      \hyperlink{class_client_list_a6c3d393ac36a1227dab58228b696ac4c}{getClientInfo}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, \hyperlink{client_info_8h_a3a747cf18fa28f0de7920de0f89f5144}{USERNAME}));
+107                 \}
+108                 \hyperlink{class_request_handler_ab9b9a6905d1204e15670b780a381d1bf}{roomList}.\hyperlink{class_room_list_a71acb9f9b8aba6d58fdc81374831e47d}{increaseNum}(stoi(room\_recv\_buf\_toString));
+109             \}
+110         \}
+111     \}
+112 \}
+\end{DoxyCode}
+\index{Request\+Handler@{Request\+Handler}!message@{message}}
+\index{message@{message}!Request\+Handler@{Request\+Handler}}
+\subsubsection[{\texorpdfstring{message(int sender, string request)}{message(int sender, string request)}}]{\setlength{\rightskip}{0pt plus 5cm}void Request\+Handler\+::message (
+\begin{DoxyParamCaption}
+\item[{int}]{sender, }
+\item[{string}]{request}
+\end{DoxyParamCaption}
+)}\hypertarget{class_request_handler_a41f02a201ac3fd366db9f51ee90814b3}{}\label{class_request_handler_a41f02a201ac3fd366db9f51ee90814b3}
+
+
+Definition at line 133 of file request\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+133                                                       \{
+134     \hyperlink{class_request_handler_aada097c13d8b393e1c067aad65e3df1f}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_request_handler_a213fc8dcf839e70561a591633546d98f}{master}, \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, 
+      \hyperlink{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{clientList}.\hyperlink{class_client_list_a260ee1c56cb4472c240839875c3bdf78}{sendTo}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}), 10, \hyperlink{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{clientList}.
+      \hyperlink{class_client_list_a6c3d393ac36a1227dab58228b696ac4c}{getClientInfo}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, \hyperlink{client_info_8h_a3a747cf18fa28f0de7920de0f89f5144}{USERNAME}) + \textcolor{stringliteral}{":"} + request);
+135     cout << \textcolor{stringliteral}{"Request: "} << request << endl;
+136 \}
+\end{DoxyCode}
+\index{Request\+Handler@{Request\+Handler}!request\+Dispatcher@{request\+Dispatcher}}
+\index{request\+Dispatcher@{request\+Dispatcher}!Request\+Handler@{Request\+Handler}}
+\subsubsection[{\texorpdfstring{request\+Dispatcher(int sender, string request)}{requestDispatcher(int sender, string request)}}]{\setlength{\rightskip}{0pt plus 5cm}void Request\+Handler\+::request\+Dispatcher (
+\begin{DoxyParamCaption}
+\item[{int}]{sender, }
+\item[{string}]{request}
+\end{DoxyParamCaption}
+)}\hypertarget{class_request_handler_a241962ea4c75b5e0be1937cfc129aae1}{}\label{class_request_handler_a241962ea4c75b5e0be1937cfc129aae1}
+
+
+Definition at line 14 of file request\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+14                                                                 \{
+15     this->\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender} = \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender};
+16 
+17     cout << \textcolor{stringliteral}{"RequestDispatcher sender: "} << to\_string(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}) << endl;
+18     \textcolor{keywordflow}{if}((request.substr(0,18)).compare(\textcolor{stringliteral}{"clientInformation:"}) == 0)\{
+19         \hyperlink{class_request_handler_a1d0e08b23da9fc32799770d4a54dfc19}{clientInformation}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, request);
+20     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((request.substr(0,10)).compare(\textcolor{stringliteral}{"createRoom"}) == 0)\{
+21         \hyperlink{class_request_handler_a760cd6fc41cc7f490c1d32ec81f82d5d}{createRoom}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender});
+22     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((request.substr(0,8)).compare(\textcolor{stringliteral}{"exitRoom"}) == 0)\{
+23         \hyperlink{class_request_handler_abaea528a55051c351eb29e95a4826b33}{exitRoom}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender});
+24     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((request.substr(0,8)).compare(\textcolor{stringliteral}{"joinRoom"}) == 0)\{
+25         \hyperlink{class_request_handler_a202db33f029e005e3c5eba9ef7c8556b}{joinRoom}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender});
+26     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((request.substr(0,8)).compare(\textcolor{stringliteral}{"showRoom"}) == 0)\{
+27         \hyperlink{class_request_handler_a46d7477e46fad683391de05b86427ad8}{showRoom}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender});
+28     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((request.substr(0,9)).compare(\textcolor{stringliteral}{"connected"}) == 0)\{
+29         \hyperlink{class_request_handler_a094d07998fe012848b608e962891f60f}{connected}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender});
+30     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((request.substr(0,12)).compare(\textcolor{stringliteral}{"disconnected"}) == 0)\{
+31         \hyperlink{class_request_handler_ac017e06204f80a122cfa537b99fcba42}{disconnected}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender});
+32     \} \textcolor{keywordflow}{else} \{
+33         \hyperlink{class_request_handler_a41f02a201ac3fd366db9f51ee90814b3}{message}(\hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, request);
+34     \}
+35 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_request_handler_a241962ea4c75b5e0be1937cfc129aae1_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Request\+Handler@{Request\+Handler}!set\+Default@{set\+Default}}
+\index{set\+Default@{set\+Default}!Request\+Handler@{Request\+Handler}}
+\subsubsection[{\texorpdfstring{set\+Default(int sockfd, fd\+\_\+set $\ast$master)}{setDefault(int sockfd, fd_set *master)}}]{\setlength{\rightskip}{0pt plus 5cm}void Request\+Handler\+::set\+Default (
+\begin{DoxyParamCaption}
+\item[{int}]{sockfd, }
+\item[{fd\+\_\+set $\ast$}]{master}
+\end{DoxyParamCaption}
+)}\hypertarget{class_request_handler_a2e195879aa53692d5370d72dcc2a5878}{}\label{class_request_handler_a2e195879aa53692d5370d72dcc2a5878}
+
+
+Definition at line 9 of file request\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+9                                                          \{
+10     this->\hyperlink{class_request_handler_a6f7f37ba12f014dafca8cb78cff298c8}{sockfd} = \hyperlink{class_request_handler_a6f7f37ba12f014dafca8cb78cff298c8}{sockfd};
+11     this->\hyperlink{class_request_handler_a213fc8dcf839e70561a591633546d98f}{master} = *\hyperlink{class_request_handler_a213fc8dcf839e70561a591633546d98f}{master};
+12 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_request_handler_a2e195879aa53692d5370d72dcc2a5878_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Request\+Handler@{Request\+Handler}!show\+Room@{show\+Room}}
+\index{show\+Room@{show\+Room}!Request\+Handler@{Request\+Handler}}
+\subsubsection[{\texorpdfstring{show\+Room(int sender)}{showRoom(int sender)}}]{\setlength{\rightskip}{0pt plus 5cm}void Request\+Handler\+::show\+Room (
+\begin{DoxyParamCaption}
+\item[{int}]{sender}
+\end{DoxyParamCaption}
+)}\hypertarget{class_request_handler_a46d7477e46fad683391de05b86427ad8}{}\label{class_request_handler_a46d7477e46fad683391de05b86427ad8}
+
+
+Definition at line 76 of file request\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+76                                        \{
+77     \hyperlink{class_request_handler_aada097c13d8b393e1c067aad65e3df1f}{messageHandler}.\hyperlink{class_message_handler_a81dd916f61ef7f19d10cd3adee55bda9}{sendTo}(&\hyperlink{class_request_handler_a213fc8dcf839e70561a591633546d98f}{master}, \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}, \{
+      \hyperlink{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{sender}\}, 10, \hyperlink{class_request_handler_ab9b9a6905d1204e15670b780a381d1bf}{roomList}.\hyperlink{class_room_list_a97fb616a29529bfa0379da8cffbb8c5a}{showRoom}());
+78 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Request\+Handler@{Request\+Handler}!client\+List@{client\+List}}
+\index{client\+List@{client\+List}!Request\+Handler@{Request\+Handler}}
+\subsubsection[{\texorpdfstring{client\+List}{clientList}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Client\+List} Request\+Handler\+::client\+List = {\bf Client\+List}({\bf master})\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}{}\label{class_request_handler_ae7e83bca62e779a7d642b955a2e3ec5c}
+
+
+Definition at line 46 of file request\+Handler.\+h.
+
+\index{Request\+Handler@{Request\+Handler}!master@{master}}
+\index{master@{master}!Request\+Handler@{Request\+Handler}}
+\subsubsection[{\texorpdfstring{master}{master}}]{\setlength{\rightskip}{0pt plus 5cm}fd\+\_\+set Request\+Handler\+::master\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_request_handler_a213fc8dcf839e70561a591633546d98f}{}\label{class_request_handler_a213fc8dcf839e70561a591633546d98f}
+
+
+Definition at line 44 of file request\+Handler.\+h.
+
+\index{Request\+Handler@{Request\+Handler}!message\+Handler@{message\+Handler}}
+\index{message\+Handler@{message\+Handler}!Request\+Handler@{Request\+Handler}}
+\subsubsection[{\texorpdfstring{message\+Handler}{messageHandler}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Message\+Handler} Request\+Handler\+::message\+Handler\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_request_handler_aada097c13d8b393e1c067aad65e3df1f}{}\label{class_request_handler_aada097c13d8b393e1c067aad65e3df1f}
+
+
+Definition at line 48 of file request\+Handler.\+h.
+
+\index{Request\+Handler@{Request\+Handler}!room\+List@{room\+List}}
+\index{room\+List@{room\+List}!Request\+Handler@{Request\+Handler}}
+\subsubsection[{\texorpdfstring{room\+List}{roomList}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Room\+List} Request\+Handler\+::room\+List\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_request_handler_ab9b9a6905d1204e15670b780a381d1bf}{}\label{class_request_handler_ab9b9a6905d1204e15670b780a381d1bf}
+
+
+Definition at line 47 of file request\+Handler.\+h.
+
+\index{Request\+Handler@{Request\+Handler}!sender@{sender}}
+\index{sender@{sender}!Request\+Handler@{Request\+Handler}}
+\subsubsection[{\texorpdfstring{sender}{sender}}]{\setlength{\rightskip}{0pt plus 5cm}int Request\+Handler\+::sender\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}{}\label{class_request_handler_a6323c8ad9911e4872973360dc83d87ea}
+
+
+Definition at line 43 of file request\+Handler.\+h.
+
+\index{Request\+Handler@{Request\+Handler}!sockfd@{sockfd}}
+\index{sockfd@{sockfd}!Request\+Handler@{Request\+Handler}}
+\subsubsection[{\texorpdfstring{sockfd}{sockfd}}]{\setlength{\rightskip}{0pt plus 5cm}int Request\+Handler\+::sockfd\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_request_handler_a6f7f37ba12f014dafca8cb78cff298c8}{}\label{class_request_handler_a6f7f37ba12f014dafca8cb78cff298c8}
+
+
+Definition at line 43 of file request\+Handler.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+source/\hyperlink{request_handler_8h}{request\+Handler.\+h}\item 
+source/\hyperlink{request_handler_8cpp}{request\+Handler.\+cpp}\end{DoxyCompactItemize}
