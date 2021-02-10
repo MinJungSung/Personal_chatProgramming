@@ -44,7 +44,7 @@ void RequestHandler::createRoom(int sender){
 	cout << "CreateRoom sender: " << to_string(sender) << endl;
 
 	cout << clientList.getClientInfo(sender, ROOMNUMBER) << endl;
-	if(atoi(clientList.getClientInfo(sender, ROOMNUMBER)) != LOUNGE){
+	if(stoi(clientList.getClientInfo(sender, ROOMNUMBER)) != LOUNGE){
 		messageHandler.sendTo(&master, sender, {sender}, 7, "");
 	} else {
 		int createdRoom = roomList.createRoom();
@@ -57,10 +57,10 @@ void RequestHandler::createRoom(int sender){
 
 void RequestHandler::exitRoom(int sender){
 
-	if(atoi(clientList.getClientInfo(sender, ROOMNUMBER)) == LOUNGE){
+	if(stoi(clientList.getClientInfo(sender, ROOMNUMBER)) == LOUNGE){
 		messageHandler.sendTo(&master, sender, {sender}, 8, "");
 	} else {
-		int originalRoom = atoi(clientList.getClientInfo(sender, ROOMNUMBER));
+		int originalRoom = stoi(clientList.getClientInfo(sender, ROOMNUMBER));
 		if(clientList.changeClient(sender,ROOMNUMBER,to_string(LOUNGE))){
 			roomList.decreaseNum(originalRoom);
 			roomList.increaseNum(LOUNGE);
@@ -95,17 +95,17 @@ void RequestHandler::joinRoom(int sender){
 		string room_recv_buf_toString(room_recv_buf);
 		trim(room_recv_buf_toString);
 	
-		if(!roomList.findRoom(atoi(room_recv_buf_toString))){
+		if(!roomList.findRoom(stoi(room_recv_buf_toString))){
 			messageHandler.sendTo(&master, sender, {sender}, 5, room_recv_buf_toString);
 		} else {
-			int originalRoom = atoi(clientList.getClientInfo(sender,ROOMNUMBER));
+			int originalRoom = stoi(clientList.getClientInfo(sender,ROOMNUMBER));
 			if(clientList.changeClient(sender,ROOMNUMBER,room_recv_buf_toString)){
 				messageHandler.sendTo(&master, sender, {sender}, 1, "");
 				roomList.decreaseNum(originalRoom);
 				if(roomList.findNum(originalRoom) > 0){
 					messageHandler.sendTo(&master, sender, clientList.sendTo(sender), 4, clientList.getClientInfo(sender, USERNAME));
 				}
-				roomList.increaseNum(atoi(room_recv_buf_toString));
+				roomList.increaseNum(stoi(room_recv_buf_toString));
 			}
 		}
 	}
@@ -118,14 +118,14 @@ void RequestHandler::joinRoom(int sender, string request){
 		string room_recv_buf_toString = to_string(room_nbytes_recvd);
 		trim(room_recv_buf_toString);
 
-		int originalRoom = atoi(clientList.getClientInfo(sender,ROOMNUMBER));
+		int originalRoom = stoi(clientList.getClientInfo(sender,ROOMNUMBER));
 		if(clientList.changeClient(sender,ROOMNUMBER,room_recv_buf_toString)){
 			messageHandler.sendTo(&master, sender, {sender}, 1, "");
 			roomList.decreaseNum(originalRoom);
 			if(roomList.findNum(originalRoom) > 0){
 				messageHandler.sendTo(&master, sender, clientList.sendTo(sender), 4, clientList.getClientInfo(sender, USERNAME));
 			}
-			roomList.increaseNum(atoi(room_recv_buf_toString));
+			roomList.increaseNum(stoi(room_recv_buf_toString));
 		}
 	}
 }
@@ -140,7 +140,7 @@ void RequestHandler::connected(int sender){
 
 void RequestHandler::disconnected(int sender){
 	int originalRoom = 0;
-	originalRoom = atoi(clientList.getClientInfo(sender,ROOMNUMBER));
+	originalRoom = stoi(clientList.getClientInfo(sender,ROOMNUMBER));
 
 	roomList.decreaseNum(originalRoom);
 	if(roomList.findNum(originalRoom) != 0 && originalRoom != LOUNGE){

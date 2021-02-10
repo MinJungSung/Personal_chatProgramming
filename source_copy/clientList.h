@@ -1,6 +1,3 @@
-#ifndef CLIENTLIST_H
-#define CLIENTLIST_H
-
 #include <string>
 #include <string.h>
 #include <iostream>
@@ -26,5 +23,3 @@ private:
 	MessageHandler messageHandler;
 	fd_set master;
 };
-
-#endif

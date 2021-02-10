@@ -12,7 +12,6 @@
 #include <cstdint>
 #include <iostream>
 #include <cstring>
-#include <vector>
 //#include "server.h"
 
 #define BUFSIZE 1024

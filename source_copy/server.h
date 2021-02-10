@@ -18,11 +18,6 @@
 #include <string>
 #include "requestHandler.h"
 
-#include "function_pool.h"
-#include <mutex>
-#include <thread>
-#include <vector>
-
 #define PORT 4950
 #define BUFSIZE 1024
 #define MAX_SOCK 1024
@@ -38,12 +33,5 @@ public:
 	void tcpListener(int sockfd, int fdmax, struct sockaddr_in my_addr, struct sockaddr_in client_addr, fd_set master, fd_set read_fds);
 
 	RequestHandler requestHandler;
-	Function_pool func_pool;
-	
-	int num_threads = thread::hardware_concurrency();
-	vector<thread> thread_pool;
-	for(int thread_count = 0; thread_count < num_threads; thread_count++){
-		thread_pool.push_back(thread(&Function_pool::infinite_loop_func, &func_pool));
-	}
 };
 #endif

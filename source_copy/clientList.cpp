@@ -103,16 +103,16 @@ bool ClientList::changeClient(int sender, int index, string change){
 					return true;
 				//RoomNumber
 				case 2:
-					it->second.setRoomNumber(atoi(change));
+					it->second.setRoomNumber(stoi(change));
 					messageHandler.sendTo(&master, sender, {sender}, 13, "RoomNumber");
 					return true;
 				//Sockfd
 				case 3:
 					{
-					it->second.setSockfd(atoi(change));
+					it->second.setSockfd(stoi(change));
 					auto const value = move(it->second);
 					client_list.erase(sender);
-					client_list.insert({atoi(change), move(value)});
+					client_list.insert({stoi(change), move(value)});
 					messageHandler.sendTo(&master, sender, {sender}, 13, "Sockfd");
 					return true;
 					}

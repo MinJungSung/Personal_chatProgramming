@@ -91,13 +91,9 @@ void Server::tcpListener(int sockfd, int fdmax, struct sockaddr_in my_addr, stru
 		for (int i = 0; i <= fdmax; i++){
 			if (FD_ISSET(i, &read_fds)){
 				if (i == sockfd){
-					func_pool.push(connection_accept(&master, &fdmax, sockfd, &client_addr));
-					func_pool.done();
-					//connection_accept(&master, &fdmax, sockfd, &client_addr);
+					connection_accept(&master, &fdmax, sockfd, &client_addr);
 				} else{
-					func_pool.push(send_recv(i, &master, sockfd, fdmax));
-					func_pool.done();
-					//send_recv(i, &master, sockfd, fdmax);
+					send_recv(i, &master, sockfd, fdmax);
 				}
 			}
 		}
@@ -115,10 +111,7 @@ int main()
 	struct sockaddr_in my_addr, client_addr;
 
 	Server server;
-
-	func_pool.push(server.tcpListener(sockfd, fdmax, my_addr, client_addr, master, read_fds));
-	func_pool.done();
-	//server.tcpListener(sockfd, fdmax, my_addr, client_addr, master, read_fds);
+	server.tcpListener(sockfd, fdmax, my_addr, client_addr, master, read_fds);
 	return 0;
 }
 

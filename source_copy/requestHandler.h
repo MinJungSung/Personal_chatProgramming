@@ -1,6 +1,3 @@
-#ifndef REQUESTHANDLER_H
-#define REQUESTHANDLER_H
-
 #include <string>
 #include <string.h>
 #include <iostream>
@@ -50,4 +47,3 @@ private:
 	RoomList roomList;
 	MessageHandler messageHandler;
 };
-#endif

@@ -9,8 +9,8 @@ ClientInfo::ClientInfo(){
 ClientInfo::ClientInfo(vector<string> clientInformation){
 	this->username = clientInformation[USERNAME];
 	this->password = clientInformation[PASSWORD];
-	this->roomNumber = atoi(clientInformation[ROOMNUMBER]);
-	this->sockfd = atoi(clientInformation[SOCKFD]);
+	this->roomNumber = stoi(clientInformation[ROOMNUMBER]);
+	this->sockfd = stoi(clientInformation[SOCKFD]);
 
 	std::cout << "ClientInfo is created" << std::endl;
 }

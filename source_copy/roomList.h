@@ -1,6 +1,3 @@
-#ifndef ROOMLIST_H
-#define ROOMLIST_H
-
 #include <string>
 #include <string.h>
 #include <iostream>
@@ -21,5 +18,3 @@ public:
 
 	map<int,int> room_list = {{0,0}};
 };
-
-#endif

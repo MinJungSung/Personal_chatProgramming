@@ -1,6 +1,3 @@
-#ifndef MESSAGEHANDLER_H
-#define MESSAGEHANDLER_H
-
 #include <string>
 #include <string.h>
 #include <iostream>
@@ -26,5 +23,3 @@ public:
 	void sendTo(fd_set* master, int sender, vector<int> receiver, int messageChoice, string param);
 
 };
-
-#endif
